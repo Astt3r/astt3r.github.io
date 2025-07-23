@@ -310,7 +310,7 @@ body{ padding-top:60px; }
   background: var(--bg-2);
   border-top: 1px solid var(--border);
   color: var(--text-muted);
-  padding: 32px 0 24px;
+  padding: 32px 0 24px; /* solo padding vertical */
   text-align: center;
   font-size: 15px;
   box-shadow: 0 -2px 12px #00000018;
@@ -319,7 +319,7 @@ body{ padding-top:60px; }
 .site-footer .footer-content {
   max-width: 900px;
   margin: 0 auto;
-  padding: 0 18px;
+  padding: 0 18px; /* controla el padding lateral */
 }
 
 .site-footer .footer-content p {
