@@ -1,6 +1,53 @@
-/* ===== TEMA CLARO / OSCURO CON ÍCONO FLOTANTE - MEJORA    // Actualizar bubble con mensaje contextual
+/* ===== TEMA CLARO / OSCURO CON   // Mostrar bubble mejorado solo la primera v    // Actualizar bubble c  });
+
+  // Detectar cambios automáticos del sistema
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      applyTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+
+  // Escuchar cambios de idioma para actualizar mensajes del tema
+  window.addEventListener('languageChanged', (e) => {
+    const { themeMessages } = e.detail;
+    // Los mensajes se actualizarán automáticamente en la próxima interacción
+    window.currentThemeMessages = themeMessages;
+  });je contextual
     if (bubble) {
-      const messages = {
+      const currentLang = localStorage.getItem('language') || 'es';
+      const themeMessages = window.translations?.[currentLang]?.theme_messages;
+      
+      const messages = themeMessages ? {
+        light: themeMessages.light_active,
+        dark: themeMessages.dark_active
+      } : {
+        light: '☀️ Tema Claro<br>Modo claro activado',
+        dark: '🌙 Tema Oscuro<br>Modo oscuro activado'
+      };
+      
+      bubble.innerHTML = messages[newTheme];
+      bubble.classList.add('visible');
+      setTimeout(() => bubble.classList.remove('visible'), 4000);
+    }localStorage.getItem('theme_hint_shown') && bubble) {
+    const currentLang = localStorage.getItem('language') || 'es';
+    const themeMessages = window.translations?.[currentLang]?.theme_messages;
+    
+    const messages = themeMessages ? {
+      dark: themeMessages.dark_hint,
+      light: themeMessages.light_hint
+    } : {
+      dark: '🌙 Tema Oscuro<br>Toca para cambiar al tema claro',
+      light: '☀️ Tema Claro<br>Toca para cambiar al tema oscuro'
+    };
+    bubble.innerHTML = messages[initialTheme];LOTANTE - MEJORA    // Actualizar bubble con mensaje contextual
+    if (bubble) {
+      const currentLang = localStorage.getItem('language') || 'es';
+      const themeMessages = window.translations?.[currentLang]?.theme_messages;
+      
+      const messages = themeMessages ? {
+        light: themeMessages.light_active,
+        dark: themeMessages.dark_active
+      } : {
         light: '☀️ Tema Claro<br>Modo claro activado',
         dark: '🌙 Tema Oscuro<br>Modo oscuro activado'
       };== */

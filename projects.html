@@ -247,10 +247,10 @@
     <!-- desktop visible links -->
     <nav class="nav-links">
       <ul>
-      <li><a href="astt3r-page.html">Home</a></li>
-      <li><a href="astt3r-page.html#skills">Technologies</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="astt3r-page.html" data-i18n="home">Home</a></li>
+      <li><a href="astt3r-page.html#skills" data-i18n="technologies">Technologies</a></li>
+      <li><a href="projects.html" data-i18n="projects">Projects</a></li>
+      <li><a href="contact.html" data-i18n="contact">Contact</a></li>
       </ul>
     </nav>
     </header>
@@ -258,10 +258,10 @@
     <!-- Reusable sliding panel for mobile -->
     <nav id="mobileNav" class="mobile-nav">
     <ul>
-      <li><a href="astt3r-page.html">Home</a></li>
-      <li><a href="astt3r-page.html#skills">Technologies</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="astt3r-page.html" data-i18n="home">Home</a></li>
+      <li><a href="astt3r-page.html#skills" data-i18n="technologies">Technologies</a></li>
+      <li><a href="projects.html" data-i18n="projects">Projects</a></li>
+      <li><a href="contact.html" data-i18n="contact">Contact</a></li>
     </ul>
     <button id="themeToggleIcon" class="theme-icon" aria-label="Switch theme">🌙</button>
     <!-- Info bubble about the button -->
@@ -277,8 +277,8 @@
   <section class="projects-wrapper">
     
     <img src="assets/cat computer.png" alt="Cat Computer" style="max-width:260px;width:100%;margin:22px auto 14px;display:block;border-radius:14px;box-shadow:0 4px 18px #0003;">
-    <h1>Projects</h1>
-    <p>Explore my finished projects and ongoing developments.</p>
+    <h1 data-i18n="projects_title">Mis Proyectos</h1>
+    <p data-i18n="projects_subtitle">Una colección de proyectos en los que he trabajado, desde aplicaciones web hasta juegos.</p>
 
     <!-- =====================
          COMPLETADOS
@@ -402,11 +402,11 @@
 
   <footer class="site-footer">
       <div class="footer-content">
-      <p>&copy; 2024 Alejandro Robles / Astt3r. All rights reserved.</p>
+      <p>&copy; 2024 Alejandro Robles / Astt3r. <span data-i18n="footer_text">Todos los derechos reservados.</span></p>
       <ul class="footer-links">
         <li><a href="https://github.com/astt3r" target="_blank" rel="noopener">GitHub</a></li>
       </ul>
-      <button id="goTopBtn" class="go-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Go to top">↑ Go to top</button>
+      <button id="goTopBtn" class="go-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Go to top" data-i18n="go_top">↑ Ir arriba</button>
       </div>
     </footer>
 
@@ -414,4 +414,6 @@
 
 <script src="main.js"></script>
 <script src="oneko.js"></script>
+<!-- Language Manager -->
+<script src="lang.js"></script>
 <script>

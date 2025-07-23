@@ -206,6 +206,33 @@ body{ padding-top:60px; }
   transform: scale(1.15) translateY(-3px);
 }
 
+/* =============================
+   LANGUAGE SWITCH - BOTÓN DE IDIOMA
+   =============================*/
+.lang-icon{
+  position: fixed;
+  bottom: 80px; /* Encima del botón de tema */
+  right: 20px;
+  z-index: 999;
+  background: var(--bg-2);
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(15px);
+}
+
+.lang-icon:hover { 
+  transform: scale(1.15) translateY(-3px);
+}
+
 /* Tema Galaxia: efecto cósmico */
 body:not(.light) .theme-icon {
   background: linear-gradient(135deg, var(--bg-2) 0%, rgba(124, 58, 237, 0.1) 100%);
@@ -228,6 +255,28 @@ body:not(.light) .theme-icon:hover {
   animation: warmGalaxyPulse 2s ease-in-out infinite;
 }
 
+/* Botón de idioma: mismo estilo que tema para tema Galaxia */
+body:not(.light) .lang-icon {
+  background: linear-gradient(135deg, var(--bg-2) 0%, rgba(124, 58, 237, 0.1) 100%);
+  box-shadow: 
+    0 0 20px rgba(124, 58, 237, 0.3),
+    0 0 40px rgba(236, 72, 153, 0.1),
+    0 8px 25px rgba(0,0,0,0.3);
+  border: 2px solid transparent;
+  background-image: linear-gradient(var(--bg-2), var(--bg-2)), 
+                    linear-gradient(135deg, var(--accent), var(--accent-2));
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+body:not(.light) .lang-icon:hover {
+  box-shadow: 
+    0 0 30px rgba(217, 80, 48, 0.5),
+    0 0 40px rgba(171, 68, 85, 0.2),
+    0 12px 35px rgba(0,0,0,0.4);
+  animation: warmGalaxyPulse 2s ease-in-out infinite;
+}
+
 /* Tema NieR: efecto dorado tecnológico */
 body.light .theme-icon {
   background: var(--bg-2);
@@ -238,6 +287,23 @@ body.light .theme-icon {
 }
 
 body.light .theme-icon:hover {
+  background: linear-gradient(135deg, var(--bg-2) 0%, rgba(201, 169, 97, 0.05) 100%);
+  box-shadow: 
+    0 0 25px rgba(201, 169, 97, 0.3),
+    0 6px 25px rgba(0,0,0,0.15);
+  border-color: var(--accent-3);
+}
+
+/* Botón de idioma: mismo estilo que tema para tema NieR */
+body.light .lang-icon {
+  background: var(--bg-2);
+  box-shadow: 
+    0 0 15px rgba(201, 169, 97, 0.2),
+    0 4px 20px rgba(0,0,0,0.1);
+  border-color: var(--accent);
+}
+
+body.light .lang-icon:hover {
   background: linear-gradient(135deg, var(--bg-2) 0%, rgba(201, 169, 97, 0.05) 100%);
   box-shadow: 
     0 0 25px rgba(201, 169, 97, 0.3),
@@ -482,10 +548,23 @@ body.light .about-box:hover {
     font-size: 20px;
   }
   
+  .lang-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+    bottom: 72px; /* Ajustar posición en móvil */
+  }
+  
   .bubble-hint {
     max-width: 160px;
     font-size: 13px;
     bottom: 70px;
+  }
+  
+  .lang-bubble-hint {
+    max-width: 160px;
+    font-size: 13px;
+    bottom: 122px; /* Ajustar posición en móvil */
   }
   
   .about-box {
@@ -643,8 +722,29 @@ body.light .skill-box:hover {
   transform: translateY(15px) scale(0.9);
 }
 
+/* LANGUAGE BUBBLE HINT - Para botón de idioma */
+.lang-bubble-hint {
+  position: fixed;
+  bottom: 138px; /* justo encima del botón de idioma */
+  right: 20px;
+  max-width: 220px;
+  color: var(--text);
+  border: 2px solid var(--accent);
+  border-radius: 18px;
+  padding: 14px 18px;
+  font-size: 14px;
+  line-height: 1.4;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  backdrop-filter: blur(15px);
+  transform: translateY(15px) scale(0.9);
+}
+
 /* Tema Galaxia Cálida: bubble terrestre */
-body:not(.light) .bubble-hint {
+body:not(.light) .bubble-hint,
+body:not(.light) .lang-bubble-hint {
   background: linear-gradient(135deg, var(--bg-2) 0%, rgba(217, 80, 48, 0.1) 100%);
   box-shadow: 
     0 0 25px rgba(217, 80, 48, 0.2),
@@ -658,7 +758,8 @@ body:not(.light) .bubble-hint {
 }
 
 /* Tema NieR: bubble tecnológico */
-body.light .bubble-hint {
+body.light .bubble-hint,
+body.light .lang-bubble-hint {
   background: var(--bg-2);
   box-shadow: 
     0 0 20px rgba(201, 169, 97, 0.15),
@@ -667,7 +768,8 @@ body.light .bubble-hint {
 }
 
 /* Flechitas decorativas mejoradas */
-.bubble-hint::after {
+.bubble-hint::after,
+.lang-bubble-hint::after {
   content: '';
   position: absolute;
   bottom: -14px;
@@ -677,7 +779,8 @@ body.light .bubble-hint {
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
-.bubble-hint::before {
+.bubble-hint::before,
+.lang-bubble-hint::before {
   content: '';
   position: absolute;
   bottom: -10px;
@@ -688,25 +791,30 @@ body.light .bubble-hint {
 }
 
 /* Tema Galaxia: flechitas cósmicas */
-body:not(.light) .bubble-hint::after {
+body:not(.light) .bubble-hint::after,
+body:not(.light) .lang-bubble-hint::after {
   border-color: var(--accent) transparent transparent transparent;
 }
 
-body:not(.light) .bubble-hint::before {
+body:not(.light) .bubble-hint::before,
+body:not(.light) .lang-bubble-hint::before {
   border-color: var(--bg-2) transparent transparent transparent;
 }
 
 /* Tema NieR: flechitas doradas */
-body.light .bubble-hint::after {
+body.light .bubble-hint::after,
+body.light .lang-bubble-hint::after {
   border-color: var(--accent) transparent transparent transparent;
 }
 
-body.light .bubble-hint::before {
+body.light .bubble-hint::before,
+body.light .lang-bubble-hint::before {
   border-color: var(--bg-2) transparent transparent transparent;
 }
 
 /* visible con animación suave */
-.bubble-hint.visible {
+.bubble-hint.visible,
+.lang-bubble-hint.visible {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0) scale(1);

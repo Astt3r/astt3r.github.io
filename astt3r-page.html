@@ -27,10 +27,10 @@
     <!-- desktop visible links -->
     <nav class="nav-links">
       <ul>
-      <li><a href="astt3r-page.html">Home</a></li>
-      <li><a href="astt3r-page.html#skills">Technologies</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="astt3r-page.html" data-i18n="home">Home</a></li>
+      <li><a href="astt3r-page.html#skills" data-i18n="technologies">Technologies</a></li>
+      <li><a href="projects.html" data-i18n="projects">Projects</a></li>
+      <li><a href="contact.html" data-i18n="contact">Contact</a></li>
       </ul>
     </nav>
     </header>
@@ -38,10 +38,10 @@
     <!-- Reusable sliding panel for mobile -->
     <nav id="mobileNav" class="mobile-nav">
     <ul>
-      <li><a href="astt3r-page.html">Home</a></li>
-      <li><a href="astt3r-page.html#skills">Technologies</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="astt3r-page.html" data-i18n="home">Home</a></li>
+      <li><a href="astt3r-page.html#skills" data-i18n="technologies">Technologies</a></li>
+      <li><a href="projects.html" data-i18n="projects">Projects</a></li>
+      <li><a href="contact.html" data-i18n="contact">Contact</a></li>
     </ul>
     <button id="themeToggleIcon" class="theme-icon" aria-label="Switch theme">🌙</button>
     <!-- Info bubble about the button -->
@@ -58,7 +58,7 @@
       <img class="hero-avatar" src="assets/avatar.png" alt="Avatar de Alejandro Robles" />
       <h1 class="hero-title"><span class="nickname">/Astt3r/</span></h1>
       <h1 class="hero-title">Alejandro Robles</h1>
-      <h2 class="hero-sub">Software Engineer & Indie Game Developer</h2>
+      <h2 class="hero-sub" data-i18n="hero_subtitle">Software Engineer & Indie Game Developer</h2>
 
       <!-- Aviso construcción
     <section class="under-construction">
@@ -78,19 +78,19 @@
 
       <!-- About -->
       <div class="about-box">
-        <h3>🧑‍💻 Sobre mí</h3>
-        <p>
-            I am a software engineer passionate about software development and indie game creation. I enjoy combining logic, creativity, and pixel art to bring original ideas to life. I am always looking to learn new technologies and take on challenges that drive my professional and personal growth.</p>
+        <h3 data-i18n="about_title">🧑‍💻 Sobre mí</h3>
+        <p data-i18n="about_text">
+            Soy un ingeniero de software apasionado por el desarrollo de software y la creación de juegos indie. Me gusta combinar lógica, creatividad y pixel art para dar vida a ideas originales. Siempre busco aprender nuevas tecnologías y asumir desafíos que impulsen mi crecimiento profesional y personal.</p>
     </div>
     </section>
 
     <!-- ========= SKILLS ========= -->
     <section id="skills">
-    <h1>Skills</h1>
+    <h1 data-i18n="skills_title">Skills</h1>
 
     <!-- Lenguajes -->
     <div class="skill-box">
-      <h2><i class="devicon-bash-plain"></i> Languages</h2>
+      <h2><i class="devicon-bash-plain"></i> <span data-i18n="frontend_title">Languages</span></h2>
       <div class="skill-grid">
       <div class="tech-card"><i class="devicon-html5-plain colored"></i><span>HTML</span></div>
       <div class="tech-card"><i class="devicon-css3-plain colored"></i><span>CSS</span></div>
@@ -107,7 +107,7 @@
 
     <!-- Frameworks, Engines & Libraries -->
     <div class="skill-box">
-      <h2><i class="devicon-react-original"></i> Frameworks</h2>
+      <h2><i class="devicon-react-original"></i> <span data-i18n="backend_title">Frameworks</span></h2>
       <div class="skill-grid">
       <div class="tech-card"><i class="devicon-react-original colored"></i><span>React</span></div>
       <div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" style="width:18px;height:18px" alt="Unity logo"><span>Unity</span></div>
@@ -121,7 +121,7 @@
 
     <!-- Bases de Datos & Cloud -->
     <div class="skill-box">
-      <h2><i class="devicon-mysql-plain"></i> DataBase and Cloud</h2>
+      <h2><i class="devicon-mysql-plain"></i> <span data-i18n="learning_title">DataBase and Cloud</span></h2>
       <div class="skill-grid">
       <div class="tech-card"><i class="devicon-mysql-plain colored"></i><span>MySQL</span></div>
       <div class="tech-card"><i class="devicon-microsoftsqlserver-plain colored"></i><span>SQL Server</span></div>
@@ -132,7 +132,7 @@
 
     <!-- Tools -->
     <div class="skill-box">
-      <h2><i class="devicon-docker-plain"></i> Tools</h2>
+      <h2><i class="devicon-docker-plain"></i> <span data-i18n="tools_title">Tools</span></h2>
       <div class="skill-grid">
       <div class="tech-card"><i class="devicon-git-plain colored"></i><span>Git</span></div>
       <div class="tech-card"><i class="devicon-github-original colored"></i><span>GitHub</span></div>
@@ -178,5 +178,8 @@
       });
     });
   </script>
+  
+  <!-- Language Manager -->
+  <script src="lang.js"></script>
 </body>
 </html>

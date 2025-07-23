@@ -64,10 +64,10 @@
     <!-- desktop visible links -->
     <nav class="nav-links">
       <ul>
-      <li><a href="astt3r-page.html">Home</a></li>
-      <li><a href="astt3r-page.html#skills">Technologies</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="astt3r-page.html" data-i18n="home">Home</a></li>
+      <li><a href="astt3r-page.html#skills" data-i18n="technologies">Technologies</a></li>
+      <li><a href="projects.html" data-i18n="projects">Projects</a></li>
+      <li><a href="contact.html" data-i18n="contact">Contact</a></li>
       </ul>
     </nav>
     </header>
@@ -75,10 +75,10 @@
     <!-- Reusable sliding panel for mobile -->
     <nav id="mobileNav" class="mobile-nav">
     <ul>
-      <li><a href="astt3r-page.html">Home</a></li>
-      <li><a href="astt3r-page.html#skills">Technologies</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="astt3r-page.html" data-i18n="home">Home</a></li>
+      <li><a href="astt3r-page.html#skills" data-i18n="technologies">Technologies</a></li>
+      <li><a href="projects.html" data-i18n="projects">Projects</a></li>
+      <li><a href="contact.html" data-i18n="contact">Contact</a></li>
     </ul>
     <button id="themeToggleIcon" class="theme-icon" aria-label="Switch theme">🌙</button>
     <!-- Info bubble about the button -->
@@ -88,8 +88,8 @@
 
   <!-- =============== CONTENIDO =============== -->
   <main id="contact">
-    <h1>Contacto</h1>
-    <p>¡Hablemos! Estos son mis canales favoritos o envíame un mensaje directo:</p>
+    <h1 data-i18n="contact_title">Contacto</h1>
+    <p data-i18n="contact_subtitle">¡Hablemos! Me encanta conectar con otros desarrolladores y colaborar en proyectos interesantes.</p>
 
     <div class="contact-grid">
       <!-- Gmail -->
@@ -105,7 +105,7 @@
       <div class="contact-card">
         <img src="https://www.svgrepo.com/show/353655/discord-icon.svg" alt="Discord" />
         <div class="contact-info">
-          <h2>Discord</h2>
+          <h2 data-i18n="discord_card">Discord</h2>
           <p><a href="https://discord.gg/REWh3TGj" target="_blank">Mándame un DM</a></p>
         </div>
       </div>
@@ -114,7 +114,7 @@
       <div class="contact-card">
         <img src="https://www.svgrepo.com/show/217753/github.svg" alt="GitHub" />
         <div class="contact-info">
-          <h2>GitHub</h2>
+          <h2 data-i18n="github_card">GitHub</h2>
           <p><a href="https://github.com/astt3r" target="_blank">github.com/astt3r</a></p>
         </div>
       </div>
@@ -123,33 +123,33 @@
       <div class="contact-card">
         <img src="https://www.svgrepo.com/show/448234/linkedin.svg" alt="LinkedIn" />
         <div class="contact-info">
-          <h2>LinkedIn</h2>
-          <p><a href="https://www.linkedin.com/in/alejandro-robles-9279992b2/" target="_blank">Perfil Linkedin</p>
+          <h2 data-i18n="linkedin_card">LinkedIn</h2>
+          <p><a href="https://www.linkedin.com/in/alejandro-robles-9279992b2/" target="_blank" data-i18n="linkedin_profile">Perfil LinkedIn</a></p>
         </div>
       </div>
 
       <!-- Formulario de contacto -->
       <form id="contact-form" class="contact-form">
-        <label for="contact-name">Nombre</label>
+        <label for="contact-name" data-i18n="form_name">Nombre</label>
         <input type="text" id="contact-name" name="name" required>
 
-        <label for="contact-email">Email</label>
+        <label for="contact-email" data-i18n="form_email">Email</label>
         <input type="email" id="contact-email" name="email" required>
 
-        <label for="contact-message">Mensaje</label>
+        <label for="contact-message" data-i18n="form_message">Mensaje</label>
         <textarea id="contact-message" name="message" required rows="4"></textarea>
 
-        <button type="submit">Enviar mensaje</button>
+        <button type="submit" data-i18n="form_submit">Enviar mensaje</button>
       </form>
     </div>
 
     <footer class="site-footer">
       <div class="footer-content">
-      <p>&copy; 2024 Alejandro Robles / Astt3r. All rights reserved.</p>
+      <p>&copy; 2024 Alejandro Robles / Astt3r. <span data-i18n="footer_text">Todos los derechos reservados.</span></p>
       <ul class="footer-links">
         <li><a href="https://github.com/astt3r" target="_blank" rel="noopener">GitHub</a></li>
       </ul>
-      <button id="goTopBtn" class="go-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Go to top">↑ Go to top</button>
+      <button id="goTopBtn" class="go-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Go to top" data-i18n="go_top">↑ Ir arriba</button>
       </div>
     </footer>
   </main>
@@ -160,5 +160,7 @@
   <script src="main.js"></script>
   <script src="interactions.js"></script>
   <script src="oneko.js"></script>
+  <!-- Language Manager -->
+  <script src="lang.js"></script>
 </body>
 </html>
