@@ -40,8 +40,8 @@ try {
   // Copiar archivos de React build al root
   console.log('📁 Copying React build files...');
   
-  // Copiar index.html (sobrescribir el actual)
-  fs.copyFileSync(path.join(buildDir, 'index.html'), path.join(rootDir, 'react-index.html'));
+  // En lugar de copiar a react-index.html, sobrescribir index.html directamente
+  fs.copyFileSync(path.join(buildDir, 'index.html'), path.join(rootDir, 'index.html'));
   
   // Copiar la carpeta static
   if (fs.existsSync(path.join(buildDir, 'static'))) {
@@ -63,72 +63,22 @@ try {
     }
   });
   
-  // Crear el nuevo index.html que redirija a React
-  console.log('🔄 Creating redirect index.html...');
-  const redirectHTML = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astt3r Portfolio - React Version</title>
-    <meta http-equiv="refresh" content="0; url=react-index.html">
-    <link rel="canonical" href="react-index.html">
-    <style>
-        body {
-            font-family: 'Pixelify Sans', monospace;
-            background: #1a1a1a;
-            color: #00ff88;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-        }
-        .loading {
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        a {
-            color: #00ff88;
-            text-decoration: none;
-        }
-        a:hover {
-            color: #00ccff;
-        }
-    </style>
-</head>
-<body>
-    <div class="loading">
-        <h1>🚀 Loading Astt3r Portfolio (React)</h1>
-        <p>Redirecting to the new React version...</p>
-        <p>If you are not redirected automatically, <a href="react-index.html">click here</a>.</p>
-        <br>
-        <p><small><a href="astt3r-page.html">View original HTML version</a></small></p>
-    </div>
-    
-    <script>
-        // JavaScript fallback for redirection
-        setTimeout(() => {
-            window.location.href = "react-index.html";
-        }, 1000);
-    </script>
-</body>
-</html>`;
+  // Crear un backup del index.html original como legacy.html
+  console.log('� Creating backup of original HTML version...');
   
-  // Escribir el nuevo index.html
-  fs.writeFileSync(path.join(rootDir, 'index.html'), redirectHTML);
+  // Renombrar astt3r-page.html a legacy.html para mantener acceso
+  if (fs.existsSync(path.join(rootDir, 'astt3r-page.html'))) {
+    fs.copyFileSync(path.join(rootDir, 'astt3r-page.html'), path.join(rootDir, 'legacy.html'));
+  }
   
   console.log('✅ Deployment completed successfully!');
   console.log('📋 Files structure:');
-  console.log('   - index.html (redirects to React)');
-  console.log('   - react-index.html (React app)');
-  console.log('   - astt3r-page.html (original HTML)');
+  console.log('   - index.html (React app - MAIN ENTRY)');
+  console.log('   - legacy.html (original HTML version)');
+  console.log('   - astt3r-page.html (kept for compatibility)');
   console.log('   - static/ (React assets)');
   console.log('🌐 Ready for GitHub Pages deployment!');
+  console.log('🏠 Main URL will load React app directly!');
   
 } catch (error) {
   console.error('❌ Deployment failed:', error);

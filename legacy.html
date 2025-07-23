@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Astt3r – Portfolio</title>
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/devicon/2.16.0/devicon.min.css" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="starfield">
+
+
+
+    <!-- ===== NAVBAR SUPERIOR (escritorio & móvil) ===== -->
+    <header class="top-nav">
+    <!-- Botón hamburguesa se muestra sólo ≤720 px -->
+    <button id="menuToggle" aria-label="Abrir menú">☰</button>
+
+    <!-- Branding / logo -->
+    <a class="brand" href="astt3r-page.html">Astt3r (´・ω・｀)</a>
+
+    <!-- desktop visible links -->
+    <nav class="nav-links">
+      <ul>
+      <li><a href="astt3r-page.html" data-i18n="home">Home</a></li>
+      <li><a href="astt3r-page.html#skills" data-i18n="technologies">Technologies</a></li>
+      <li><a href="projects.html" data-i18n="projects">Projects</a></li>
+      <li><a href="contact.html" data-i18n="contact">Contact</a></li>
+      </ul>
+    </nav>
+    </header>
+
+    <!-- Reusable sliding panel for mobile -->
+    <nav id="mobileNav" class="mobile-nav">
+    <ul>
+      <li><a href="astt3r-page.html" data-i18n="home">Home</a></li>
+      <li><a href="astt3r-page.html#skills" data-i18n="technologies">Technologies</a></li>
+      <li><a href="projects.html" data-i18n="projects">Projects</a></li>
+      <li><a href="contact.html" data-i18n="contact">Contact</a></li>
+    </ul>
+    <button id="themeToggleIcon" class="theme-icon" aria-label="Switch theme">🌙</button>
+    <!-- Info bubble about the button -->
+    <div id="themeBubble" class="bubble-hint">
+    Want to use light theme?<br>Tap here</div>
+    </nav>
+
+
+
+  <!-- =============== CONTENIDO =============== -->
+  <main>
+    <!-- ========= HERO ========= -->
+    <section id="hero" class="hero">
+      <img class="hero-avatar" src="assets/avatar.png" alt="Avatar de Alejandro Robles" />
+      <h1 class="hero-title"><span class="nickname">/Astt3r/</span></h1>
+      <h1 class="hero-title">Alejandro Robles</h1>
+      <h2 class="hero-sub" data-i18n="hero_subtitle">Software Engineer & Indie Game Developer</h2>
+
+      <!-- Aviso construcción
+    <section class="under-construction">
+      <div class="warning-icon">🚧</div>
+      <h2>Este sitio está en construcción</h2>
+      <p>Sigo puliendo detalles de manera constante. </p>
+        <p><span class="nickname">¡Gracias por pasar!</span></p>
+    </section> -->
+
+      <!-- Badges -->
+      <div class="badges">
+        <span class="badge"> 24y</span>
+        <span class="badge" id="clClock"> 🇨🇱 --:--</span>
+        <span class="badge">💻 Él/He</span>
+        <span class="badge"> INTJ</span>
+      </div>
+
+      <!-- About -->
+      <div class="about-box">
+        <h3 data-i18n="about_title">🧑‍💻 Sobre mí</h3>
+        <p data-i18n="about_text">
+            Soy un ingeniero de software apasionado por el desarrollo de software y la creación de juegos indie. Me gusta combinar lógica, creatividad y pixel art para dar vida a ideas originales. Siempre busco aprender nuevas tecnologías y asumir desafíos que impulsen mi crecimiento profesional y personal.</p>
+    </div>
+    </section>
+
+    <!-- ========= SKILLS ========= -->
+    <section id="skills">
+    <h1 data-i18n="skills_title">Skills</h1>
+
+    <!-- Lenguajes -->
+    <div class="skill-box">
+      <h2><i class="devicon-bash-plain"></i> <span data-i18n="frontend_title">Languages</span></h2>
+      <div class="skill-grid">
+      <div class="tech-card"><i class="devicon-html5-plain colored"></i><span>HTML</span></div>
+      <div class="tech-card"><i class="devicon-css3-plain colored"></i><span>CSS</span></div>
+      <div class="tech-card"><i class="devicon-javascript-plain colored"></i><span>JavaScript</span></div>
+      <div class="tech-card"><i class="devicon-php-plain colored"></i><span>PHP</span></div>
+      <div class="tech-card"><i class="devicon-python-plain colored"></i><span>Python</span></div>
+      <div class="tech-card"><i class="devicon-csharp-plain colored"></i><span>C#</span></div>
+      <div class="tech-card"><i class="devicon-mysql-plain colored"></i><span>SQL</span></div>
+      <div class="tech-card"><i class="devicon-bash-plain colored"></i><span>Bash</span></div>
+      <div class="tech-card"><i class="devicon-typescript-plain colored"></i><span>TypeScript</span></div>
+      <div class="tech-card"><i class="devicon-java-plain colored"></i><span>Java</span></div>
+      </div>
+    </div>
+
+    <!-- Frameworks, Engines & Libraries -->
+    <div class="skill-box">
+      <h2><i class="devicon-react-original"></i> <span data-i18n="backend_title">Frameworks</span></h2>
+      <div class="skill-grid">
+      <div class="tech-card"><i class="devicon-react-original colored"></i><span>React</span></div>
+      <div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" style="width:18px;height:18px" alt="Unity logo"><span>Unity</span></div>
+      <div class="tech-card"><i class="devicon-godot-plain colored"></i><span>Godot</span></div>
+      <div class="tech-card"><i class="devicon-bootstrap-plain colored"></i><span>Bootstrap</span></div>
+      <div class="tech-card"><i class="devicon-nodejs-plain colored"></i><span>Node.js</span></div>
+      <div class="tech-card"><i class="devicon-express-original colored"></i><span>Express.js</span></div>
+      <div class="tech-card"><i class="devicon-jquery-plain colored"></i><span>jQuery</span></div>
+      </div>
+    </div>
+
+    <!-- Bases de Datos & Cloud -->
+    <div class="skill-box">
+      <h2><i class="devicon-mysql-plain"></i> <span data-i18n="learning_title">DataBase and Cloud</span></h2>
+      <div class="skill-grid">
+      <div class="tech-card"><i class="devicon-mysql-plain colored"></i><span>MySQL</span></div>
+      <div class="tech-card"><i class="devicon-microsoftsqlserver-plain colored"></i><span>SQL Server</span></div>
+      <div class="tech-card"><i class="devicon-amazonwebservices-plain-wordmark colored"></i><span>AWS</span></div>
+      <div class="tech-card"><i class="devicon-azure-plain colored"></i><span>Azure</span></div>
+      </div>
+    </div>
+
+    <!-- Tools -->
+    <div class="skill-box">
+      <h2><i class="devicon-docker-plain"></i> <span data-i18n="tools_title">Tools</span></h2>
+      <div class="skill-grid">
+      <div class="tech-card"><i class="devicon-git-plain colored"></i><span>Git</span></div>
+      <div class="tech-card"><i class="devicon-github-original colored"></i><span>GitHub</span></div>
+      <div class="tech-card"><i class="devicon-docker-plain colored"></i><span>Docker</span></div>
+      <div class="tech-card"><img src="https://www.vectorlogo.zone/logos/cisco/cisco-icon.svg" style="width:18px;height:18px" alt=""><span>Cisco Packet Tracer</span></div>
+      <div class="tech-card"><i class="devicon-latex-original colored"></i><span>LaTeX / Overleaf</span></div>
+      <div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/filezilla/filezilla-plain.svg" style="width:18px;height:18px" alt=""><span>Excel VBA</span></div>
+      </div>
+    </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+      <p>&copy; 2024 Alejandro Robles / Astt3r. All rights reserved.</p>
+      <ul class="footer-links">
+        <li><a href="https://github.com/astt3r" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+      <button id="goTopBtn" class="go-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Go to top">↑ Go to top</button>
+      </div>
+    </footer>
+    
+  </main>
+
+  <!-- =============== SCRIPTS =============== -->
+  <script src="main.js"></script>
+  <script src="interactions.js"></script>
+  <script src="oneko.js"></script>
+  <script>
+    // Reloj local Chile
+    function updateClock(){
+      const now=new Date();
+      const opts={hour:'2-digit',minute:'2-digit'};
+      document.getElementById('clClock').textContent='🇨🇱 '+now.toLocaleTimeString('es-CL',opts);
+    }
+    updateClock();
+    setInterval(updateClock,60000); // actualiza cada minuto
+
+    // Scroll suave anclas
+    document.querySelectorAll('a[href^="#"]').forEach(link=>{
+      link.addEventListener('click',e=>{
+        e.preventDefault();
+        document.querySelector(link.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});
+      });
+    });
+  </script>
+  
+  <!-- Language Manager -->
+  <script src="lang.js"></script>
+</body>
+</html>
