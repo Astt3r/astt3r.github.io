@@ -7,6 +7,13 @@
 
   if (isReducedMotion) return;
 
+  // Disable oneko on mobile devices
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+    window.innerWidth <= 768 ||
+    ('ontouchstart' in window);
+
+  if (isMobile) return;
+
   const nekoEl = document.createElement("div");
 
   let nekoPosX = 32;
