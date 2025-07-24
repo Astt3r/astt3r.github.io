@@ -1,9 +1,10 @@
 import React from 'react';
-import { useChileClock, useLanguage } from '../hooks';
+import { useChileClock } from '../hooks';
+import { useLanguageContext } from '../contexts';
 
 const Hero = () => {
   const chileTime = useChileClock();
-  const { t } = useLanguage();
+  const { t } = useLanguageContext();
 
   return (
     <section id="hero" className="hero">

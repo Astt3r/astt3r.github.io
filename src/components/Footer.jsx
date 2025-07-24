@@ -1,9 +1,9 @@
 import React from 'react';
 import { scrollToTop } from '../utils';
-import { useLanguage } from '../hooks';
+import { useLanguageContext } from '../contexts';
 
 const Footer = () => {
-  const { t } = useLanguage();
+  const { t } = useLanguageContext();
 
   return (
     <footer className="site-footer">

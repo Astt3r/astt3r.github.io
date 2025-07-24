@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { projectsData } from '../data';
-import { useLanguage } from '../hooks';
+import { useLanguageContext } from '../contexts';
 
 const ProjectCard = ({ project }) => {
   const { title, description, image, tech, links, badge, mainIcon, isPlayable } = project;
@@ -97,16 +97,41 @@ const ProjectCarousel = ({ title, projects, carouselId, t }) => {
   const [isAutoPlaying, setIsAutoPlaying] = React.useState(true);
   const [transition, setTransition] = React.useState('transform 0.5s ease-in-out');
 
-
+  // Estados para el arrastre táctil
+  const [isDragging, setIsDragging] = React.useState(false);
+  const [startX, setStartX] = React.useState(0);
+  const [startTranslate, setStartTranslate] = React.useState(0);
+  const [isMobile, setIsMobile] = React.useState(false);
 
   // Creamos un array duplicado para el efecto infinito
   const duplicatedProjects = [...projects, ...projects];
-  const cardWidth = 268; // 240px card + 28px gap
+  const cardWidth = React.useMemo(() => {
+    // Dinámico basado en el tamaño de pantalla
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth <= 650) {
+        return 212; // 200px card + 12px gap en móvil
+      }
+      return 268; // 240px card + 28px gap en desktop
+    }
+    return 268;
+  }, []);
   const totalWidth = cardWidth * projects.length;
+
+  // Detectar si estamos en móvil
+  React.useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth <= 650);
+    };
+    
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
 
   // Auto-scroll infinito cada 3 segundos
   React.useEffect(() => {
-    if (!isAutoPlaying || projects.length <= 1) return;
+    if (!isAutoPlaying || projects.length <= 1 || isDragging) return;
 
     const interval = setInterval(() => {
       setCurrentTranslate(prev => {
@@ -128,7 +153,7 @@ const ProjectCarousel = ({ title, projects, carouselId, t }) => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, projects.length, cardWidth, totalWidth]);
+  }, [isAutoPlaying, projects.length, cardWidth, totalWidth, isDragging]);
 
   const goToNext = () => {
     if (projects.length <= 1) return;
@@ -175,26 +200,145 @@ const ProjectCarousel = ({ title, projects, carouselId, t }) => {
     setTimeout(() => setIsAutoPlaying(true), 8000);
   };
 
+  // Funciones para el arrastre táctil
+  const handleTouchStart = (e) => {
+    if (!isMobile || projects.length <= 1) return;
+    
+    setIsDragging(true);
+    setIsAutoPlaying(false);
+    setTransition('none');
+    setStartX(e.touches[0].clientX);
+    setStartTranslate(currentTranslate);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isDragging || !isMobile) return;
+    
+    e.preventDefault();
+    const currentX = e.touches[0].clientX;
+    const diff = currentX - startX;
+    const newTranslate = startTranslate + diff;
+    
+    setCurrentTranslate(newTranslate);
+  };
+
+  const handleTouchEnd = () => {
+    if (!isDragging || !isMobile) return;
+    
+    setIsDragging(false);
+    setTransition('transform 0.3s ease-out');
+    
+    const threshold = cardWidth * 0.3; // 30% del ancho de la tarjeta
+    const diff = currentTranslate - startTranslate;
+    
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        // Arrastrado hacia la derecha - ir al anterior
+        goToPrev();
+      } else {
+        // Arrastrado hacia la izquiera - ir al siguiente
+        goToNext();
+      }
+    } else {
+      // No se arrastró lo suficiente, volver a la posición original
+      setCurrentTranslate(startTranslate);
+    }
+    
+    // Reanudar autoplay después de un tiempo
+    setTimeout(() => {
+      setIsAutoPlaying(true);
+      setTransition('transform 0.5s ease-in-out');
+    }, 2000);
+  };
+
+  // Eventos del mouse para desktop (opcional)
+  const handleMouseDown = (e) => {
+    if (isMobile || projects.length <= 1) return;
+    
+    setIsDragging(true);
+    setIsAutoPlaying(false);
+    setTransition('none');
+    setStartX(e.clientX);
+    setStartTranslate(currentTranslate);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging || isMobile) return;
+    
+    e.preventDefault();
+    const currentX = e.clientX;
+    const diff = currentX - startX;
+    const newTranslate = startTranslate + diff;
+    
+    setCurrentTranslate(newTranslate);
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging || isMobile) return;
+    
+    setIsDragging(false);
+    setTransition('transform 0.3s ease-out');
+    
+    const threshold = cardWidth * 0.3;
+    const diff = currentTranslate - startTranslate;
+    
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        goToPrev();
+      } else {
+        goToNext();
+      }
+    } else {
+      setCurrentTranslate(startTranslate);
+    }
+    
+    setTimeout(() => {
+      setIsAutoPlaying(true);
+      setTransition('transform 0.5s ease-in-out');
+    }, 2000);
+  };
+
+  // Event listeners para el mouse
+  React.useEffect(() => {
+    if (isDragging && !isMobile) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+      };
+    }
+  }, [isDragging, isMobile, startX, startTranslate]);
+
   return (
     <>
       <h2 className="section-title">{title}</h2>
       <div className="carousel-container" id={carouselId}>
-        {projects.length > 1 && (
+        {projects.length > 1 && !isMobile && (
           <button className="nav-btn nav-prev" onClick={goToPrev}>❮</button>
         )}
         <div 
-          className={`carousel infinite-carousel ${projects.length === 1 ? 'single' : ''}`}
+          className={`carousel infinite-carousel ${projects.length === 1 ? 'single' : ''} ${isDragging ? 'dragging' : ''}`}
           ref={carouselRef}
-          onMouseEnter={() => setIsAutoPlaying(false)}
-          onMouseLeave={() => setIsAutoPlaying(true)}
+          onMouseEnter={() => !isMobile && setIsAutoPlaying(false)}
+          onMouseLeave={() => !isMobile && setIsAutoPlaying(true)}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onMouseDown={handleMouseDown}
+          style={{
+            cursor: isDragging ? 'grabbing' : (isMobile ? 'default' : 'grab'),
+            userSelect: 'none'
+          }}
         >
           <div 
-            className="carousel-track"
+            className={`carousel-track ${isDragging ? 'dragging' : ''}`}
             style={{
               transform: `translateX(${currentTranslate}px)`,
               transition: transition,
               display: 'flex',
-              gap: '28px',
+              gap: isMobile ? '12px' : '28px',
             }}
           >
             {projects.length === 1 ? (
@@ -209,7 +353,7 @@ const ProjectCarousel = ({ title, projects, carouselId, t }) => {
             )}
           </div>
         </div>
-        {projects.length > 1 && (
+        {projects.length > 1 && !isMobile && (
           <button className="nav-btn nav-next" onClick={goToNext}>❯</button>
         )}
       </div>
@@ -222,7 +366,13 @@ const ProjectCarousel = ({ title, projects, carouselId, t }) => {
           marginTop: '12px',
           opacity: 0.7
         }}>
-          {projects.length > 1 ? `↻ ${t('carousel_infinite') || 'Carrusel infinito en movimiento'}` : t('single_project') || 'Proyecto único'}
+          {projects.length > 1 ? (
+            isMobile ? 
+              `👆 ${t('swipe_to_navigate') || 'Desliza para navegar'}` : 
+              `↻ ${t('carousel_infinite') || 'Carrusel infinito en movimiento'}`
+          ) : (
+            t('single_project') || 'Proyecto único'
+          )}
         </p>
       </div>
     </>
@@ -230,7 +380,7 @@ const ProjectCarousel = ({ title, projects, carouselId, t }) => {
 };
 
 const ProjectsPage = () => {
-  const { t } = useLanguage();
+  const { t } = useLanguageContext();
 
   return (
     <main>

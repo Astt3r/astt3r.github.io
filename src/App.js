@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Navbar, Footer, FloatingControls, StarfieldCanvas } from './components';
+import { Navbar, Footer, StarfieldCanvas } from './components';
 import { HomePage, ProjectsPage, ContactPage } from './pages';
+import { LanguageProvider } from './contexts';
 import { initSmoothScrolling } from './utils';
-import { useLanguage } from './hooks';
 import './App.css';
 
 function App() {
-  const { language } = useLanguage();
-  
   useEffect(() => {
     // Initialize smooth scrolling
     const cleanup = initSmoothScrolling();
@@ -30,28 +28,27 @@ function App() {
   }, []);
 
   return (
-    <Router basename={process.env.NODE_ENV === 'production' ? '' : ''}>
-      <div className="App" key={language}>
-        {/* Starfield background */}
-        <StarfieldCanvas />
-        
-        {/* Navigation */}
-        <Navbar />
-        
-        {/* Main content */}
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-        </Routes>
-        
-        {/* Footer */}
-        <Footer />
-        
-        {/* Floating controls */}
-        <FloatingControls />
-      </div>
-    </Router>
+    <LanguageProvider>
+      <Router basename={process.env.NODE_ENV === 'production' ? '' : ''}>
+        <div className="App">
+          {/* Starfield background */}
+          <StarfieldCanvas />
+          
+          {/* Navigation */}
+          <Navbar />
+          
+          {/* Main content */}
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+          </Routes>
+          
+          {/* Footer */}
+          <Footer />
+        </div>
+      </Router>
+    </LanguageProvider>
   );
 }
 

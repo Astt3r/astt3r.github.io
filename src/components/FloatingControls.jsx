@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useTheme, useLanguage } from '../hooks';
+import { useTheme } from '../hooks';
+import { useLanguageContext } from '../contexts';
 
 const ThemeToggle = () => {
   const { theme, toggleTheme, getThemeIcon } = useTheme();
@@ -15,6 +16,10 @@ const ThemeToggle = () => {
     };
   }, []);
 
+  const closeHint = () => {
+    setShowHint(false);
+  };
+
   return (
     <>
       <button 
@@ -26,6 +31,9 @@ const ThemeToggle = () => {
       </button>
       
       <div className={`bubble-hint ${showHint ? 'visible' : ''}`}>
+        <button className="hint-close" onClick={closeHint} aria-label="Close hint">
+          ×
+        </button>
         {theme === 'dark' 
           ? 'Want to use light theme?\nTap here'
           : 'Want to use dark theme?\nTap here'
@@ -36,7 +44,7 @@ const ThemeToggle = () => {
 };
 
 const LanguageToggle = () => {
-  const { language, toggleLanguage, getLanguageIcon } = useLanguage();
+  const { language, toggleLanguage, getLanguageIcon } = useLanguageContext();
   const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
@@ -49,6 +57,10 @@ const LanguageToggle = () => {
     };
   }, []);
 
+  const closeHint = () => {
+    setShowHint(false);
+  };
+
   return (
     <>
       <button 
@@ -60,6 +72,9 @@ const LanguageToggle = () => {
       </button>
       
       <div className={`lang-bubble-hint ${showHint ? 'visible' : ''}`}>
+        <button className="hint-close" onClick={closeHint} aria-label="Close hint">
+          ×
+        </button>
         {language === 'es' 
           ? 'Switch to English?\nTap here'
           : 'Cambiar a Español?\nToca aquí'

@@ -33,6 +33,7 @@ export const translations = {
     stay_tuned: "¡Mantente atento a futuras actualizaciones!",
     carousel_infinite: "Carrusel infinito en movimiento",
     single_project: "Proyecto único",
+    swipe_to_navigate: "Desliza para navegar",
     
     // Hero badges
     pronouns: "Él/He",
@@ -82,6 +83,7 @@ export const translations = {
     stay_tuned: "Stay tuned for future updates!",
     carousel_infinite: "Infinite carousel in motion",
     single_project: "Single project",
+    swipe_to_navigate: "Swipe to navigate",
     
     // Hero badges
     pronouns: "He/Him",
@@ -227,6 +229,27 @@ export const projectsData = {
   ],
   
   inProgress: [
-    // No projects in progress currently
+    {
+      id: 5,
+      title: "Community Platform",
+      description: "Enhanced fork of JuntaTransparente for my thesis project. Modern Laravel + React platform for neighborhood association management with advanced features, improved UI/UX, and comprehensive community administration tools.",
+      image: "/assets/communityplatform.png", // Imagen del proyecto (make sure this file exists in the public/assets folder)
+      tech: [
+        { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" },
+        { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+        { name: "PHP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
+        { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+        { name: "TailwindCSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" },
+        { name: "Inertia.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" }
+      ],
+      links: {
+        github: "https://github.com/Astt3r/CommunityPlatform"
+      },
+      badge: {
+        text: "Thesis Project",
+        color: "linear-gradient(90deg,#667eea,#764ba2)"
+      },
+      mainIcon: "devicon-laravel-plain colored"
+    }
   ]
 };

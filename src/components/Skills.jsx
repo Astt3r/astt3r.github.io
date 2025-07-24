@@ -1,6 +1,6 @@
 import React from 'react';
 import { skillsData } from '../data';
-import { useLanguage } from '../hooks';
+import { useLanguageContext } from '../contexts';
 
 const TechCard = ({ icon, name, customIcon }) => (
   <div className="tech-card">
@@ -33,7 +33,7 @@ const SkillBox = ({ title, icon, skills }) => (
 );
 
 const Skills = () => {
-  const { t } = useLanguage();
+  const { t } = useLanguageContext();
 
   const skillSections = [
     {

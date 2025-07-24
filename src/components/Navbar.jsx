@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useMobileMenu, useLanguage } from '../hooks';
+import { useMobileMenu, useTheme } from '../hooks';
+import { useLanguageContext } from '../contexts';
 
 const Navbar = () => {
   const { isOpen, toggleMenu, closeMenu } = useMobileMenu();
-  const { t } = useLanguage();
+  const { t, language, toggleLanguage, getLanguageIcon } = useLanguageContext();
+  const { theme, toggleTheme, getThemeIcon } = useTheme();
   const location = useLocation();
 
   const navLinks = [
@@ -53,6 +55,27 @@ const Navbar = () => {
             ))}
           </ul>
         </nav>
+
+        {/* Control buttons in navbar */}
+        <div className="navbar-controls">
+          <button 
+            className="navbar-btn lang-btn" 
+            onClick={toggleLanguage}
+            aria-label="Switch language"
+            title={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
+          >
+            {getLanguageIcon()}
+          </button>
+          
+          <button 
+            className="navbar-btn theme-btn" 
+            onClick={toggleTheme}
+            aria-label="Switch theme"
+            title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+          >
+            {getThemeIcon()}
+          </button>
+        </div>
       </header>
 
       {/* Mobile Navbar */}
@@ -69,6 +92,25 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
+        
+        {/* Mobile controls */}
+        <div className="mobile-controls">
+          <button 
+            className="mobile-btn lang-btn" 
+            onClick={() => { toggleLanguage(); closeMenu(); }}
+            aria-label="Switch language"
+          >
+            {getLanguageIcon()} {language === 'es' ? 'English' : 'Español'}
+          </button>
+          
+          <button 
+            className="mobile-btn theme-btn" 
+            onClick={() => { toggleTheme(); closeMenu(); }}
+            aria-label="Switch theme"
+          >
+            {getThemeIcon()} {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+          </button>
+        </div>
       </nav>
 
       {/* Overlay for mobile menu */}

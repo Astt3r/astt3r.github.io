@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useLanguage } from '../hooks';
+import { useLanguageContext } from '../contexts';
 
 const ContactPage = () => {
-  const { t } = useLanguage();
+  const { t } = useLanguageContext();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
