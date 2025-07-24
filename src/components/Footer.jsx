@@ -16,6 +16,11 @@ const Footer = () => {
         
         <p>&copy; 2024 Alejandro Robles. {t('footer_text')}</p>
         
+        <div className="crypto-addresses">
+          <p><strong>ETH:</strong> <span className="crypto-addr">0x874264741b35189Bcd44e636eC1131bD92cefc5F</span></p>
+          <p><strong>BTC:</strong> <span className="crypto-addr">bc1q9muzx5ahkzs89kq2en6yygc83rcxly7lsnauh5</span></p>
+        </div>
+        
         <button 
           className="go-top-btn" 
           onClick={scrollToTop}

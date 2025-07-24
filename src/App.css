@@ -1,33 +1,33 @@
 :root{
-  /* Tema "Galaxia Cálida" - Basado en tonos terrestres cálidos */
-  --bg:#0f1419;        /* Fondo base más suave como antes */
-  --bg-2:#1a1f29;      /* Sidebar con tono azulado como antes */
-  --bg-card:#1c2128;   /* Tarjetas más cálidas como antes */
+  /* Tema Galaxia Cálida */
+  --bg:#0f1419;
+  --bg-2:#1a1f29;
+  --bg-card:#1c2128;
   --bg-card-hov:#242b34;
-  --border:#4D596F;    /* Azul grisáceo de tu paleta */
-  --text:#e6e6e8;      /* Texto principal menos agresivo */
-  --text-muted:#9ca3af;/* Texto secundario más legible */
-  --accent:#D95030;    /* Naranja cálido principal */
-  --accent-2:#AB4455;  /* Rosa-púrpura cálido */
-  --accent-3:#433F3C;  /* Marrón oscuro para detalles */
+  --border:#4D596F;
+  --text:#e6e6e8;
+  --text-muted:#9ca3af;
+  --accent:#D95030;
+  --accent-2:#AB4455;
+  --accent-3:#433F3C;
 }
 body.light{
-  /* Tema "NieR: Automata" - Inspirado en los menús del juego */
-  --bg:#f8f6f0;        /* Beige muy claro con toque cálido */
-  --bg-2:#ffffff;      /* Blanco puro para contraste */
-  --bg-card:#f2f0e8;   /* Beige cálido más pronunciado */
+  /* Tema NieR: Automata */
+  --bg:#f8f6f0;
+  --bg-2:#ffffff;
+  --bg-card:#f2f0e8;
   --bg-card-hov:#ebe8dd;
-  --border:#d0c2a0;    /* Borde dorado más suave */
-  --text:#2a2722;      /* Marrón oscuro más cálido */
-  --text-muted:#6a6150;/* Marrón medio con toque dorado */
-  --accent:#c8a961;    /* Dorado NieR principal */
-  --accent-2:#8a7456;  /* Marrón dorado secundario */
-  --accent-3:#d4af37;  /* Oro brillante para highlights */
-  --nier-grid: rgba(201, 169, 97, 0.08); /* Color para líneas decorativas */
+  --border:#d0c2a0;
+  --text:#2a2722;
+  --text-muted:#6a6150;
+  --accent:#c8a961;
+  --accent-2:#8a7456;
+  --accent-3:#d4af37;
+  --nier-grid: rgba(201, 169, 97, 0.08);
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html,body{min-height:100%;} /* Cambiado de height:100% a min-height:100% para permitir crecimiento */
+html,body{min-height:100%;}
 body{
   font-family:'Pixelify Sans',sans-serif;
   background:var(--bg);
@@ -37,28 +37,24 @@ body{
   overflow-x:hidden;
 }
 
-/* Contenedor principal con layout flexible */
+/* Layout principal */
 .App {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* Contenido principal que empuja el footer hacia abajo */
 .App > * {
-  flex: 0 0 auto; /* Por defecto, no crecen */
+  flex: 0 0 auto;
 }
 
-/* El footer se mantiene abajo */
 .site-footer {
-  margin-top: auto; /* Empuja el footer hacia abajo automáticamente */
+  margin-top: auto;
 }
 
-/* =============================
-  STARFIELD BACKGROUND - TEMAS GALAXIA & NIER
-  =============================*/
+/* ========== STARFIELD BACKGROUND ========== */
 
-/* Animaciones galácticas */
+/* Animaciones */
 @keyframes galacticDrift {
   0%   { background-position: 0 0; }
   100% { background-position: -6000px 3000px; }
@@ -85,7 +81,7 @@ body{
   100% { background-position: 40px 40px; }
 }
 
-/* Contenedor para el canvas */
+/* Canvas */
 .starfield-canvas {
   position: fixed;
   inset: 0;
@@ -97,28 +93,28 @@ body{
   background: transparent !important;
 }
 
-/* === TEMA GALAXIA CÁLIDA: Estrellas con tonos terrestres === */
+/* Tema Galaxia Cálida */
 body.starfield .starfield-canvas {
   filter: brightness(1.2) drop-shadow(0 0 4px rgba(217, 80, 48, 0.4)) drop-shadow(0 0 6px rgba(171, 68, 85, 0.2));
   opacity: 0.6;
   animation: galaxyTwinkle 8s ease-in-out infinite;
 }
 
-/* Efecto reactivo galaxia: resplandor cálido muy sutil */
+/* Efecto reactivo galaxia */
 body.starfield .starfield-canvas.reactive {
   filter: brightness(1.3) drop-shadow(0 0 6px rgba(217, 80, 48, 0.3));
   opacity: 0.7;
   transition: filter 0.3s ease, opacity 0.3s ease;
 }
 
-/* === TEMA NIER: Partículas geométricas minimalistas === */
+/* Tema NieR */
 body.light.starfield .starfield-canvas {
   filter: brightness(0.3) contrast(1.2) sepia(0.3) hue-rotate(40deg);
   opacity: 0.2;
   animation: nierFloat 12s ease-in-out infinite;
 }
 
-/* Efecto reactivo NieR: grid tecnológico */
+/* Efecto reactivo NieR */
 body.light.starfield .starfield-canvas.reactive {
   filter: brightness(0.5) contrast(1.4) sepia(0.4) hue-rotate(40deg);
   opacity: 0.35;
@@ -126,7 +122,7 @@ body.light.starfield .starfield-canvas.reactive {
   transition: filter 0.3s ease, opacity 0.3s ease;
 }
 
-/* Fallback SVG - Cielo estrellado natural para tema oscuro */
+/* Fallback SVG */
 body.starfield::before,
 body.starfield::after {
   content: "";
@@ -148,7 +144,7 @@ body.starfield::after {
   opacity: 0.06;
 }
 
-/* Fallback para tema NieR - Grid geométrico */
+/* Fallback para tema NieR */
 body.light.starfield::before,
 body.light.starfield::after {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><defs><pattern id='nierGrid' x='0' y='0' width='40' height='40' patternUnits='userSpaceOnUse'><rect x='0' y='0' width='1' height='40' fill='%23c9a961' opacity='0.2'/><rect x='0' y='0' width='40' height='1' fill='%23c9a961' opacity='0.2'/><circle cx='20' cy='20' r='1' fill='%23d4af37' opacity='0.4'/></pattern></defs><rect width='80' height='80' fill='url(%23nierGrid)'/><rect x='10' y='10' width='8' height='1' fill='%23c9a961' opacity='0.3'/><rect x='50' y='30' width='6' height='1' fill='%23c9a961' opacity='0.3'/><rect x='25' y='60' width='10' height='1' fill='%23c9a961' opacity='0.3'/></svg>");
@@ -163,7 +159,7 @@ body.light.starfield::after {
   opacity: 0.04;
 }
 
-/* Responsive: canvas ocupa toda la pantalla */
+/* Responsive canvas */
 @media (max-width: 720px) {
   .starfield-canvas {
    width: 100vw;
@@ -171,7 +167,7 @@ body.light.starfield::after {
   }
 }
 
-/* ============ NAVBAR SUPERIOR ============ */
+/* ======= NAVBAR ======= */
 .top-nav{
   position:fixed;
   top:0;left:0;right:0;
@@ -249,19 +245,17 @@ body.light.starfield::after {
   color: var(--bg);
 }
 
-/* botón hamburguesa (oculto en escritorio) */
+/* botón hamburguesa */
 #menuToggle{
   font-size:28px;background:none;border:none;color:var(--accent);cursor:pointer;display:none;
 }
 
-/* desplazamos todo el body debajo de la barra */
+/* desplazamos body debajo de navbar */
 body{ padding-top:60px; }
 
 
 
-/* =============================
-   HERO SECTION - MEJORADA
-   =============================*/
+/* ======= HERO SECTION ======= */
 .hero{
   padding-top: 120px;
   text-align: center;
@@ -279,7 +273,7 @@ body{ padding-top:60px; }
   transform: scale(1.05);
 }
 
-/* Tema claro: sombra más suave para avatar */
+/* Tema claro: sombra suave para avatar */
 body.light .hero-avatar {
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
@@ -297,7 +291,7 @@ body.light .hero-avatar {
   background-clip: text;
 }
 
-/* Tema oscuro: efecto galaxia en título */
+/* Tema oscuro: efecto galaxia */
 body:not(.light) .hero-title {
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 50%, var(--accent-3) 100%);
   -webkit-background-clip: text;
@@ -327,7 +321,7 @@ body.light .hero-title {
   font-weight: 500;
 }
 
-/* Badges mejorados */
+/* Badges */
 .badges{
   display: flex;
   justify-content: center;
@@ -354,7 +348,7 @@ body.light .hero-title {
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* Tema claro: badges más suaves */
+/* Tema claro: badges suaves */
 body.light .badge {
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
@@ -363,7 +357,7 @@ body.light .badge:hover {
   box-shadow: 0 3px 10px rgba(0,0,0,0.12);
 }
 
-/* ABOUT BOX mejorada */
+/* ABOUT BOX */
 .about-box{
   max-width: 720px;
   margin: 0 auto 80px;
@@ -380,7 +374,7 @@ body.light .badge:hover {
   box-shadow: 0 12px 30px rgba(0,0,0,0.15);
 }
 
-/* Tema claro: about box más suave */
+/* Tema claro: about box suave */
 body.light .about-box {
   box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
@@ -402,9 +396,7 @@ body.light .about-box:hover {
   line-height: 1.6;
 }
 
-/* =============================
-   SKILLS SECTION
-   =============================*/
+/* ======= SKILLS SECTION ======= */
 #skills{padding-top:40px;}
 #skills > h1{font-size:42px;text-align:center;margin-bottom:24px;color:var(--text);}
 
@@ -437,9 +429,7 @@ body.light .about-box:hover {
 .tech-card:hover{transform:scale(1.06);border-color:var(--accent);} 
 .tech-card i{font-size:18px;}
 
-/* =============================
-   UNDER CONSTRUCTION
-   =============================*/
+/* ======= UNDER CONSTRUCTION ======= */
 .under-construction{
   margin:60px auto;padding:30px;max-width:620px;
   background:var(--bg-card);
@@ -449,9 +439,7 @@ body.light .about-box:hover {
 }
 .warning-icon{font-size:38px;margin-bottom:14px;}
 
-/* =============================
-   RESPONSIVE OPTIMIZATIONS - MEJORADAS
-   =============================*/
+/* ======= RESPONSIVE ======= */
 @media(max-width: 720px){
   .hero {
     padding-top: 100px;
@@ -497,11 +485,9 @@ body.light .about-box:hover {
   }
 }
 
-/* =============================
-   ELEMENTOS ADICIONALES - TEMAS ESPECÍFICOS
-   =============================*/
+/* ======= ELEMENTOS TEMAS ======= */
 
-/* Tema Galaxia Cálida: sin fondo nebuloso */
+/* Tema Galaxia: sin fondo nebuloso */
 body:not(.light)::after {
   display: none;
 }
@@ -512,7 +498,7 @@ body:not(.light)::after {
   66% { transform: translate(5px, -10px) rotate(-1deg); }
 }
 
-/* Tema NieR: Grid pattern tecnológico mejorado */
+/* Tema NieR: Grid tecnológico */
 body.light::after {
   content: "";
   position: fixed;
@@ -558,7 +544,7 @@ body.light::before {
   100% { background-position: 40px 40px, 40px 40px, 200px 200px, 200px 200px, 60px 60px; }
 }
 
-/* Efecto de brillo sutil en bordes para tema galaxia cálida */
+/* Efecto de brillo sutil en bordes tema galaxia */
 body:not(.light) .about-box,
 body:not(.light) .skill-box {
   border-color: rgba(77, 89, 111, 0.3);
@@ -578,7 +564,7 @@ body:not(.light) .skill-box:hover {
     0 8px 30px rgba(0,0,0,0.3);
 }
 
-/* Efecto NieR en tema claro - Inspirado en menús de NieR Automata */
+/* Efecto NieR en tema claro */
 body.light .about-box,
 body.light .skill-box {
   border: 2px solid var(--accent);
@@ -626,7 +612,7 @@ body.light .skill-box::after {
   opacity: 0.3;
 }
 
-/* Cards de proyectos con estilo NieR Automata mejorado */
+/* Cards de proyectos con estilo NieR */
 body.light .project-card, 
 body.light .skill-card {
   background: linear-gradient(145deg, 
@@ -690,7 +676,7 @@ body.light .skill-card:hover {
     0 0 30px rgba(201, 169, 97, 0.15);
 }
 
-/* Navbar estilo NieR Automata */
+/* Navbar estilo NieR */
 body.light .navbar {
   background: linear-gradient(135deg, 
     rgba(245, 245, 220, 0.95), 
@@ -742,7 +728,7 @@ body.light .navbar-menu a.active::after {
   width: 100%;
 }
 
-/* Footer estilo NieR Automata */
+/* Footer estilo NieR */
 body.light .footer {
   background: linear-gradient(135deg, 
     rgba(240, 240, 225, 0.98), 
@@ -770,7 +756,7 @@ body.light .footer::before {
   opacity: 0.6;
 }
 
-/* Botones de tecnología estilo NieR */
+/* Botones de tecnología NieR */
 body.light .tech-button,
 body.light .tech-link {
   background: linear-gradient(135deg, 
@@ -864,9 +850,7 @@ body.light .about-box:hover::after,
 body.light .skill-box:hover::after {
   opacity: 0.5;
 }
-/* =============================
-   CURSOR OPTIMIZATIONS
-   =============================*/
+/* ======= CURSOR ======= */
    .galeria img {
     width: 128px;
     height: 128px;
@@ -879,11 +863,11 @@ body.light .skill-box:hover::after {
 
 /* ===== MOBILE NAVBAR ===== */
 .mobile-bar{
-  display:none;                       /* solo en móviles */
+/* solo en móviles */
   position:fixed;top:0;left:0;right:0;
   height:48px;background:var(--bg-2);
   border-bottom:1px solid var(--border);
-  z-index:1100;                       /* por encima del resto */
+  z-index:1100;
   display:flex;align-items:center;
   padding:0 12px;gap:12px;
 }
@@ -911,26 +895,24 @@ body.light .skill-box:hover::after {
 }
 
 
-/* ——— Breakpoint ——— */
+/* Breakpoint */
 @media(max-width:720px){
   #menuToggle{display:block;}
-  .top-nav .nav-links{display:none;}   /* oculta links de escritorio */
-  .navbar-controls{display:none;}      /* oculta controles de escritorio */
+  .top-nav .nav-links{display:none;}
+  .navbar-controls{display:none;}
 }
 
-/* =============================
-  SITE FOOTER
-  =============================*/
+/* ======= SITE FOOTER ======= */
 .site-footer {
   background: var(--bg-2);
   border-top: 1px solid var(--border);
   color: var(--text-muted);
-  padding: 20px 0 16px; /* Reducido padding de 32px/24px a 20px/16px */
+  padding: 20px 0 16px;
   text-align: center;
   font-size: 15px;
   box-shadow: 0 -2px 12px #00000018;
-  margin-top: auto; /* Empuja el footer hacia abajo automáticamente */
-  flex-shrink: 0; /* Evita que el footer se contraiga en flexbox */
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
 .site-footer .footer-content {
@@ -965,7 +947,7 @@ body.light .skill-box:hover::after {
   text-decoration: underline;
 }
 
-/* Botón Go to Top mejorado */
+/* Botón Go to Top */
 .go-top-btn {
   background: var(--accent);
   color: var(--bg);
@@ -986,7 +968,40 @@ body.light .skill-box:hover::after {
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
-/* Tema claro: botón más suave */
+/* Direcciones de criptomonedas */
+.crypto-addresses {
+  margin: 16px 0 8px 0;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.crypto-addresses p {
+  margin: 6px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.crypto-addresses strong {
+  color: var(--accent);
+  font-weight: 600;
+  min-width: 35px;
+}
+
+.crypto-addr {
+  font-family: 'Courier New', monospace;
+  background: var(--bg-card);
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  font-size: 11px;
+  word-break: break-all;
+  max-width: 300px;
+  overflow-wrap: break-word;
+}
+
+/* Tema claro: botón suave */
 body.light .go-top-btn {
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
@@ -998,8 +1013,8 @@ body.light .go-top-btn:hover {
 @media (max-width: 720px) {
   .site-footer {
     font-size: 14px;
-    padding: 20px 0 16px; /* Reducido padding para móvil */
-    margin-top: 30px; /* Reducido margen superior */
+    padding: 20px 0 16px;
+    margin-top: 30px;
   }
   
   .site-footer .footer-content {
@@ -1025,16 +1040,24 @@ body.light .go-top-btn:hover {
     font-size: 13px;
     margin-top: 4px;
   }
+  
+  .crypto-addresses p {
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .crypto-addr {
+    max-width: 280px;
+    font-size: 10px;
+  }
 }
 
-/* =============================
-   PROJECTS PAGE STYLES - CAROUSEL VERSION
-   =============================*/
+/* ======= PROJECTS PAGE ======= */
 .projects-wrapper {
   max-width: 1100px;
   margin: 0 auto;
   text-align: center;
-  padding: 120px 18px 40px; /* Padding normal para evitar espacios excesivos */
+  padding: 120px 18px 40px;
   min-height: auto; /* Cambiado de 100vh a auto para evitar espacio vacío */
 }
 
@@ -1054,14 +1077,14 @@ body.light .go-top-btn:hover {
 
 .carousel-container {
   position: relative;
-  margin-bottom: 20px; /* Reducido de 44px a 20px */
+  margin-bottom: 20px;
   padding: 0 32px;
 }
 
 .carousel {
   display: flex;
   gap: 28px;
-  overflow: hidden; /* Cambio importante: siempre hidden para carrusel infinito */
+  overflow: hidden;
   scroll-behavior: smooth;
   padding: 8px 0 24px 0;
   scrollbar-width: none;
@@ -1095,7 +1118,7 @@ body.light .go-top-btn:hover {
 .carousel-track {
   display: flex;
   align-items: stretch;
-  will-change: transform; /* Optimización para animaciones */
+  will-change: transform;
   transition: transform 0.5s ease-in-out;
 }
 
@@ -1326,7 +1349,7 @@ body.light .go-top-btn:hover {
     box-shadow: 0 1px 6px #0001;
     justify-content: flex-start;
     cursor: grab !important;
-    touch-action: pan-y; /* Permite scroll vertical pero bloquea horizontal */
+    touch-action: pan-y;
   }
   
   .carousel:active {
@@ -1334,7 +1357,6 @@ body.light .go-top-btn:hover {
   }
   
   .infinite-carousel {
-    /* En móvil mantenemos el comportamiento infinito con touch */
     overflow: hidden;
     touch-action: pan-y;
   }
@@ -1344,21 +1366,19 @@ body.light .go-top-btn:hover {
   }
   
   .carousel-info {
-    display: block !important; /* Mostrar info de swipe en móvil */
+    display: block !important;
   }
   
   .proj-card {
     min-width: 200px;
     max-width: 80vw;
     flex-shrink: 0;
-    /* Mejorar interacción táctil */
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
   }
   
   .proj-card img {
     height: 80px;
-    /* Evitar selección accidental */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -1387,11 +1407,9 @@ body.light .go-top-btn:hover {
   }
 }
 
-/* =============================
-   CONTACT PAGE STYLES
-   =============================*/
+/* ======= CONTACT PAGE ======= */
 .contact-section {
-  padding: 120px 20px 40px; /* Padding normal para evitar espacios excesivos */
+  padding: 120px 20px 40px;
   min-height: auto; /* Cambiado de 100vh a auto para evitar espacio vacío */
 }
 

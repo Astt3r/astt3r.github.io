@@ -41,7 +41,8 @@ export const translations = {
     // Contact page
     contact_title: "Contacto",
     contact_subtitle: "¡Hablemos! Me encanta conectar con otros desarrolladores y colaborar en proyectos interesantes.",
-    contact_intro: "¡Me encanta conectar con otros desarrolladores y colaborar en proyectos interesantes! Si tienes algún proyecto emocionante, una oportunidad laboral o simplemente quieres charlar sobre tecnología y videojuegos, no dudes en contactarme.",
+    contact_info_title: "Mis medios de contacto",
+    contact_intro: "Estos son mis medios de contacto disponibles. ¡No dudes en escribirme!",
     contact_form_title: "Envíame un mensaje",
     form_name: "Nombre",
     form_email: "Email", 
@@ -91,7 +92,8 @@ export const translations = {
     // Contact page
     contact_title: "Contact",
     contact_subtitle: "Let's talk! I love connecting with other developers and collaborating on interesting projects.",
-    contact_intro: "I love connecting with other developers and collaborating on interesting projects! If you have an exciting project, a job opportunity or just want to chat about technology and video games, don't hesitate to contact me.",
+    contact_info_title: "My contact methods",
+    contact_intro: "These are my available contact methods. Don't hesitate to reach out!",
     contact_form_title: "Send me a message",
     form_name: "Name",
     form_email: "Email",

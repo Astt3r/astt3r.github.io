@@ -32,9 +32,9 @@ const ContactPage = () => {
           
           <div className="contact-content">
             <div className="contact-info">
-              <h2>¡Hablemos!</h2>
+              <h2>{t('contact_info_title') || 'Mis medios de contacto'}</h2>
               <p>
-                {t('contact_intro') || '¡Me encanta conectar con otros desarrolladores y colaborar en proyectos interesantes! Si tienes algún proyecto emocionante, una oportunidad laboral o simplemente quieres charlar, no dudes en contactarme.'}
+                {t('contact_intro') || 'Estos son mis medios de contacto disponibles. ¡No dudes en escribirme!'}
               </p>
               
               <div className="contact-methods">

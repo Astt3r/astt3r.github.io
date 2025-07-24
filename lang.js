@@ -51,7 +51,8 @@ const translations = {
 
     // Contact page
     contact_title: "Contacto",
-    contact_subtitle: "¡Hablemos! Me encanta conectar con otros desarrolladores y colaborar en proyectos interesantes.",
+    contact_subtitle: "Estos son mis medios de contacto disponibles. ¡No dudes en escribirme!",
+    contact_info_title: "Mis medios de contacto",
     github_card: "GitHub",
     discord_card: "Discord", 
     linkedin_card: "LinkedIn",
@@ -119,7 +120,8 @@ const translations = {
 
     // Contact page
     contact_title: "Contact",
-    contact_subtitle: "Let's talk! I love connecting with other developers and collaborating on interesting projects.",
+    contact_subtitle: "These are my available contact methods. Don't hesitate to reach out!",
+    contact_info_title: "My contact methods",
     github_card: "GitHub",
     discord_card: "Discord",
     linkedin_card: "LinkedIn", 
