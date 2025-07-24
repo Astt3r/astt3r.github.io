@@ -20,7 +20,12 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "deploy-github": "npm run build && node deploy.js"
+    "deploy-github": "npm run build && node deploy.js",
+    "clean": "node cleanup.js",
+    "analyze": "npm run build && npx source-map-explorer 'build/static/js/*.js'",
+    "size": "npm run build && size-limit",
+    "format": "prettier --write src/**/*.{js,jsx,css,md}",
+    "lint": "eslint src --ext .js,.jsx --fix"
   },
   "eslintConfig": {
     "extends": [

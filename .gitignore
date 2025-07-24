@@ -30,3 +30,34 @@ yarn-error.log*
 
 # OS
 Thumbs.db
+
+# ===== OPTIMIZACIONES ASTT3R =====
+
+# Archivos backup y temporales
+*.backup
+*.tmp
+*.old
+temp/
+legacy/
+
+# Source maps en producción (opcional)
+# *.map
+
+# Archivos de limpieza
+cleanup.js
+
+# Múltiples builds (mantener solo el más reciente)
+/static/js/main.*.js.old
+/static/css/main.*.css.old
+
+# Carpetas de migración temporal
+react-migration/
+migration-backup/
+
+# Assets no optimizados
+/assets/raw/
+/assets/unoptimized/
+
+# Build artifacts específicos
+asset-manifest.json.bak
+index.html.bak
