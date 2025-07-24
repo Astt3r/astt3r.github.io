@@ -235,7 +235,7 @@ export const projectsData = {
       id: 5,
       title: "Community Platform",
       description: "Enhanced fork of JuntaTransparente for my thesis project. Modern Laravel + React platform for neighborhood association management with advanced features, improved UI/UX, and comprehensive community administration tools.",
-      image: "/assets/communityplatform.png", // Imagen del proyecto (make sure this file exists in the public/assets folder)
+      image: "/assets/msn-windows-live-messenger.png", // Imagen del proyecto (make sure this file exists in the public/assets folder)
       tech: [
         { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" },
         { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
