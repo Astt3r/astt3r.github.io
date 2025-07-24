@@ -179,7 +179,33 @@ body.light.starfield::after {
   z-index:1000;
 }
 .top-nav .brand{
-  font-weight:700;font-size:22px;color:var(--accent);text-decoration:none;
+  font-weight:700;
+  font-size:22px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  cursor: default;
+  user-select: none;
+  filter: brightness(1.1);
+  transition: filter 0.3s ease;
+}
+
+.top-nav .brand:hover {
+  filter: brightness(1.2) drop-shadow(0 0 8px rgba(217, 80, 48, 0.3));
+}
+
+/* Tema claro: efecto dorado NieR para brand */
+body.light .top-nav .brand {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-3) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: brightness(0.9);
+}
+
+body.light .top-nav .brand:hover {
+  filter: brightness(1.0) drop-shadow(0 2px 4px rgba(201, 169, 97, 0.4));
 }
 .top-nav .nav-links ul{list-style:none;display:flex;gap:22px;}
 .top-nav .nav-links a{color:var(--text);text-decoration:none;transition:color .2s;}
@@ -871,7 +897,23 @@ body.light .skill-box:hover::after {
   display:flex;align-items:center;
   padding:0 12px;gap:12px;
 }
-.mobile-bar .brand{font-weight:700;color:var(--accent);}
+.mobile-bar .brand{
+  font-weight:700;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  cursor: default;
+  user-select: none;
+}
+
+/* Tema claro: brand mobile */
+body.light .mobile-bar .brand {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-3) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 #menuToggle{
   font-size:26px;background:none;border:none;
   color:var(--accent);cursor:pointer;

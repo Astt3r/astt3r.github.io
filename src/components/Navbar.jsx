@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useMobileMenu, useTheme } from '../hooks';
 import { useLanguageContext } from '../contexts';
 
@@ -7,22 +7,15 @@ const Navbar = () => {
   const { isOpen, toggleMenu, closeMenu } = useMobileMenu();
   const { t, language, toggleLanguage, getLanguageIcon } = useLanguageContext();
   const { theme, toggleTheme, getThemeIcon } = useTheme();
-  const location = useLocation();
 
   const navLinks = [
     { to: '/', label: t('home'), section: 'home' },
-    { to: '/#skills', label: t('technologies'), section: 'skills' },
     { to: '/projects', label: t('projects'), section: 'projects' },
     { to: '/contact', label: t('contact'), section: 'contact' }
   ];
 
-  const handleLinkClick = (section) => {
+  const handleLinkClick = () => {
     closeMenu();
-    if (section === 'skills' && location.pathname === '/') {
-      setTimeout(() => {
-        document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    }
   };
 
   return (
@@ -37,9 +30,9 @@ const Navbar = () => {
           ☰
         </button>
 
-        <Link className="brand" to="/">
+        <span className="brand">
           Astt3r (´・ω・｀)
-        </Link>
+        </span>
 
         <nav className="nav-links">
           <ul>
@@ -47,7 +40,7 @@ const Navbar = () => {
               <li key={link.section}>
                 <Link 
                   to={link.to} 
-                  onClick={() => handleLinkClick(link.section)}
+                  onClick={handleLinkClick}
                 >
                   {link.label}
                 </Link>
@@ -85,7 +78,7 @@ const Navbar = () => {
             <li key={link.section}>
               <Link 
                 to={link.to} 
-                onClick={() => handleLinkClick(link.section)}
+                onClick={handleLinkClick}
               >
                 {link.label}
               </Link>
