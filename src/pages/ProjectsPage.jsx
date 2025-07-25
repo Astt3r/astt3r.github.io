@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { projectsData } from '../data';
 import { useLanguageContext } from '../contexts';
 
 const ProjectCard = ({ project }) => {
-  const { title, description, image, tech, links, badge, mainIcon, isPlayable } = project;
+  const { title, description, image, tech, links, badge, mainIcon, isPlayable, isDownloadable } = project;
   
   const cardLink = links.demo || links.github || '#';
   
@@ -85,297 +85,54 @@ const ProjectCard = ({ project }) => {
               </a>
             </div>
           )}
+          
+          {isDownloadable && (
+            <div style={{marginTop: '10px', display: 'flex', gap: '8px'}}>
+              <a 
+                href={links.download} 
+                download
+                style={{
+                  background: 'linear-gradient(90deg,#4CAF50,#45a049)',
+                  color: '#fff',
+                  padding: '5px 14px',
+                  borderRadius: '7px',
+                  fontSize: '13px',
+                  fontWeight: '600',
+                  textDecoration: 'none',
+                  boxShadow: '0 2px 8px #0002',
+                  transition: '.18s',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px'
+                }}
+              >
+                📥 Download App
+              </a>
+              {links.github && (
+                <a 
+                  href={links.github} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{
+                    background: 'var(--bg-2)',
+                    color: 'var(--accent)',
+                    padding: '5px 12px',
+                    borderRadius: '7px',
+                    fontSize: '13px',
+                    fontWeight: '600',
+                    textDecoration: 'none',
+                    border: '1px solid var(--accent)',
+                    transition: '.18s'
+                  }}
+                >
+                  Code
+                </a>
+              )}
+            </div>
+          )}
         </div>
       </a>
     </div>
-  );
-};
-
-const ProjectCarousel = ({ title, projects, carouselId, t }) => {
-  const carouselRef = useRef(null);
-  const [currentTranslate, setCurrentTranslate] = React.useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = React.useState(true);
-  const [transition, setTransition] = React.useState('transform 0.5s ease-in-out');
-
-  // Estados para el arrastre táctil
-  const [isDragging, setIsDragging] = React.useState(false);
-  const [startX, setStartX] = React.useState(0);
-  const [startTranslate, setStartTranslate] = React.useState(0);
-  const [isMobile, setIsMobile] = React.useState(false);
-
-  // Creamos un array duplicado para el efecto infinito
-  const duplicatedProjects = [...projects, ...projects];
-  const cardWidth = React.useMemo(() => {
-    // Dinámico basado en el tamaño de pantalla
-    if (typeof window !== 'undefined') {
-      if (window.innerWidth <= 650) {
-        return 212; // 200px card + 12px gap en móvil
-      }
-      return 268; // 240px card + 28px gap en desktop
-    }
-    return 268;
-  }, []);
-  const totalWidth = cardWidth * projects.length;
-
-  // Detectar si estamos en móvil
-  React.useEffect(() => {
-    const checkIfMobile = () => {
-      setIsMobile(window.innerWidth <= 650);
-    };
-    
-    checkIfMobile();
-    window.addEventListener('resize', checkIfMobile);
-    
-    return () => window.removeEventListener('resize', checkIfMobile);
-  }, []);
-
-  // Auto-scroll infinito cada 3 segundos
-  React.useEffect(() => {
-    if (!isAutoPlaying || projects.length <= 1 || isDragging) return;
-
-    const interval = setInterval(() => {
-      setCurrentTranslate(prev => {
-        const newTranslate = prev - cardWidth;
-        
-        // Si hemos llegado al final del primer set, resetear sin transición
-        if (Math.abs(newTranslate) >= totalWidth) {
-          setTimeout(() => {
-            setTransition('none');
-            setCurrentTranslate(0);
-            setTimeout(() => {
-              setTransition('transform 0.5s ease-in-out');
-            }, 50);
-          }, 500);
-        }
-        
-        return newTranslate;
-      });
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, projects.length, cardWidth, totalWidth, isDragging]);
-
-  const goToNext = () => {
-    if (projects.length <= 1) return;
-    setIsAutoPlaying(false);
-    
-    setCurrentTranslate(prev => {
-      const newTranslate = prev - cardWidth;
-      
-      if (Math.abs(newTranslate) >= totalWidth) {
-        setTimeout(() => {
-          setTransition('none');
-          setCurrentTranslate(0);
-          setTimeout(() => {
-            setTransition('transform 0.5s ease-in-out');
-          }, 50);
-        }, 500);
-      }
-      
-      return newTranslate;
-    });
-    
-    setTimeout(() => setIsAutoPlaying(true), 8000);
-  };
-
-  const goToPrev = () => {
-    if (projects.length <= 1) return;
-    setIsAutoPlaying(false);
-    
-    setCurrentTranslate(prev => {
-      let newTranslate = prev + cardWidth;
-      
-      // Si estamos al inicio, ir al final sin transición
-      if (newTranslate > 0) {
-        setTransition('none');
-        newTranslate = -totalWidth + cardWidth;
-        setTimeout(() => {
-          setTransition('transform 0.5s ease-in-out');
-        }, 50);
-      }
-      
-      return newTranslate;
-    });
-    
-    setTimeout(() => setIsAutoPlaying(true), 8000);
-  };
-
-  // Funciones para el arrastre táctil
-  const handleTouchStart = (e) => {
-    if (!isMobile || projects.length <= 1) return;
-    
-    setIsDragging(true);
-    setIsAutoPlaying(false);
-    setTransition('none');
-    setStartX(e.touches[0].clientX);
-    setStartTranslate(currentTranslate);
-  };
-
-  const handleTouchMove = (e) => {
-    if (!isDragging || !isMobile) return;
-    
-    e.preventDefault();
-    const currentX = e.touches[0].clientX;
-    const diff = currentX - startX;
-    const newTranslate = startTranslate + diff;
-    
-    setCurrentTranslate(newTranslate);
-  };
-
-  const handleTouchEnd = () => {
-    if (!isDragging || !isMobile) return;
-    
-    setIsDragging(false);
-    setTransition('transform 0.3s ease-out');
-    
-    const threshold = cardWidth * 0.3; // 30% del ancho de la tarjeta
-    const diff = currentTranslate - startTranslate;
-    
-    if (Math.abs(diff) > threshold) {
-      if (diff > 0) {
-        // Arrastrado hacia la derecha - ir al anterior
-        goToPrev();
-      } else {
-        // Arrastrado hacia la izquiera - ir al siguiente
-        goToNext();
-      }
-    } else {
-      // No se arrastró lo suficiente, volver a la posición original
-      setCurrentTranslate(startTranslate);
-    }
-    
-    // Reanudar autoplay después de un tiempo
-    setTimeout(() => {
-      setIsAutoPlaying(true);
-      setTransition('transform 0.5s ease-in-out');
-    }, 2000);
-  };
-
-  // Eventos del mouse para desktop (opcional)
-  const handleMouseDown = (e) => {
-    if (isMobile || projects.length <= 1) return;
-    
-    setIsDragging(true);
-    setIsAutoPlaying(false);
-    setTransition('none');
-    setStartX(e.clientX);
-    setStartTranslate(currentTranslate);
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDragging || isMobile) return;
-    
-    e.preventDefault();
-    const currentX = e.clientX;
-    const diff = currentX - startX;
-    const newTranslate = startTranslate + diff;
-    
-    setCurrentTranslate(newTranslate);
-  };
-
-  const handleMouseUp = () => {
-    if (!isDragging || isMobile) return;
-    
-    setIsDragging(false);
-    setTransition('transform 0.3s ease-out');
-    
-    const threshold = cardWidth * 0.3;
-    const diff = currentTranslate - startTranslate;
-    
-    if (Math.abs(diff) > threshold) {
-      if (diff > 0) {
-        goToPrev();
-      } else {
-        goToNext();
-      }
-    } else {
-      setCurrentTranslate(startTranslate);
-    }
-    
-    setTimeout(() => {
-      setIsAutoPlaying(true);
-      setTransition('transform 0.5s ease-in-out');
-    }, 2000);
-  };
-
-  // Event listeners para el mouse
-  React.useEffect(() => {
-    if (isDragging && !isMobile) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-      
-      return () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-      };
-    }
-  }, [isDragging, isMobile, startX, startTranslate]);
-
-  return (
-    <>
-      <h2 className="section-title">{title}</h2>
-      <div className="carousel-container" id={carouselId}>
-        {projects.length > 1 && !isMobile && (
-          <button className="nav-btn nav-prev" onClick={goToPrev}>❮</button>
-        )}
-        <div 
-          className={`carousel infinite-carousel ${projects.length === 1 ? 'single' : ''} ${isDragging ? 'dragging' : ''}`}
-          ref={carouselRef}
-          onMouseEnter={() => !isMobile && setIsAutoPlaying(false)}
-          onMouseLeave={() => !isMobile && setIsAutoPlaying(true)}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-          onMouseDown={handleMouseDown}
-          style={{
-            cursor: isDragging ? 'grabbing' : (isMobile ? 'default' : 'grab'),
-            userSelect: 'none'
-          }}
-        >
-          <div 
-            className={`carousel-track ${isDragging ? 'dragging' : ''}`}
-            style={{
-              transform: `translateX(${currentTranslate}px)`,
-              transition: transition,
-              display: 'flex',
-              gap: isMobile ? '12px' : '28px',
-            }}
-          >
-            {projects.length === 1 ? (
-              <ProjectCard project={projects[0]} />
-            ) : (
-              duplicatedProjects.map((project, index) => (
-                <ProjectCard 
-                  key={`${project.id}-${index >= projects.length ? 'duplicate' : 'original'}`} 
-                  project={project} 
-                />
-              ))
-            )}
-          </div>
-        </div>
-        {projects.length > 1 && !isMobile && (
-          <button className="nav-btn nav-next" onClick={goToNext}>❯</button>
-        )}
-      </div>
-      
-      <div className="carousel-info">
-        <p style={{
-          textAlign: 'center',
-          fontSize: '12px',
-          color: 'var(--text-muted)',
-          marginTop: '12px',
-          opacity: 0.7
-        }}>
-          {projects.length > 1 ? (
-            isMobile ? 
-              `👆 ${t('swipe_to_navigate') || 'Desliza para navegar'}` : 
-              `↻ ${t('carousel_infinite') || 'Carrusel infinito en movimiento'}`
-          ) : (
-            t('single_project') || 'Proyecto único'
-          )}
-        </p>
-      </div>
-    </>
   );
 };
 
@@ -403,21 +160,25 @@ const ProjectsPage = () => {
         </p>
 
         {/* Completed Projects */}
-        <ProjectCarousel 
-          title={t('completed_projects') || 'Completed'}
-          projects={projectsData.completed}
-          carouselId="done"
-          t={t}
-        />
+        <div className="projects-section">
+          <h2 className="section-title">{t('completed_projects') || 'Completed'}</h2>
+          <div className="projects-grid">
+            {projectsData.completed.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        </div>
 
         {/* In Progress Projects */}
         {projectsData.inProgress && projectsData.inProgress.length > 0 ? (
-          <ProjectCarousel 
-            title={t('in_progress_projects') || 'Currently in Development'}
-            projects={projectsData.inProgress}
-            carouselId="in-progress"
-            t={t}
-          />
+          <div className="projects-section">
+            <h2 className="section-title">{t('in_progress_projects') || 'Currently in Development'}</h2>
+            <div className="projects-grid">
+              {projectsData.inProgress.map((project) => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
+            </div>
+          </div>
         ) : (
           <div className="no-projects-message">
             <h2 className="section-title">{t('in_progress_projects') || 'Currently in Development'}</h2>

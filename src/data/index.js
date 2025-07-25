@@ -227,15 +227,32 @@ export const projectsData = {
       },
       mainIcon: "devicon-react-original colored"
     },
-    
+    {
+      id: 5,
+      title: "Pokemon API Explorer",
+      description: "A simple desktop app to explore the Pokemon API, showcasing my skills in API integration and data visualization. Must be opened on desktop.",
+      image: "/assets/pokemonapp.png",
+      tech: [
+        { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" }
+      ],
+      links: {
+        download: "/assets/PokemonApp.exe"
+      },
+      badge: {
+        text: "Desktop App",
+        color: "linear-gradient(90deg,#fbc2eb,#a6c1ee)"
+      },
+      mainIcon: "devicon-python-plain colored",
+      isDownloadable: true // <-- Permite descarga
+    }
   ],
   
   inProgress: [
     {
-      id: 5,
+      id: 6,
       title: "Community Platform",
       description: "Enhanced fork of JuntaTransparente for my thesis project. Modern Laravel + React platform for neighborhood association management with advanced features, improved UI/UX, and comprehensive community administration tools.",
-      image: "/assets/msn-windows-live-messenger.png", // Imagen del proyecto (make sure this file exists in the public/assets folder)
+      image: "/assets/msn-windows-live-messenger.png",
       tech: [
         { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" },
         { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },

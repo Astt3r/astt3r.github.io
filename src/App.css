@@ -1258,9 +1258,23 @@ body.light .go-top-btn:hover {
   opacity: 0.8;
 }
 
+/* Projects Grid Layout */
+.projects-section {
+  margin-bottom: 60px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  padding: 20px 0;
+  justify-items: center;
+}
+
 .proj-card {
   min-width: 240px;
-  max-width: 260px;
+  max-width: 320px;
+  width: 100%;
   background: var(--bg-card);
   border: 1.5px solid var(--border);
   border-radius: 14px;
@@ -1597,6 +1611,13 @@ body.light .go-top-btn:hover {
 @media (max-width: 768px) {
   .projects-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 16px 0;
+  }
+  
+  .proj-card {
+    max-width: 100%;
+    min-width: auto;
   }
   
   .contact-content {
