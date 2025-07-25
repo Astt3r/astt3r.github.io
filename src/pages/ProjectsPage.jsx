@@ -159,7 +159,7 @@ const ProjectsPage = () => {
           {t('projects_subtitle') || 'Una colección de proyectos en los que he trabajado, desde aplicaciones web hasta juegos.'}
         </p>
 
-        {/* Completed Project */}
+        {/* Completed Projects */}
         <div className="projects-section">
           <h2 className="section-title">{t('completed_projects') || 'Completed'}</h2>
           <div className="projects-grid">
