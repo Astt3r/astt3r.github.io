@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { useLanguageContext } from '../contexts';
 
 const ContactPage = () => {
@@ -8,6 +9,7 @@ const ContactPage = () => {
     email: '',
     message: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -18,9 +20,35 @@ const ContactPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    alert('Mensaje enviado! (En desarrollo)');
+    setIsLoading(true);
+
+    // Configuración de EmailJS
+    const serviceId = 'service_f89ej28';
+    const templateId = 'template_1t4vdk8';
+    const publicKey = '8AvHiDIzoam6TfTl5';
+
+    // Estos son los datos que se enviarán al template
+    const templateParams = {
+      from_name: formData.name,        // Nombre del usuario
+      from_email: formData.email,      // Email del usuario
+      to_email: 'alejano2000@gmail.com', // Tu email (donde llegarán los mensajes)
+      message: formData.message,       // Mensaje del usuario
+      reply_to: formData.email        // Para responder directamente
+    };
+
+    emailjs.send(serviceId, templateId, templateParams, publicKey)
+      .then((response) => {
+        console.log('Email sent successfully:', response);
+        alert('¡Mensaje enviado exitosamente! Te responderé pronto.');
+        setFormData({ name: '', email: '', message: '' });
+      })
+      .catch((error) => {
+        console.error('Error sending email:', error);
+        alert('Error al enviar el mensaje. Por favor, intenta de nuevo o contacta directamente por email.');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -117,8 +145,8 @@ const ContactPage = () => {
                   ></textarea>
                 </div>
                 
-                <button type="submit" className="submit-btn">
-                  {t('form_submit') || 'Enviar Mensaje'}
+                <button type="submit" className="submit-btn" disabled={isLoading}>
+                  {isLoading ? 'Enviando...' : (t('form_submit') || 'Enviar Mensaje')}
                 </button>
               </form>
             </div>
