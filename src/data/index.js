@@ -25,7 +25,7 @@ export const translations = {
     go_top: "Ir arriba",
     
     // Projects page
-    projects_subtitle: "Una colección de proyectos en los que he trabajado, desde aplicaciones web hasta juegos.",
+    projects_subtitle: "Una colección de proyectos en los que he trabajado, desde aplicaciones web hasta juegos indie.",
     completed_projects: "Completados",
     in_progress_projects: "En Desarrollo",
     preparing_new_projects: "Preparando nuevos proyectos",
