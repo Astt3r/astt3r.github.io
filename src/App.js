@@ -2,12 +2,21 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar, Footer, StarfieldCanvas } from './components';
 import { HomePage, ProjectsPage, ContactPage } from './pages';
+import MaintenancePage from './pages/MaintenancePage';
 import { LanguageProvider } from './contexts';
 import { initSmoothScrolling } from './utils';
 import './App.css';
 
+// ⚠️ MODO MANTENIMIENTO ⚠️
+// Cambia esto a 'true' para activar la página de mantenimiento
+// Cambia esto a 'false' para mostrar el portfolio normal
+const MAINTENANCE_MODE = true;
+
 function App() {
   useEffect(() => {
+    // Skip initialization if in maintenance mode
+    if (MAINTENANCE_MODE) return;
+
     // Initialize smooth scrolling
     const cleanup = initSmoothScrolling();
     
@@ -26,6 +35,11 @@ function App() {
       }
     };
   }, []);
+
+  // Si está en modo mantenimiento, mostrar solo la página de mantenimiento
+  if (MAINTENANCE_MODE) {
+    return <MaintenancePage />;
+  }
 
   return (
     <LanguageProvider>
