@@ -14,7 +14,7 @@ const MAINTENANCE_MODE = true;
 
 function App() {
   useEffect(() => {
-    // Skip initialization if in maintenance mode
+    // Skip initialization if in maintenance  mode
     if (MAINTENANCE_MODE) return;
 
     // Initialize smooth scrolling
