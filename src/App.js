@@ -10,7 +10,7 @@ import './App.css';
 // ⚠️ MODO MANTENIMIENTO ⚠️
 // Cambia esto a 'true' para activar la página de mantenimiento
 // Cambia esto a 'false' para mostrar el portfolio normal
-const MAINTENANCE_MODE = true;
+const MAINTENANCE_MODE = false;
 
 function App() {
   useEffect(() => {

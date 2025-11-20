@@ -8,16 +8,13 @@ export const useLanguage = () => {
   });
 
   useEffect(() => {
-    // Solo guardamos en localStorage si no lo hicimos en toggleLanguage
-    if (localStorage.getItem('language') !== language) {
-      localStorage.setItem('language', language);
-    }
+    localStorage.setItem('language', language);
   }, [language]);
 
   const toggleLanguage = () => {
     const newLanguage = language === 'es' ? 'en' : 'es';
     setLanguage(newLanguage);
-    localStorage.setItem('language', newLanguage); // Guardamos inmediatamente
+    localStorage.setItem('language', newLanguage); 
   };
 
   const t = (key) => {
