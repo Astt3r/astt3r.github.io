@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar, Footer, StarfieldCanvas } from './components';
 import { HomePage, ProjectsPage, ContactPage } from './pages';
 import MaintenancePage from './pages/MaintenancePage';
@@ -43,7 +43,7 @@ function App() {
 
   return (
     <LanguageProvider>
-      <Router basename={process.env.NODE_ENV === 'production' ? '' : ''}>
+      <Router>
         <div className="App">
           {/* Starfield background */}
           <StarfieldCanvas />
