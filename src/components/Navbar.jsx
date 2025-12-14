@@ -12,17 +12,27 @@ const Navbar = () => {
   const [visitCount, setVisitCount] = useState(0);
 
   useEffect(() => {
-    // Contador global con CountAPI - usando el contador personalizado
+    // Contador global con CountAPI
     const fetchVisitCount = async () => {
       try {
-        // Usar el slug del contador creado en CounterAPI
-        const response = await fetch('https://api.countapi.xyz/hit/alejandro-robles-team/first-counter-2112');
+        // Usar formato simple de CountAPI: namespace/key
+        const response = await fetch('https://api.countapi.xyz/hit/astt3r-portfolio/visits', {
+          method: 'GET',
+        });
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
         setVisitCount(data.value || 0);
       } catch (error) {
         console.error('Error fetching visit count:', error);
-        // Fallback: mostrar 0 si falla
-        setVisitCount(0);
+        // Fallback: usar localStorage como backup
+        const localCount = localStorage.getItem('fallbackVisitCount') || '0';
+        const newCount = parseInt(localCount) + 1;
+        localStorage.setItem('fallbackVisitCount', newCount.toString());
+        setVisitCount(newCount);
       }
     };
 
