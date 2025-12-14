@@ -16,7 +16,6 @@ const ProjectCard = ({ project }) => {
       showClose={false}
       className="proj-card-retro"
     >
-      {/* Imagen del proyecto */}
       <div style={{ position: 'relative', marginBottom: '12px' }}>
         <img 
           src={image} 
@@ -30,7 +29,6 @@ const ProjectCard = ({ project }) => {
           }}
         />
         
-        {/* Badge */}
         {badge && (
           <span
             className="project-badge"
@@ -52,7 +50,6 @@ const ProjectCard = ({ project }) => {
         )}
       </div>
 
-      {/* Descripción */}
       <div className="retro-well" style={{ marginBottom: '12px', padding: '10px' }}>
         <p style={{ 
           fontSize: '13px', 
@@ -63,7 +60,6 @@ const ProjectCard = ({ project }) => {
         </p>
       </div>
 
-      {/* Tecnologías con botones retro */}
       {tech && tech.length > 0 && (
         <div style={{ marginBottom: '12px' }}>
           <div className="retro-well" style={{ 

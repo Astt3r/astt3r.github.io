@@ -29,7 +29,6 @@ const Hero = () => {
 
   return (
     <section id="hero" className="hero hero-retro">
-      {/* Astt3r.exe - Ventana estilo Paint con avatar */}
       <div style={{ marginBottom: '24px' }}>
         <RetroWindow 
           title="Astt3r.exe - Paint"
@@ -37,7 +36,6 @@ const Hero = () => {
           width="280px"
           className="paint-window"
         >
-          {/* Área de dibujo con canvas blanco */}
           <div style={{ 
             background: '#c0c0c0',
             padding: '3px',
@@ -45,7 +43,6 @@ const Hero = () => {
             flexDirection: 'column',
             gap: '0'
           }}>
-            {/* Canvas principal con avatar */}
             <div style={{
               background: '#ffffff',
               minHeight: '200px',
@@ -68,7 +65,6 @@ const Hero = () => {
               />
             </div>
             
-            {/* Paleta de colores estilo Paint MS 95 */}
             <div style={{
               background: 'var(--bg-2)',
               padding: '4px 4px 2px 4px',
@@ -77,7 +73,6 @@ const Hero = () => {
               alignItems: 'center',
               borderTop: '2px solid var(--border)'
             }}>
-              {/* Color seleccionado (foreground/background) */}
               <div style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -101,7 +96,6 @@ const Hero = () => {
                 }} />
               </div>
               
-              {/* Paleta de colores */}
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(14, 1fr)',
@@ -129,7 +123,6 @@ const Hero = () => {
         </RetroWindow>
       </div>
       
-      {/* Nombre y título */}
       <h1 className="hero-title">
         <span className="nickname">/Astt3r/</span>
       </h1>
@@ -140,7 +133,6 @@ const Hero = () => {
         {t('hero_subtitle')}
       </h2>
 
-      {/* System.exe - Badges de información del sistema */}
       <div style={{ marginBottom: '24px', marginTop: '24px' }}>
         <RetroWindow 
           title="System.exe - Properties"
@@ -180,7 +172,6 @@ const Hero = () => {
         </RetroWindow>
       </div>
 
-      {/* AboutMe.exe - Ventana de información */}
       <div style={{ marginTop: '24px' }}>
         <RetroWindow 
           title="AboutMe.exe - Notepad"

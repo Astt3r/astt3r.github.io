@@ -112,7 +112,6 @@ const ContactPage = () => {
             gap: '32px',
             alignItems: 'start'
           }}>
-            {/* Contacts.exe - Address Book */}
             <RetroWindow 
               title="Contacts.exe - Address Book"
               showClose={false}

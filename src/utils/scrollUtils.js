@@ -8,7 +8,7 @@ export const scrollToTop = () => {
 export const scrollToSection = (sectionId) => {
   const element = document.getElementById(sectionId);
   if (element) {
-    const headerHeight = 60; // Height of the fixed header
+    const headerHeight = 60;
     const elementPosition = element.offsetTop - headerHeight;
     
     window.scrollTo({
@@ -19,7 +19,6 @@ export const scrollToSection = (sectionId) => {
 };
 
 export const initSmoothScrolling = () => {
-  // Handle anchor links
   const handleAnchorClick = (e) => {
     const target = e.target.closest('a[href^="#"]');
     if (target) {

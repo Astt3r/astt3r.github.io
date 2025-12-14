@@ -16,7 +16,7 @@ export const useChileClock = () => {
     };
 
     updateTime();
-    const interval = setInterval(updateTime, 60000); // Update every minute
+    const interval = setInterval(updateTime, 60000);
 
     return () => clearInterval(interval);
   }, []);
