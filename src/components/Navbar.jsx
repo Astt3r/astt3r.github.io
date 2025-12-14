@@ -12,26 +12,21 @@ const Navbar = () => {
   const [visitCount, setVisitCount] = useState(0);
 
   useEffect(() => {
-    // Obtener contador de visitas
-    const storedCount = localStorage.getItem('siteVisitCount');
-    const storedDate = localStorage.getItem('siteVisitDate');
-    const today = new Date().toDateString();
+    // Contador global con CountAPI
+    const fetchVisitCount = async () => {
+      try {
+        // Incrementar y obtener el contador en una sola llamada
+        const response = await fetch('https://api.countapi.xyz/hit/astt3r.github.io/visits');
+        const data = await response.json();
+        setVisitCount(data.value || 0);
+      } catch (error) {
+        console.error('Error fetching visit count:', error);
+        // Fallback: mostrar 0 si falla
+        setVisitCount(0);
+      }
+    };
 
-    if (!storedCount) {
-      // Primera visita
-      localStorage.setItem('siteVisitCount', '1');
-      localStorage.setItem('siteVisitDate', today);
-      setVisitCount(1);
-    } else if (storedDate !== today) {
-      // Nueva visita en día diferente
-      const newCount = parseInt(storedCount) + 1;
-      localStorage.setItem('siteVisitCount', newCount.toString());
-      localStorage.setItem('siteVisitDate', today);
-      setVisitCount(newCount);
-    } else {
-      // Misma sesión del día
-      setVisitCount(parseInt(storedCount));
-    }
+    fetchVisitCount();
   }, []);
 
   const navLinks = [
@@ -79,7 +74,7 @@ const Navbar = () => {
         <div className="system-tray">
           <div 
             className="tray-counter"
-            title={language === 'es' ? `Visitas únicas: ${visitCount}` : `Unique visits: ${visitCount}`}
+            title={language === 'es' ? `Visitas totales: ${visitCount}` : `Total visits: ${visitCount}`}
           >
             <span className="counter-icon">👁️</span>
             <span className="counter-value">{visitCount}</span>
