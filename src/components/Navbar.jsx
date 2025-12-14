@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '../hooks';
 import { useLanguageContext } from '../contexts';
+import folderIcon from '../assets/icons/folder_open.png';
+import programIcon from '../assets/icons/program.png';
+import mailIcon from '../assets/icons/mail.png';
+import worldIcon from '../assets/icons/world.png';
+import toolsIcon from '../assets/icons/tools.png';
+import clockIcon from '../assets/icons/clock.png';
 
 const Navbar = () => {
   const { t, language, toggleLanguage } = useLanguageContext();
@@ -40,9 +46,9 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { to: '/', label: t('home'), icon: '🏠' },
-    { to: '/projects', label: t('projects'), icon: '💾' },
-    { to: '/contact', label: t('contact'), icon: '📧' }
+    { to: '/', label: t('home'), icon: folderIcon },
+    { to: '/projects', label: t('projects'), icon: programIcon },
+    { to: '/contact', label: t('contact'), icon: mailIcon }
   ];
 
   const toggleStartMenu = () => {
@@ -74,7 +80,7 @@ const Navbar = () => {
               }`}
               onClick={() => setStartMenuOpen(false)}
             >
-              <span className="task-icon">{link.icon}</span>
+              <img src={link.icon} alt="" className="task-icon" style={{ width: '16px', height: '16px', imageRendering: 'pixelated' }} />
               <span className="task-label">{link.label}</span>
             </Link>
           ))}
@@ -131,7 +137,7 @@ const Navbar = () => {
                     setStartMenuOpen(false);
                   }}
                 >
-                  <span className="start-menu-icon">{link.icon}</span>
+                  <img src={link.icon} alt="" className="start-menu-icon" style={{ width: '16px', height: '16px', imageRendering: 'pixelated' }} />
                   <span>{link.label}</span>
                 </button>
               ))}
@@ -143,7 +149,7 @@ const Navbar = () => {
                   setStartMenuOpen(false);
                 }}
               >
-                <span className="start-menu-icon">🌐</span>
+                <img src={worldIcon} alt="" className="start-menu-icon" style={{ width: '16px', height: '16px', imageRendering: 'pixelated' }} />
                 <span>{language === 'es' ? 'Switch to English' : 'Cambiar a Español'}</span>
               </button>
               <button
@@ -153,7 +159,12 @@ const Navbar = () => {
                   setStartMenuOpen(false);
                 }}
               >
-                <span className="start-menu-icon">{theme === 'dark' ? '☀' : '🌙'}</span>
+                <img 
+                  src={theme === 'dark' ? toolsIcon : clockIcon} 
+                  alt="" 
+                  className="start-menu-icon" 
+                  style={{ width: '16px', height: '16px', imageRendering: 'pixelated' }} 
+                />
                 <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
               </button>
             </div>

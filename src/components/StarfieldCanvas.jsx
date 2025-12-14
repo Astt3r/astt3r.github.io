@@ -9,6 +9,7 @@ const StarfieldCanvas = () => {
     const ctx = canvas.getContext('2d');
     const stars = [];
     const numStars = 200;
+    const pixelSize = 4; // Tamaño de cada píxel
 
     // Set canvas size
     const resizeCanvas = () => {
@@ -19,13 +20,16 @@ const StarfieldCanvas = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Initialize stars
+    // Initialize stars - alineadas a la cuadrícula
     for (let i = 0; i < numStars; i++) {
+      const gridX = Math.floor(Math.random() * (canvas.width / pixelSize));
+      const gridY = Math.floor(Math.random() * (canvas.height / pixelSize));
+      
       stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 0.5,
-        speed: Math.random() * 0.5 + 0.1,
+        x: gridX * pixelSize,
+        y: gridY * pixelSize,
+        size: pixelSize,
+        speed: Math.random() * 0.3 + 0.1,
         opacity: Math.random() * 0.8 + 0.2
       });
     }
@@ -43,10 +47,15 @@ const StarfieldCanvas = () => {
         // Reset star position when it goes off screen
         if (star.y > canvas.height) {
           star.y = 0;
-          star.x = Math.random() * canvas.width;
+          const gridX = Math.floor(Math.random() * (canvas.width / pixelSize));
+          star.x = gridX * pixelSize;
         }
         
-        // Draw star
+        // Ajustar posición a la cuadrícula
+        const gridX = Math.round(star.x / pixelSize) * pixelSize;
+        const gridY = Math.round(star.y / pixelSize) * pixelSize;
+        
+        // Draw star - cuadrado pixelado
         ctx.save();
         ctx.globalAlpha = star.opacity;
         
@@ -59,9 +68,8 @@ const StarfieldCanvas = () => {
           ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
         }
         
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        ctx.fill();
+        // Dibujar cuadrado pixelado en lugar de círculo
+        ctx.fillRect(gridX, gridY, pixelSize, pixelSize);
         ctx.restore();
       });
       

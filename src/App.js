@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import { Navbar, Footer, StarfieldCanvas } from './components';
+import { Navbar, Footer, StarfieldCanvas, DesktopIcons } from './components';
 import { HomePage, ProjectsPage, ContactPage } from './pages';
 import MaintenancePage from './pages/MaintenancePage';
 import { LanguageProvider } from './contexts';
@@ -47,6 +47,9 @@ function App() {
         <div className="App">
           {/* Starfield background */}
           <StarfieldCanvas />
+          
+          {/* Desktop Icons */}
+          <DesktopIcons />
           
           {/* Navigation */}
           <Navbar />

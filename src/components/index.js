@@ -6,5 +6,6 @@ export { default as StarfieldCanvas } from './StarfieldCanvas';
 export { default as WorkedWith } from './WorkedWith';
 export { default as RetroWindow } from './RetroWindow';
 export { default as RetroProjectCard } from './RetroProjectCard';
+export { default as DesktopIcons } from './DesktopIcons';
 export * from './RetroComponents';
 

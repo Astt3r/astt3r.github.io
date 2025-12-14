@@ -4,7 +4,11 @@ import { useLanguageContext } from '../contexts';
 import RetroWindow from './RetroWindow';
 
 const TechCard = ({ icon, name, customIcon }) => (
-  <button className="retro-button tech-card-retro">
+  <button 
+    className="retro-button tech-card-retro"
+    onClick={() => console.log(`Clicked on ${name}`)}
+    title={`Click to learn more about ${name}`}
+  >
     {customIcon ? (
       <img src={customIcon} style={{width: '18px', height: '18px'}} alt={`${name} logo`} />
     ) : (

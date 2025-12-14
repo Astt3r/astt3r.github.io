@@ -3,6 +3,8 @@ import { projectsData } from '../data';
 import { useLanguageContext } from '../contexts';
 import RetroWindow from '../components/RetroWindow';
 import { RetroButton } from '../components/RetroComponents';
+import worldIcon from '../assets/icons/world.png';
+import recycleFullIcon from '../assets/icons/recycle_bin_full.png';
 
 
 const ProjectCard = ({ project }) => {
@@ -149,7 +151,8 @@ const ProjectCard = ({ project }) => {
               padding: '8px 12px'
             }}
           >
-            🌐 Preview
+            <img src={worldIcon} alt="" style={{ width: '14px', height: '14px', marginRight: '4px', imageRendering: 'pixelated' }} />
+            Preview
           </RetroButton>
         )}
 
@@ -224,9 +227,14 @@ const ProjectsPage = () => {
               fontSize: '24px',
               marginBottom: '32px',
               color: 'var(--accent)',
-              fontWeight: 'bold'
+              fontWeight: 'bold',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px'
             }}>
-              ⭐ {t('featured_projects') || 'Featured'}
+              <img src={recycleFullIcon} alt="" style={{ width: '20px', height: '20px', imageRendering: 'pixelated' }} />
+              {t('featured_projects') || 'Featured'}
             </h2>
             <div className="projects-grid" style={{
               display: 'grid',
@@ -250,9 +258,14 @@ const ProjectsPage = () => {
             fontSize: '24px',
             marginBottom: '32px',
             color: 'var(--accent)',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px'
           }}>
-            ✅ {t('completed_projects') || 'Completed'}
+            <img src={recycleFullIcon} alt="" style={{ width: '20px', height: '20px', imageRendering: 'pixelated' }} />
+            {t('completed_projects') || 'Completed'}
           </h2>
           <div className="projects-grid" style={{
             display: 'grid',

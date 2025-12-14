@@ -24,19 +24,29 @@ const RetroWindow = ({
     >
       <div className="retro-titlebar">
         <span>{title}</span>
-        {showClose && (
+        <div style={{ display: 'flex', gap: '1px' }}>
           <button 
-            className="retro-button"
-            onClick={onClose}
-            style={{ 
-              padding: '2px 8px',
-              fontSize: '12px',
-              minWidth: 'auto'
-            }}
+            className="retro-button retro-window-button"
+            onClick={() => console.log('Minimize clicked')}
+            aria-label="Minimize"
+          >
+            –
+          </button>
+          <button 
+            className="retro-button retro-window-button"
+            onClick={() => console.log('Maximize clicked')}
+            aria-label="Maximize"
+          >
+            □
+          </button>
+          <button 
+            className="retro-button retro-window-button"
+            onClick={onClose || (() => console.log('Close clicked'))}
+            aria-label="Close"
           >
             ✕
           </button>
-        )}
+        </div>
       </div>
       <div className="retro-well">
         {children}

@@ -1,7 +1,11 @@
 import React from 'react';
+import RetroWindow from './RetroWindow';
 import { useChileClock } from '../hooks';
 import { useLanguageContext } from '../contexts';
-import RetroWindow from './RetroWindow';
+import calendarIcon from '../assets/icons/calendar.png';
+import clockIcon from '../assets/icons/clock.png';
+import notepadIcon from '../assets/icons/notepad.png';
+import calculatorIcon from '../assets/icons/calculator.png';
 
 const Hero = () => {
   const chileTime = useChileClock();
@@ -152,20 +156,24 @@ const Hero = () => {
               gap: '8px'
             }}>
               <button className="retro-button system-badge">
+                <img src={calendarIcon} alt="" style={{ width: '14px', height: '14px', marginRight: '4px', imageRendering: 'pixelated' }} />
                 <strong>Age:</strong>
-                <span>📅 {age}y</span>
+                <span>{age}y</span>
               </button>
               <button className="retro-button system-badge">
+                <img src={clockIcon} alt="" style={{ width: '14px', height: '14px', marginRight: '4px', imageRendering: 'pixelated' }} />
                 <strong>Time:</strong>
                 <span id="clClock">{chileTime || '🇨🇱 --:--'}</span>
               </button>
               <button className="retro-button system-badge">
+                <img src={notepadIcon} alt="" style={{ width: '14px', height: '14px', marginRight: '4px', imageRendering: 'pixelated' }} />
                 <strong>Pronouns:</strong>
-                <span>💻 {t('pronouns') || 'Él/He'}</span>
+                <span>{t('pronouns') || 'Él/He'}</span>
               </button>
               <button className="retro-button system-badge">
+                <img src={calculatorIcon} alt="" style={{ width: '14px', height: '14px', marginRight: '4px', imageRendering: 'pixelated' }} />
                 <strong>Type:</strong>
-                <span>🧠 INTJ</span>
+                <span>INTJ</span>
               </button>
             </div>
           </div>

@@ -3,6 +3,11 @@ import emailjs from '@emailjs/browser';
 import { useLanguageContext } from '../contexts';
 import RetroWindow from '../components/RetroWindow';
 import { RetroInput, RetroTextarea, RetroButton } from '../components/RetroComponents';
+import recycleFullIcon from '../assets/icons/recycle_bin_full.png';
+import mailIcon from '../assets/icons/mail.png';
+import discordIcon from '../assets/icons/discord.png';
+import briefcaseIcon from '../assets/icons/briefcase.png';
+import folderIcon from '../assets/icons/folder_open.png';
 
 const ContactPage = () => {
   const { t } = useLanguageContext();
@@ -59,20 +64,20 @@ const ContactPage = () => {
   const contacts = [
     {
       name: 'Discord',
-      icon: '💬',
+      icon: discordIcon,
       value: '@astt3r',
       link: 'https://discord.com/users/348587853746520064',
       color: '#5865F2'
     },
     {
       name: 'LinkedIn',
-      icon: '💼',
+      icon: briefcaseIcon,
       link: 'https://www.linkedin.com/in/alejandro-robles-9279992b2/',
       color: '#0A66C2'
     },
     {
       name: 'GitHub',
-      icon: '🐙',
+      icon: folderIcon,
       value: '@astt3r',
       link: 'https://github.com/astt3r',
       color: '#6e5494'
@@ -91,9 +96,14 @@ const ContactPage = () => {
             fontSize: '32px',
             marginBottom: '48px',
             color: 'var(--accent)',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '12px'
           }}>
-            📬 {t('contact_title') || 'Contacto'}
+            <img src={mailIcon} alt="" style={{ width: '32px', height: '32px', imageRendering: 'pixelated' }} />
+            {t('contact_title') || 'Contacto'}
           </h1>
           
           <div style={{
@@ -120,9 +130,13 @@ const ContactPage = () => {
                     margin: 0,
                     fontSize: '13px',
                     lineHeight: '1.6',
-                    color: 'var(--text-secondary)'
+                    color: 'var(--text-secondary)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px'
                   }}>
-                    💬 {t('contact_intro') || '¡Estos son mis medios de contacto! No dudes en escribirme.'}
+                    <img src={mailIcon} alt="" style={{ width: '16px', height: '16px', imageRendering: 'pixelated' }} />
+                    {t('contact_intro') || '¡Estos son mis medios de contacto! No dudes en escribirme.'}
                   </p>
                 </div>
                 
@@ -161,7 +175,7 @@ const ContactPage = () => {
                         e.currentTarget.style.boxShadow = '2px 2px 4px rgba(0,0,0,0.2)';
                       }}
                     >
-                      <span style={{ fontSize: '24px' }}>{contact.icon}</span>
+                      <img src={contact.icon} alt="" style={{ width: '24px', height: '24px', imageRendering: 'pixelated' }} />
                       <div style={{ flex: 1 }}>
                         <div style={{ 
                           fontWeight: 'bold', 
@@ -278,9 +292,14 @@ const ContactPage = () => {
                       color: '#4CAF50',
                       textAlign: 'center',
                       fontSize: '13px',
-                      fontWeight: 'bold'
+                      fontWeight: 'bold',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px'
                     }}>
-                      ✅ {t('contact_success') || '¡Mensaje enviado con éxito!'}
+                      <img src={recycleFullIcon} alt="" style={{ width: '16px', height: '16px', imageRendering: 'pixelated' }} />
+                      {t('contact_success') || '¡Mensaje enviado con éxito!'}
                     </div>
                   )}
 
