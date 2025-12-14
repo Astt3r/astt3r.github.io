@@ -102,6 +102,7 @@
     nekoEl.style.left = `${nekoPosX - 16}px`;
     nekoEl.style.top = `${nekoPosY - 16}px`;
     nekoEl.style.zIndex = 2147483647;
+    nekoEl.style.filter = "drop-shadow(0 0 20px rgba(217, 80, 48, 0.8)) drop-shadow(0 0 40px rgba(171, 68, 85, 0.6))";
 
     let nekoFile = "./oneko.gif"
     const curScript = document.currentScript
