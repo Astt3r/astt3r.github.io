@@ -7,5 +7,6 @@ export { default as WorkedWith } from './WorkedWith';
 export { default as RetroWindow } from './RetroWindow';
 export { default as RetroProjectCard } from './RetroProjectCard';
 export { default as DesktopIcons } from './DesktopIcons';
+export { default as BootScreen } from './BootScreen';
 export * from './RetroComponents';
 

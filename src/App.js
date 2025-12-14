@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import { Navbar, Footer, StarfieldCanvas, DesktopIcons } from './components';
+import { Navbar, Footer, StarfieldCanvas, DesktopIcons, BootScreen } from './components';
 import { HomePage, ProjectsPage, ContactPage } from './pages';
 import MaintenancePage from './pages/MaintenancePage';
 import { LanguageProvider } from './contexts';
@@ -13,6 +13,8 @@ import './App.css';
 const MAINTENANCE_MODE = false;
 
 function App() {
+  const [isBooting, setIsBooting] = useState(true);
+
   useEffect(() => {
     // Skip initialization if in maintenance  mode
     if (MAINTENANCE_MODE) return;
@@ -35,6 +37,11 @@ function App() {
       }
     };
   }, []);
+
+  // Mostrar pantalla de inicio primero
+  if (isBooting) {
+    return <BootScreen onComplete={() => setIsBooting(false)} />;
+  }
 
   // Si está en modo mantenimiento, mostrar solo la página de mantenimiento
   if (MAINTENANCE_MODE) {

@@ -18,6 +18,8 @@ const Navbar = () => {
   const [visitCount, setVisitCount] = useState(0);
 
   useEffect(() => {
+    let isSubscribed = true;
+    
     const fetchVisitCount = async () => {
       try {
         const response = await fetch('https://api.countapi.xyz/hit/astt3r-portfolio/visits', {
@@ -29,17 +31,25 @@ const Navbar = () => {
         }
         
         const data = await response.json();
-        setVisitCount(data.value || 0);
+        if (isSubscribed) {
+          setVisitCount(data.value || 0);
+        }
       } catch (error) {
         console.error('Error fetching visit count:', error);
-        const localCount = localStorage.getItem('fallbackVisitCount') || '0';
-        const newCount = parseInt(localCount) + 1;
-        localStorage.setItem('fallbackVisitCount', newCount.toString());
-        setVisitCount(newCount);
+        if (isSubscribed) {
+          const localCount = localStorage.getItem('fallbackVisitCount') || '0';
+          const newCount = parseInt(localCount) + 1;
+          localStorage.setItem('fallbackVisitCount', newCount.toString());
+          setVisitCount(newCount);
+        }
       }
     };
 
     fetchVisitCount();
+    
+    return () => {
+      isSubscribed = false;
+    };
   }, []);
 
   const navLinks = [
@@ -89,7 +99,7 @@ const Navbar = () => {
             className="tray-counter"
             title={language === 'es' ? `Visitas totales: ${visitCount}` : `Total visits: ${visitCount}`}
           >
-            <span className="counter-icon">👁️</span>
+            <img src={worldIcon} alt="" className="counter-icon" style={{ width: '14px', height: '14px', imageRendering: 'pixelated' }} />
             <span className="counter-value">{visitCount}</span>
           </div>
 
