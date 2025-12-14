@@ -12,11 +12,11 @@ const Navbar = () => {
   const [visitCount, setVisitCount] = useState(0);
 
   useEffect(() => {
-    // Contador global con CountAPI
+    // Contador global con CountAPI - usando el contador personalizado
     const fetchVisitCount = async () => {
       try {
-        // Incrementar y obtener el contador en una sola llamada
-        const response = await fetch('https://api.countapi.xyz/hit/astt3r.github.io/visits');
+        // Usar el slug del contador creado en CounterAPI
+        const response = await fetch('https://api.countapi.xyz/hit/alejandro-robles-team/first-counter-2112');
         const data = await response.json();
         setVisitCount(data.value || 0);
       } catch (error) {
