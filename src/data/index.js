@@ -21,11 +21,12 @@ export const translations = {
     tools_title: "Herramientas",
     
     // Footer
-    footer_text: "Hecho con ❤️ por Astt3r usando React",
+    footer_text: "Hecho por Astt3r",
     go_top: "Ir arriba",
     
     // Projects page
     projects_subtitle: "Una colección de proyectos en los que he trabajado, desde aplicaciones web hasta juegos indie.",
+    featured_projects: "Destacados",
     completed_projects: "Completados",
     in_progress_projects: "En Desarrollo",
     preparing_new_projects: "Preparando nuevos proyectos",
@@ -37,6 +38,9 @@ export const translations = {
     
     // Hero badges
     pronouns: "Él/He",
+    
+    // Worked with section
+    worked_with: "He trabajado con",
     
     // Contact page
     contact_title: "Contacto",
@@ -72,11 +76,12 @@ export const translations = {
     tools_title: "Tools",
     
     // Footer
-    footer_text: "Made with ❤️ by Astt3r using React",
+    footer_text: "Made by Astt3r",
     go_top: "Go to top",
     
     // Projects page
     projects_subtitle: "A collection of projects I've worked on, from web applications to games.",
+    featured_projects: "Featured",
     completed_projects: "Completed",
     in_progress_projects: "Currently in Development",
     preparing_new_projects: "Preparing new projects",
@@ -88,6 +93,9 @@ export const translations = {
     
     // Hero badges
     pronouns: "He/Him",
+    
+    // Worked with section
+    worked_with: "Worked with",
     
     // Contact page
     contact_title: "Contact",
@@ -144,9 +152,29 @@ export const skillsData = {
 };
 
 export const projectsData = {
-  completed: [
+  featured: [
     {
       id: 1,
+      title: "Fundación Juan XXIII",
+      description: "Landing page proposal for Fundación Juan XXIII, a Catholic Schools organization. Modern and responsive design showcasing the foundation's mission and services.",
+      image: "/assets/Animation.gif",
+      tech: [
+        { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+        { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" }
+      ],
+      links: {
+        demo: "https://fjxiii-preview.netlify.app/",
+        github: "https://github.com/Astt3r/fjuanxxiii"
+      },
+      badge: {
+        text: "Landing Page",
+        color: "linear-gradient(90deg,#11998e,#38ef7d)"
+      },
+      mainIcon: "devicon-react-original colored",
+      hasPreview: true
+    },
+    {
+      id: 2,
       title: "Junta Transparente",
       description: "Neighborhood board data viewer and public allocations. Part of my graduation project.",
       image: "/assets/juntatransparente.png",
@@ -168,7 +196,7 @@ export const projectsData = {
       mainIcon: "devicon-react-original colored"
     },
     {
-      id: 2,
+      id: 3,
       title: "Blind Hero",
       description: "Arcade platform minigame using RigidBody2D for fast-paced mechanics.",
       image: "/assets/blindhero.png",
@@ -184,9 +212,12 @@ export const projectsData = {
         color: "linear-gradient(90deg,#6a11cb,#2575fc)"
       },
       mainIcon: "devicon-unity-original colored"
-    },
+    }
+  ],
+  
+  completed: [
     {
-      id: 3,
+      id: 4,
       title: "JSTetris",
       description: "Classic Tetris clone made with JavaScript, HTML5 Canvas, and CSS. Playable in browser.",
       image: "/assets/Screenshot_Tetris.png",
@@ -207,7 +238,7 @@ export const projectsData = {
       isPlayable: true
     },
     {
-      id: 4,
+      id: 5,
       title: "Portfolio migration to React",
       description: "Successfully migrated this portfolio from vanilla HTML/CSS/JS to React with improved architecture, component-based development, and modern features.",
       image: "/assets/portfolio-react.png",
@@ -226,49 +257,6 @@ export const projectsData = {
         color: "linear-gradient(90deg,#61dafb,#20232a)"
       },
       mainIcon: "devicon-react-original colored"
-    },
-    {
-      id: 5,
-      title: "Pokemon API Explorer",
-      description: "A simple desktop app to explore the Pokemon API, showcasing my skills in API integration and data visualization. Must be opened on desktop.",
-      image: "/assets/pokemonapp.png",
-      tech: [
-        { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" }
-      ],
-      links: {
-        download: "/assets/PokemonApp.exe"
-      },
-      badge: {
-        text: "Desktop App",
-        color: "linear-gradient(90deg,#fbc2eb,#a6c1ee)"
-      },
-      mainIcon: "devicon-python-plain colored",
-      isDownloadable: true // <-- Permite descarga
-    }
-  ],
-  
-  inProgress: [
-    {
-      id: 6,
-      title: "Community Platform",
-      description: "Enhanced fork of JuntaTransparente for my thesis project. Modern Laravel + React platform for neighborhood association management with advanced features, improved UI/UX, and comprehensive community administration tools.",
-      image: "/assets/msn-windows-live-messenger.png",
-      tech: [
-        { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" },
-        { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-        { name: "PHP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
-        { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
-        { name: "TailwindCSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" },
-        { name: "Inertia.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" }
-      ],
-      links: {
-        github: "https://github.com/Astt3r/CommunityPlatform"
-      },
-      badge: {
-        text: "Thesis Project",
-        color: "linear-gradient(90deg,#667eea,#764ba2)"
-      },
-      mainIcon: "devicon-laravel-plain colored"
     }
   ]
 };

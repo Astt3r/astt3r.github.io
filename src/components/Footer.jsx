@@ -4,6 +4,7 @@ import { useLanguageContext } from '../contexts';
 
 const Footer = () => {
   const { t } = useLanguageContext();
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="site-footer">
@@ -14,7 +15,7 @@ const Footer = () => {
           <li><a href="/contact">Contact</a></li>
         </ul>
         
-        <p>&copy; 2024 Alejandro Robles. {t('footer_text')}</p>
+        <p>&copy; {currentYear} Alejandro Robles. {t('footer_text')}</p>
         
         <div className="crypto-addresses">
           <p><strong>ETH:</strong> <span className="crypto-addr">0x874264741b35189Bcd44e636eC1131bD92cefc5F</span></p>

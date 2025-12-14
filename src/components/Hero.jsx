@@ -6,6 +6,22 @@ const Hero = () => {
   const chileTime = useChileClock();
   const { t } = useLanguageContext();
 
+ 
+  const calculateAge = () => {
+    const birthDate = new Date(2000, 11, 26); 
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    
+    return age;
+  };
+
+  const age = calculateAge();
+
   return (
     <section id="hero" className="hero">
       <img 
@@ -26,7 +42,7 @@ const Hero = () => {
 
       {/* Badges */}
       <div className="badges">
-        <span className="badge">📅 24y</span>
+        <span className="badge">📅 {age}y</span>
         <span className="badge" id="clClock">
           {chileTime || '🇨🇱 --:--'}
         </span>

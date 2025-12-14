@@ -3,7 +3,7 @@ import { projectsData } from '../data';
 import { useLanguageContext } from '../contexts';
 
 const ProjectCard = ({ project }) => {
-  const { title, description, image, tech, links, badge, mainIcon, isPlayable, isDownloadable } = project;
+  const { title, description, image, tech, links, badge, mainIcon, isPlayable, isDownloadable, hasPreview } = project;
   
   const cardLink = links.demo || links.github || '#';
   
@@ -130,6 +130,49 @@ const ProjectCard = ({ project }) => {
               )}
             </div>
           )}
+          
+          {hasPreview && (
+            <div style={{marginTop: '10px', display: 'flex', gap: '8px'}}>
+              <a 
+                href={links.demo} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{
+                  background: 'linear-gradient(90deg,#11998e,#38ef7d)',
+                  color: '#fff',
+                  padding: '5px 14px',
+                  borderRadius: '7px',
+                  fontSize: '13px',
+                  fontWeight: '600',
+                  textDecoration: 'none',
+                  boxShadow: '0 2px 8px #0002',
+                  transition: '.18s'
+                }}
+              >
+                🌐 View Preview
+              </a>
+              {links.github && (
+                <a 
+                  href={links.github} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{
+                    background: 'var(--bg-2)',
+                    color: 'var(--accent)',
+                    padding: '5px 12px',
+                    borderRadius: '7px',
+                    fontSize: '13px',
+                    fontWeight: '600',
+                    textDecoration: 'none',
+                    border: '1px solid var(--accent)',
+                    transition: '.18s'
+                  }}
+                >
+                  Code
+                </a>
+              )}
+            </div>
+          )}
         </div>
       </a>
     </div>
@@ -159,6 +202,18 @@ const ProjectsPage = () => {
           {t('projects_subtitle') || 'Una colección de proyectos en los que he trabajado, desde aplicaciones web hasta juegos.'}
         </p>
 
+        {/* Featured Projects */}
+        {projectsData.featured && projectsData.featured.length > 0 && (
+          <div className="projects-section">
+            <h2 className="section-title">{t('featured_projects') || 'Featured'}</h2>
+            <div className="projects-grid">
+              {projectsData.featured.map((project) => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Completed Projects */}
         <div className="projects-section">
           <h2 className="section-title">{t('completed_projects') || 'Completed'}</h2>
@@ -168,28 +223,6 @@ const ProjectsPage = () => {
             ))}
           </div>
         </div>
-
-        {/* In Progress Projects */}
-        {projectsData.inProgress && projectsData.inProgress.length > 0 ? (
-          <div className="projects-section">
-            <h2 className="section-title">{t('in_progress_projects') || 'Currently in Development'}</h2>
-            <div className="projects-grid">
-              {projectsData.inProgress.map((project) => (
-                <ProjectCard key={project.id} project={project} />
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="no-projects-message">
-            <h2 className="section-title">{t('in_progress_projects') || 'Currently in Development'}</h2>
-            <div className="under-construction">
-              <div className="warning-icon">🚀</div>
-              <h3>{t('preparing_new_projects') || 'Preparando nuevos proyectos'}</h3>
-              <p>{t('focused_on_current') || 'Estoy enfocado en perfeccionar los proyectos actuales y planificando las próximas creaciones.'}</p>
-              <p><span className="nickname">{t('stay_tuned') || '¡Mantente atento a futuras actualizaciones!'}</span></p>
-            </div>
-          </div>
-        )}
       </section>
     </main>
   );
