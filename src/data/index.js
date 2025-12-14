@@ -198,20 +198,22 @@ export const projectsData = {
     {
       id: 3,
       title: "Blind Hero",
-      description: "Arcade platform minigame using RigidBody2D for fast-paced mechanics.",
+      description: "Arcade platform minigame about finding trophies.",
       image: "/assets/blindhero.png",
       tech: [
         { name: "Unity", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" },
         { name: "C#", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" }
       ],
       links: {
-        demo: "https://arxenical.itch.io/blind-hero"
+        demo: "https://arxenical.itch.io/blind-hero",
+        download: "https://arxenical.itch.io/blind-hero"
       },
       badge: {
         text: "Game Jam",
         color: "linear-gradient(90deg,#6a11cb,#2575fc)"
       },
-      mainIcon: "devicon-unity-original colored"
+      mainIcon: "devicon-unity-original colored",
+      isDownloadable: true
     }
   ],
   

@@ -11,3 +11,56 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Cursores personalizados */
+* {
+  cursor: url('./assets/cursors/pointer.png'), auto;
+}
+
+a, button, [role="button"], 
+.retro-button, .start-button, .task-button, .start-menu-item,
+.footer-link, .retro-card, .tech-card-retro, .proj-card-retro, 
+.clickable {
+  cursor: url('./assets/cursors/link.png'), pointer !important;
+}
+
+a:active, button:active {
+  cursor: url('./assets/cursors/grab.png'), pointer;
+}
+
+input[type="text"], 
+input[type="email"], 
+input[type="search"], 
+textarea,
+[contenteditable="true"] {
+  cursor: url('./assets/cursors/beam.png'), text;
+}
+
+p, h1, h2, h3, h4, h5, h6, span, li, td, th,
+.text-content, .about-text, .retro-well {
+  cursor: url('./assets/cursors/pointer.png'), auto;
+}
+
+[disabled], .disabled {
+  cursor: url('./assets/cursors/unavailable.png'), not-allowed;
+}
+
+.loading, [aria-busy="true"] {
+  cursor: url('./assets/cursors/working.gif'), wait;
+}
+
+[title]:hover, .help-cursor {
+  cursor: url('./assets/cursors/help.png'), help;
+}
+
+.resizable, .resize-handle {
+  cursor: url('./assets/cursors/move.png'), nwse-resize;
+}
+
+.grab-cursor {
+  cursor: url('./assets/cursors/grab.png'), grab;
+}
+
+.grabbing-cursor, .grab-cursor:active {
+  cursor: url('./assets/cursors/grab_hover.png'), grabbing;
+}

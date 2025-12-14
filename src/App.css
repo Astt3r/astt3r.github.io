@@ -28,13 +28,22 @@ body.light{
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html,body{min-height:100%;}
+
+@font-face {
+  font-family: 'MS Sans Serif';
+  src: local('Microsoft Sans Serif'), local('Tahoma'), local('Arial');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body{
-  font-family:'Pixelify Sans',sans-serif;
+  font-family:'Pixelify Sans', 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
   background:var(--bg);
   color:var(--text);
   transition:background .25s,color .25s;
   line-height:1.45;
   overflow-x:hidden;
+  padding-top: 42px;
 }
 
 /* Layout principal */
@@ -52,36 +61,29 @@ body{
   margin-top: auto;
 }
 
-/* ========== STARFIELD BACKGROUND ========== */
+/* ========== STARFIELD PIXELADO BACKGROUND ========== */
 
 /* Animaciones */
-@keyframes galacticDrift {
+@keyframes pixelDrift {
   0%   { background-position: 0 0; }
-  100% { background-position: -6000px 3000px; }
-}
-@keyframes galaxyTwinkle {
-  0%, 100% { opacity: 0.4; }
-  25%      { opacity: 0.8; }
-  50%      { opacity: 0.6; }
-  75%      { opacity: 0.9; }
-}
-@keyframes nebulaPulse {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  33%      { transform: scale(1.1) rotate(120deg); }
-  66%      { transform: scale(0.9) rotate(240deg); }
-}
-@keyframes nierFloat {
-  0%, 100% { transform: translateY(0px) translateX(0px); }
-  25%      { transform: translateY(-8px) translateX(4px); }
-  50%      { transform: translateY(-4px) translateX(-2px); }
-  75%      { transform: translateY(-12px) translateX(6px); }
-}
-@keyframes nierGrid {
-  0%   { background-position: 0 0; }
-  100% { background-position: 40px 40px; }
+  100% { background-position: 200px 200px; }
 }
 
-/* Canvas */
+@keyframes pixelTwinkle {
+  0%, 100% { opacity: 0.5; }
+  25%      { opacity: 0.9; }
+  50%      { opacity: 0.7; }
+  75%      { opacity: 1; }
+}
+
+@keyframes pixelFloat {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  25%      { transform: translateY(-4px) translateX(4px); }
+  50%      { transform: translateY(-2px) translateX(-2px); }
+  75%      { transform: translateY(-6px) translateX(3px); }
+}
+
+/* Canvas de estrellas */
 .starfield-canvas {
   position: fixed;
   inset: 0;
@@ -91,75 +93,146 @@ body{
   z-index: -2;
   transition: filter 0.4s ease, opacity 0.4s ease;
   background: transparent !important;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
-/* Tema Galaxia Cálida */
+/* Tema oscuro - Estrellas pixeladas */
 body.starfield .starfield-canvas {
-  filter: brightness(1.2) drop-shadow(0 0 4px rgba(217, 80, 48, 0.4)) drop-shadow(0 0 6px rgba(171, 68, 85, 0.2));
-  opacity: 0.6;
-  animation: galaxyTwinkle 8s ease-in-out infinite;
-}
-
-/* Efecto reactivo galaxia */
-body.starfield .starfield-canvas.reactive {
-  filter: brightness(1.3) drop-shadow(0 0 6px rgba(217, 80, 48, 0.3));
+  filter: brightness(1.3) contrast(1.2) drop-shadow(0 0 2px rgba(217, 80, 48, 0.5));
   opacity: 0.7;
+  animation: pixelTwinkle 6s ease-in-out infinite;
+}
+
+body.starfield .starfield-canvas.reactive {
+  filter: brightness(1.4) contrast(1.3) drop-shadow(0 0 3px rgba(217, 80, 48, 0.6));
+  opacity: 0.8;
   transition: filter 0.3s ease, opacity 0.3s ease;
 }
 
-/* Tema NieR */
+/* Tema claro - Estrellas pixeladas */
 body.light.starfield .starfield-canvas {
-  filter: brightness(0.3) contrast(1.2) sepia(0.3) hue-rotate(40deg);
-  opacity: 0.2;
-  animation: nierFloat 12s ease-in-out infinite;
+  filter: brightness(0.4) contrast(1.5) saturate(1.5) hue-rotate(20deg);
+  opacity: 0.35;
+  animation: pixelFloat 10s ease-in-out infinite;
 }
 
-/* Efecto reactivo NieR */
 body.light.starfield .starfield-canvas.reactive {
-  filter: brightness(0.5) contrast(1.4) sepia(0.4) hue-rotate(40deg);
-  opacity: 0.35;
-  animation: nierGrid 1.5s linear;
+  filter: brightness(0.6) contrast(1.6) saturate(1.6) hue-rotate(20deg);
+  opacity: 0.45;
   transition: filter 0.3s ease, opacity 0.3s ease;
 }
 
-/* Fallback SVG */
-body.starfield::before,
-body.starfield::after {
+/* Fondo base pixelado oscuro */
+body.starfield::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: -3;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'><defs><radialGradient id='warmStar1' cx='50%' cy='50%' r='50%'><stop offset='0%' stop-color='%23D95030' stop-opacity='0.9'/><stop offset='100%' stop-color='%23D95030' stop-opacity='0'/></radialGradient><radialGradient id='warmStar2' cx='50%' cy='50%' r='50%'><stop offset='0%' stop-color='%23AB4455' stop-opacity='0.8'/><stop offset='100%' stop-color='%23AB4455' stop-opacity='0'/></radialGradient><radialGradient id='warmStar3' cx='50%' cy='50%' r='50%'><stop offset='0%' stop-color='%234D596F' stop-opacity='0.7'/><stop offset='100%' stop-color='%234D596F' stop-opacity='0'/></radialGradient></defs><g><!-- Estrellas dispersas naturalmente --><circle cx='73' cy='45' r='1.2' fill='url(%23warmStar1)'/><circle cx='234' cy='123' r='0.8' fill='url(%23warmStar3)'/><circle cx='456' cy='67' r='1.5' fill='url(%23warmStar2)'/><circle cx='623' cy='189' r='0.6' fill='url(%23warmStar1)'/><circle cx='167' cy='234' r='1.1' fill='url(%23warmStar3)'/><circle cx='389' cy='156' r='0.9' fill='url(%23warmStar2)'/><circle cx='712' cy='78' r='1.3' fill='url(%23warmStar1)'/><circle cx='145' cy='345' r='0.7' fill='url(%23warmStar3)'/><circle cx='523' cy='267' r='1.4' fill='url(%23warmStar2)'/><circle cx='678' cy='234' r='0.8' fill='url(%23warmStar1)'/><circle cx='89' cy='445' r='1.0' fill='url(%23warmStar3)'/><circle cx='345' cy='378' r='0.6' fill='url(%23warmStar2)'/><circle cx='567' cy='423' r='1.2' fill='url(%23warmStar1)'/><circle cx='234' cy='478' r='0.9' fill='url(%23warmStar3)'/><circle cx='445' cy='512' r='0.7' fill='url(%23warmStar2)'/><circle cx='678' cy='445' r='1.1' fill='url(%23warmStar1)'/><circle cx='123' cy='567' r='0.8' fill='url(%23warmStar3)'/><circle cx='789' cy='345' r='1.0' fill='url(%23warmStar2)'/></g></svg>");
-  background-repeat: repeat;
-  animation: galacticDrift 240s linear infinite, galaxyTwinkle 12s ease-in-out infinite;
-  opacity: 0.12;
-  filter: blur(0.3px);
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 4px,
+      rgba(217, 80, 48, 0.02) 4px,
+      rgba(217, 80, 48, 0.02) 8px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 4px,
+      rgba(171, 68, 85, 0.02) 4px,
+      rgba(171, 68, 85, 0.02) 8px
+    );
+  background-size: 8px 8px;
+  animation: pixelDrift 240s linear infinite;
+  image-rendering: pixelated;
 }
 
+/* Pattern de estrellas pixeladas extra oscuro */
 body.starfield::after {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='500' viewBox='0 0 600 500'><defs><radialGradient id='dimStar1' cx='50%' cy='50%' r='50%'><stop offset='0%' stop-color='%23D95030' stop-opacity='0.4'/><stop offset='100%' stop-color='%23D95030' stop-opacity='0'/></radialGradient><radialGradient id='dimStar2' cx='50%' cy='50%' r='50%'><stop offset='0%' stop-color='%23AB4455' stop-opacity='0.3'/><stop offset='100%' stop-color='%23AB4455' stop-opacity='0'/></radialGradient></defs><g><!-- Segunda capa de estrellas más tenues --><circle cx='156' cy='89' r='0.5' fill='url(%23dimStar1)'/><circle cx='345' cy='234' r='0.4' fill='url(%23dimStar2)'/><circle cx='478' cy='145' r='0.6' fill='url(%23dimStar1)'/><circle cx='234' cy='345' r='0.3' fill='url(%23dimStar2)'/><circle cx='567' cy='278' r='0.5' fill='url(%23dimStar1)'/><circle cx='123' cy='412' r='0.4' fill='url(%23dimStar2)'/><circle cx='445' cy='367' r='0.6' fill='url(%23dimStar1)'/><circle cx='289' cy='456' r='0.3' fill='url(%23dimStar2)'/></g></svg>");
-  animation-duration: 180s, 16s;
-  transform: scale(1.2) rotate(15deg);
-  opacity: 0.06;
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+  background-image: 
+    radial-gradient(circle 2px at 10% 20%, rgba(217, 80, 48, 0.4) 0%, transparent 100%),
+    radial-gradient(circle 1px at 30% 40%, rgba(171, 68, 85, 0.3) 0%, transparent 100%),
+    radial-gradient(circle 2px at 60% 15%, rgba(77, 89, 111, 0.3) 0%, transparent 100%),
+    radial-gradient(circle 1px at 80% 60%, rgba(217, 80, 48, 0.35) 0%, transparent 100%),
+    radial-gradient(circle 2px at 25% 80%, rgba(171, 68, 85, 0.4) 0%, transparent 100%),
+    radial-gradient(circle 1px at 90% 30%, rgba(77, 89, 111, 0.25) 0%, transparent 100%);
+  background-size: 200px 200px;
+  animation: pixelDrift 180s linear infinite reverse, pixelTwinkle 10s ease-in-out infinite;
+  opacity: 0.6;
+  image-rendering: pixelated;
 }
 
-/* Fallback para tema NieR */
-body.light.starfield::before,
+/* Fondo base pixelado claro */
+body.light.starfield::before {
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 4px,
+      rgba(200, 169, 97, 0.08) 4px,
+      rgba(200, 169, 97, 0.08) 8px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 4px,
+      rgba(212, 175, 55, 0.08) 4px,
+      rgba(212, 175, 55, 0.08) 8px
+    );
+  background-size: 8px 8px;
+  animation: pixelDrift 200s linear infinite;
+  opacity: 0.5;
+  image-rendering: pixelated;
+}
+
+/* Pattern de estrellas pixeladas claro */
 body.light.starfield::after {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><defs><pattern id='nierGrid' x='0' y='0' width='40' height='40' patternUnits='userSpaceOnUse'><rect x='0' y='0' width='1' height='40' fill='%23c9a961' opacity='0.2'/><rect x='0' y='0' width='40' height='1' fill='%23c9a961' opacity='0.2'/><circle cx='20' cy='20' r='1' fill='%23d4af37' opacity='0.4'/></pattern></defs><rect width='80' height='80' fill='url(%23nierGrid)'/><rect x='10' y='10' width='8' height='1' fill='%23c9a961' opacity='0.3'/><rect x='50' y='30' width='6' height='1' fill='%23c9a961' opacity='0.3'/><rect x='25' y='60' width='10' height='1' fill='%23c9a961' opacity='0.3'/></svg>");
-  animation: nierGrid 300s linear infinite, nierFloat 16s ease-in-out infinite;
-  opacity: 0.08;
-  filter: blur(0.3px) contrast(1.2);
+  background-image: 
+    radial-gradient(circle 2px at 15% 25%, rgba(200, 169, 97, 0.5) 0%, transparent 100%),
+    radial-gradient(circle 1px at 35% 45%, rgba(138, 116, 86, 0.4) 0%, transparent 100%),
+    radial-gradient(circle 2px at 65% 20%, rgba(212, 175, 55, 0.45) 0%, transparent 100%),
+    radial-gradient(circle 1px at 85% 65%, rgba(200, 169, 97, 0.4) 0%, transparent 100%),
+    radial-gradient(circle 2px at 20% 75%, rgba(138, 116, 86, 0.5) 0%, transparent 100%),
+    radial-gradient(circle 1px at 50% 50%, rgba(212, 175, 55, 0.35) 0%, transparent 100%);
+  background-size: 200px 200px;
+  animation: pixelDrift 160s linear infinite reverse, pixelFloat 12s ease-in-out infinite;
+  opacity: 0.4;
+  image-rendering: pixelated;
 }
 
-body.light.starfield::after {
-  animation-duration: 400s, 20s;
-  transform: scale(0.7) rotate(-30deg);
-  opacity: 0.04;
+/* Oneko glow effect - solo tema oscuro */
+@keyframes onekoGlow {
+  0%, 100% { 
+    filter: drop-shadow(0 0 20px rgba(217, 80, 48, 0.8)) 
+            drop-shadow(0 0 40px rgba(171, 68, 85, 0.6)); 
+  }
+  50% { 
+    filter: drop-shadow(0 0 30px rgba(217, 80, 48, 1)) 
+            drop-shadow(0 0 50px rgba(171, 68, 85, 0.8)) 
+            drop-shadow(0 0 60px rgba(255, 140, 100, 0.4)); 
+  }
 }
 
-/* Responsive canvas */
+#oneko {
+  animation: onekoGlow 2s ease-in-out infinite;
+}
+
+/* En tema claro, remover el glow */
+body.light #oneko {
+  filter: none !important;
+  animation: none;
+}
+
+/* Responsive */
 @media (max-width: 720px) {
   .starfield-canvas {
    width: 100vw;
@@ -1633,5 +1706,941 @@ body.light .go-top-btn:hover {
   .project-card {
     margin: 0 auto;
     max-width: 400px;
+  }
+}
+
+/* ========== REACT95 CUSTOM STYLES ========== */
+
+/* Bordes estilo Windows 95 con colores personalizados */
+.retro-card {
+  background: var(--bg-card);
+  border: 2px solid;
+  border-color: var(--border) #0f1419 #0f1419 var(--border);
+  box-shadow: 
+    inset 1px 1px 0 rgba(77, 89, 111, 0.5),
+    inset -1px -1px 0 rgba(0, 0, 0, 0.5),
+    2px 2px 4px rgba(0, 0, 0, 0.3);
+  padding: 12px;
+  position: relative;
+}
+
+body.light .retro-card {
+  border-color: #ffffff #b8a88a #b8a88a #ffffff;
+  box-shadow: 
+    inset 1px 1px 0 rgba(255, 255, 255, 0.8),
+    inset -1px -1px 0 rgba(106, 97, 80, 0.3),
+    2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón estilo Windows 95 */
+.retro-button {
+  background: var(--bg-card);
+  border: 2px solid;
+  border-color: var(--border) #0f1419 #0f1419 var(--border);
+  color: var(--text);
+  padding: 6px 16px;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 
+    inset 1px 1px 0 rgba(77, 89, 111, 0.3),
+    inset -1px -1px 0 rgba(0, 0, 0, 0.3);
+  transition: all 0.1s ease;
+}
+
+.retro-button:hover {
+  background: var(--bg-card-hov);
+  border-color: var(--accent) var(--accent-2) var(--accent-2) var(--accent);
+}
+
+.retro-button:active {
+  border-color: #0f1419 var(--border) var(--border) #0f1419;
+  box-shadow: 
+    inset -1px -1px 0 rgba(77, 89, 111, 0.3),
+    inset 1px 1px 0 rgba(0, 0, 0, 0.5);
+  transform: translate(1px, 1px);
+}
+
+body.light .retro-button {
+  border-color: #ffffff #b8a88a #b8a88a #ffffff;
+}
+
+body.light .retro-button:hover {
+  border-color: var(--accent) var(--accent-2) var(--accent-2) var(--accent);
+}
+
+body.light .retro-button:active {
+  border-color: #b8a88a #ffffff #ffffff #b8a88a;
+}
+
+/* Barra de título estilo Windows 95 */
+.retro-titlebar {
+  background: linear-gradient(to right, var(--accent), var(--accent-2));
+  color: var(--text);
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: -12px -12px 12px -12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+body.light .retro-titlebar {
+  background: linear-gradient(to right, var(--accent), var(--accent-3));
+  color: var(--text);
+}
+
+/* Input estilo Windows 95 */
+.retro-input {
+  background: var(--bg);
+  border: 2px solid;
+  border-color: #0f1419 var(--border) var(--border) #0f1419;
+  color: var(--text);
+  padding: 6px 8px;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 14px;
+  box-shadow: 
+    inset -1px -1px 0 rgba(77, 89, 111, 0.2),
+    inset 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.retro-input:focus {
+  outline: 1px dotted var(--accent);
+  outline-offset: -3px;
+}
+
+body.light .retro-input {
+  border-color: #b8a88a #ffffff #ffffff #b8a88a;
+  background: var(--bg-2);
+}
+
+/* Separador horizontal estilo Windows 95 */
+.retro-separator {
+  height: 2px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
+  border-top: 1px solid rgba(77, 89, 111, 0.3);
+  margin: 16px 0;
+}
+
+body.light .retro-separator {
+  background: linear-gradient(to bottom, rgba(106, 97, 80, 0.3), transparent);
+  border-top: 1px solid rgba(208, 194, 160, 0.5);
+}
+
+/* Tooltip estilo Windows 95 */
+.retro-tooltip {
+  background: var(--accent-3);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 4px 8px;
+  font-size: 12px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+}
+
+/* Panel hundido estilo Windows 95 */
+.retro-well {
+  background: var(--bg);
+  border: 2px solid;
+  border-color: #0f1419 var(--border) var(--border) #0f1419;
+  padding: 12px;
+  box-shadow: 
+    inset -1px -1px 0 rgba(77, 89, 111, 0.2),
+    inset 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+body.light .retro-well {
+  border-color: #b8a88a #ffffff #ffffff #b8a88a;
+  background: var(--bg);
+  box-shadow: 
+    inset -1px -1px 0 rgba(255, 255, 255, 0.5),
+    inset 1px 1px 2px rgba(106, 97, 80, 0.3);
+}
+
+/* Scrollbar estilo Windows 95 */
+.retro-scrollbar::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+.retro-scrollbar::-webkit-scrollbar-track {
+  background: var(--bg);
+  border: 2px solid;
+  border-color: #0f1419 var(--border) var(--border) #0f1419;
+}
+
+.retro-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--bg-card);
+  border: 2px solid;
+  border-color: var(--border) #0f1419 #0f1419 var(--border);
+  box-shadow: inset 1px 1px 0 rgba(77, 89, 111, 0.3);
+}
+
+.retro-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--bg-card-hov);
+}
+
+.retro-scrollbar::-webkit-scrollbar-button {
+  background: var(--bg-card);
+  border: 2px solid;
+  border-color: var(--border) #0f1419 #0f1419 var(--border);
+  height: 16px;
+  width: 16px;
+}
+
+/* Checkbox estilo Windows 95 */
+.retro-checkbox {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 2px solid;
+  border-color: #0f1419 var(--border) var(--border) #0f1419;
+  background: var(--bg-2);
+  cursor: pointer;
+  position: relative;
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.retro-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: -4px;
+  left: 1px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+body.light .retro-checkbox {
+  border-color: #b8a88a #ffffff #ffffff #b8a88a;
+}
+
+/* Menu estilo Windows 95 */
+.retro-menu {
+  background: var(--bg-card);
+  border: 2px solid;
+  border-color: var(--border) #0f1419 #0f1419 var(--border);
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+  padding: 2px;
+}
+
+.retro-menu-item {
+  padding: 4px 24px 4px 8px;
+  cursor: pointer;
+  position: relative;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.retro-menu-item:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.retro-menu-separator {
+  height: 1px;
+  background: #0f1419;
+  margin: 2px 4px;
+  border-top: 1px solid var(--border);
+}
+
+body.light .retro-menu {
+  border-color: #ffffff #b8a88a #b8a88a #ffffff;
+}
+
+body.light .retro-menu-item:hover {
+  background: var(--accent);
+  color: var(--text);
+}
+
+/* ========== RETRO INTEGRATION STYLES ========== */
+
+/* Tech cards como botones retro */
+.tech-card-retro {
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px !important;
+  font-size: 13px !important;
+  cursor: default;
+  pointer-events: none;
+}
+
+.tech-card-retro:hover {
+  border-color: var(--accent) var(--accent-2) var(--accent-2) var(--accent) !important;
+}
+
+.tech-card-retro i {
+  font-size: 16px;
+}
+
+body.light .tech-card-retro:hover {
+  border-color: var(--accent) var(--accent-2) var(--accent-2) var(--accent) !important;
+}
+
+/* Project cards retro */
+.proj-card-retro {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.proj-card-retro .retro-titlebar {
+  font-size: 13px;
+  padding: 6px 10px;
+}
+
+/* Hero retro styles */
+.hero-retro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.paint-window,
+.system-window,
+.about-window {
+  margin: 0 auto;
+}
+
+.system-badge {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  padding: 8px 12px !important;
+  min-width: 90px;
+  text-align: center;
+  cursor: default !important;
+  pointer-events: none;
+}
+
+.system-badge strong {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+.system-badge span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Skills windows */
+.skills-section .retro-card {
+  width: 100%;
+  max-width: 640px;
+}
+
+/* Responsive ajustes para componentes retro */
+@media (max-width: 768px) {
+  .proj-card-retro {
+    max-width: 100%;
+  }
+
+  .tech-card-retro {
+    font-size: 12px !important;
+    padding: 5px 10px !important;
+  }
+
+  .retro-button {
+    font-size: 12px !important;
+    padding: 5px 12px !important;
+  }
+
+  .retro-titlebar {
+    font-size: 12px !important;
+  }
+
+  .paint-window {
+    width: 100% !important;
+    max-width: 280px !important;
+  }
+
+  .paint-window .hero-avatar {
+    max-width: 140px !important;
+  }
+
+  .system-window {
+    width: 100% !important;
+    max-width: 420px !important;
+  }
+
+  .about-window {
+    width: 100% !important;
+    max-width: 480px !important;
+  }
+
+  .retro-card {
+    max-width: 100% !important;
+  }
+
+  .skills-section .retro-card {
+    max-width: 100% !important;
+  }
+
+  .system-badge {
+    font-size: 10px;
+    padding: 6px 8px;
+    min-width: 80px;
+  }
+
+  .system-badge strong {
+    font-size: 10px;
+  }
+
+  .system-badge span {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tech-card-retro {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+    gap: 4px;
+  }
+
+  .tech-card-retro i,
+  .tech-card-retro img {
+    width: 14px !important;
+    height: 14px !important;
+    font-size: 14px !important;
+  }
+
+  .proj-card-retro .retro-well {
+    padding: 8px !important;
+    font-size: 12px !important;
+  }
+
+  .retro-button {
+    font-size: 11px !important;
+    padding: 4px 10px !important;
+    min-width: 70px !important;
+  }
+
+  .paint-window {
+    max-width: 240px !important;
+  }
+
+  .paint-window .hero-avatar {
+    max-width: 120px !important;
+  }
+
+  .system-window {
+    max-width: 100% !important;
+  }
+
+  .about-window {
+    max-width: 100% !important;
+  }
+
+  .system-badge {
+    font-size: 9px;
+    padding: 5px 6px;
+    min-width: 70px;
+  }
+
+  .system-badge strong {
+    font-size: 9px;
+  }
+
+  .system-badge span {
+    font-size: 11px;
+  }
+
+  .retro-well {
+    padding: 8px !important;
+    font-size: 11px !important;
+  }
+
+  .hero-title {
+    font-size: 32px !important;
+  }
+
+  .hero-sub {
+    font-size: 16px !important;
+  }
+}
+
+/* ========== WINDOWS 95 TASKBAR ========== */
+
+.taskbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: var(--bg-card);
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px;
+  z-index: 1090;
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.start-button {
+  height: 32px;
+  padding: 0 12px;
+  background: var(--accent);
+  border: 2px solid;
+  border-color: var(--accent) var(--accent-2) var(--accent-2) var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #ffffff;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.3), inset -1px -1px 0 rgba(0, 0, 0, 0.3);
+  transition: all 0.2s;
+}
+
+.start-button:hover {
+  background: var(--accent-2);
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.4), inset -1px -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.start-button:active {
+  border-color: var(--accent-2) var(--accent) var(--accent) var(--accent-2);
+  box-shadow: inset -1px -1px 0 rgba(255, 255, 255, 0.2), inset 1px 1px 0 rgba(0, 0, 0, 0.5);
+  padding: 2px 10px 0 14px;
+}
+
+.start-logo {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 4px rgba(217, 80, 48, 0.5);
+}
+
+.start-text {
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.task-buttons {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  overflow-x: auto;
+  padding: 0 4px;
+}
+
+.task-button {
+  height: 32px;
+  min-width: 120px;
+  max-width: 160px;
+  padding: 0 12px;
+  background: var(--bg-2);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+  font-size: 12px;
+  color: var(--text);
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.1), inset -1px -1px 0 rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s;
+}
+
+.task-button:hover {
+  background: var(--bg-card-hov);
+  border-color: var(--accent);
+}
+
+.task-button.active {
+  border-color: var(--accent);
+  box-shadow: inset -1px -1px 0 rgba(255, 255, 255, 0.1), inset 1px 1px 0 rgba(0, 0, 0, 0.4);
+  background: var(--bg);
+  color: var(--accent);
+}
+
+.task-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.task-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.system-tray {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 8px;
+  height: 32px;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  box-shadow: inset -1px -1px 0 rgba(255, 255, 255, 0.05), inset 1px 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.tray-counter {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: bold;
+  cursor: help;
+  transition: all 0.2s;
+  box-shadow: inset -1px -1px 0 rgba(255, 255, 255, 0.05), inset 1px 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.tray-counter:hover {
+  background: var(--bg-card);
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(217, 80, 48, 0.4);
+}
+
+.counter-icon {
+  font-size: 12px;
+  filter: grayscale(0.3);
+}
+
+.counter-value {
+  min-width: 20px;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.tray-button {
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--text);
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+  transition: all 0.2s;
+}
+
+.tray-button:hover {
+  border: 1px solid var(--accent);
+  background: var(--bg-card);
+  color: var(--accent);
+}
+
+.tray-button:active {
+  border: 1px solid var(--accent-2);
+  background: var(--bg-2);
+}
+
+.tray-clock {
+  padding: 0 8px;
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+  font-size: 11px;
+  color: var(--text);
+  border-left: 1px solid var(--border);
+  margin-left: 4px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Start Menu */
+.start-menu {
+  position: fixed;
+  bottom: 40px;
+  left: 0;
+  width: 240px;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-bottom: none;
+  box-shadow: 3px -2px 12px rgba(0, 0, 0, 0.6);
+  z-index: 1091;
+  display: flex;
+}
+
+.start-menu-sidebar {
+  width: 32px;
+  background: linear-gradient(180deg, var(--accent) 0%, var(--accent-2) 100%);
+  padding: 8px 4px;
+  display: flex;
+  align-items: flex-end;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  box-shadow: inset -1px 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.start-menu-title {
+  color: #ffffff;
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.7);
+}
+
+.start-menu-content {
+  flex: 1;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-2);
+}
+
+.start-menu-item {
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+  font-size: 12px;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: all 0.2s;
+}
+
+.start-menu-item:hover {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent-2);
+}
+
+.start-menu-icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.start-menu-separator {
+  height: 2px;
+  background: var(--border);
+  margin: 4px 8px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.start-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1088;
+}
+
+/* ========== WINDOWS 95 FOOTER ========== */
+
+.retro-footer {
+  background: var(--bg-card);
+  border-top: 2px solid var(--border);
+  padding: 40px 20px;
+  margin-top: 80px;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.retro-footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  position: relative;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-well {
+  background: var(--bg-2);
+  padding: 20px;
+  border: 2px solid var(--border);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.footer-well strong {
+  color: var(--accent);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.footer-links-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-link {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 6px 12px;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+  display: inline-block;
+  background: var(--bg);
+}
+
+.footer-link:hover {
+  background: var(--accent);
+  border-color: var(--accent-2);
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+.footer-copyright {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 2px solid var(--border);
+}
+
+.crypto-addr {
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  background: var(--bg);
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  display: inline-block;
+  word-break: break-all;
+  color: var(--accent);
+  margin-top: 4px;
+}
+
+.go-top-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  min-width: 120px;
+  background: var(--accent) !important;
+  color: #ffffff !important;
+  border-color: var(--accent) var(--accent-2) var(--accent-2) var(--accent) !important;
+}
+
+.go-top-btn:hover {
+  background: var(--accent-2) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(217, 80, 48, 0.4) !important;
+}
+
+/* Responsive Taskbar */
+@media (max-width: 768px) {
+  .taskbar {
+    height: 36px;
+  }
+
+  .start-button {
+    height: 30px;
+    font-size: 12px;
+    padding: 0 6px;
+  }
+
+  .task-buttons {
+    display: none;
+  }
+
+  .system-tray {
+    gap: 1px;
+  }
+
+  .tray-counter {
+    padding: 2px 6px;
+    font-size: 10px;
+  }
+
+  .counter-icon {
+    font-size: 10px;
+  }
+
+  .counter-value {
+    min-width: 18px;
+  }
+
+  .tray-clock span {
+    font-size: 10px;
+  }
+
+  .start-menu {
+    width: 220px;
+  }
+
+  .retro-footer-content {
+    grid-template-columns: 1fr;
+  }
+
+  .go-top-btn {
+    position: static;
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-top: 38px;
+  }
+
+  .taskbar {
+    height: 32px;
+  }
+
+  .start-button {
+    height: 28px;
+    font-size: 11px;
+  }
+
+  .start-logo {
+    width: 16px;
+    height: 16px;
+  }
+
+  .tray-button {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+  }
+
+  .start-menu {
+    width: calc(100vw - 8px);
+    left: 4px;
   }
 }

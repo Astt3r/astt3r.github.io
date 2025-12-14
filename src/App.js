@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar, Footer, StarfieldCanvas } from './components';
-import { HomePage, ProjectsPage, ContactPage } from './pages';
+import { HomePage, ProjectsPage, ContactPage, RetroShowcasePage } from './pages';
 import MaintenancePage from './pages/MaintenancePage';
 import { LanguageProvider } from './contexts';
 import { initSmoothScrolling } from './utils';
@@ -56,6 +56,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/retro" element={<RetroShowcasePage />} />
           </Routes>
           
           {/* Footer */}
