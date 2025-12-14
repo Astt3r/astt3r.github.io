@@ -33,7 +33,7 @@ const ContactPage = () => {
       from_email: formData.email,      // Email del usuario
       to_email: 'alejano2000@gmail.com', // Tu email (donde llegarán los mensajes)
       message: formData.message,       // Mensaje del usuario
-      reply_to: formData.email        // Para responder directamente
+      reply_to: formData.email        // Para responder directamente 
     };
 
     emailjs.send(serviceId, templateId, templateParams, publicKey)
