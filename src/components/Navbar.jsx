@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useMobileMenu, useTheme } from '../hooks';
+import { useTheme } from '../hooks';
 import { useLanguageContext } from '../contexts';
 
 const Navbar = () => {
-  const { isOpen, toggleMenu, closeMenu } = useMobileMenu();
   const { t, language, toggleLanguage } = useLanguageContext();
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();

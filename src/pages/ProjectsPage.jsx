@@ -6,7 +6,7 @@ import { RetroButton } from '../components/RetroComponents';
 
 
 const ProjectCard = ({ project }) => {
-  const { title, description, image, tech, links, badge, mainIcon, isPlayable, isDownloadable, hasPreview } = project;
+  const { title, description, image, tech, links, badge, isPlayable, isDownloadable, hasPreview } = project;
   
   return (
     <RetroWindow 
