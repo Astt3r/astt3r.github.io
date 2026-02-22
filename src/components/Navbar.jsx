@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '../hooks';
 import { useLanguageContext } from '../contexts';
+import { getCounterApiUrl } from '../config/counterapi.config';
 import folderIcon from '../assets/icons/folder_open.png';
 import programIcon from '../assets/icons/program.png';
 import mailIcon from '../assets/icons/mail.png';
@@ -15,32 +16,29 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [startMenuOpen, setStartMenuOpen] = useState(false);
-  const [visitCount, setVisitCount] = useState(0);
+  const [visitCount, setVisitCount] = useState('...');
 
   useEffect(() => {
     let isSubscribed = true;
     
     const fetchVisitCount = async () => {
       try {
-        const response = await fetch('https://api.countapi.xyz/hit/astt3r-portfolio/visits', {
-          method: 'GET',
+        const response = await fetch(getCounterApiUrl('up'), {
+          method: 'GET'
         });
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        const data = await response.json();
+        const result = await response.json();
         if (isSubscribed) {
-          setVisitCount(data.value || 0);
+          setVisitCount(result.data?.up_count || 0);
         }
       } catch (error) {
         console.error('Error fetching visit count:', error);
         if (isSubscribed) {
-          const localCount = localStorage.getItem('fallbackVisitCount') || '0';
-          const newCount = parseInt(localCount) + 1;
-          localStorage.setItem('fallbackVisitCount', newCount.toString());
-          setVisitCount(newCount);
+          setVisitCount('--');
         }
       }
     };

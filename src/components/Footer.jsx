@@ -14,7 +14,7 @@ const Footer = () => {
             <strong style={{ color: 'var(--accent)', marginBottom: '8px', display: 'block' }}>Quick Links</strong>
             <div className="footer-links-grid">
               <a href="https://github.com/Astt3r" target="_blank" rel="noopener noreferrer" className="footer-link">GitHub</a>
-              <a href="https://linkedin.com/in/alejandrordeveloper" target="_blank" rel="noopener noreferrer" className="footer-link">LinkedIn</a>
+              <a href="https://www.linkedin.com/in/alejandro-robles-9279992b2/" target="_blank" rel="noopener noreferrer" className="footer-link">LinkedIn</a>
               <a href="/contact" className="footer-link">Contact</a>
             </div>
           </div>

@@ -1,19 +1,20 @@
 import { useState, useEffect } from 'react';
+import { getCounterApiUrl } from '../config/counterapi.config';
 
 const useVisitorCounter = () => {
   const [count, setCount] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // CountAPI.xyz endpoint - crea un contador único para tu sitio
-    const namespace = 'astt3r-portfolio';
-    const key = 'visitors';
-    const url = `https://api.countapi.xyz/hit/${namespace}/${key}`;
+    // CounterAPI.dev endpoint - incrementa y obtiene el contador
+    const url = getCounterApiUrl('up');
 
-    fetch(url)
+    fetch(url, {
+      method: 'GET'
+    })
       .then(response => response.json())
-      .then(data => {
-        setCount(data.value);
+      .then(result => {
+        setCount(result.data?.up_count || 0);
         setLoading(false);
       })
       .catch(error => {

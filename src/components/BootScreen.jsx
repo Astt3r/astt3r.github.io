@@ -5,7 +5,6 @@ const BootScreen = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Animación de progreso rápida
     const interval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
@@ -16,7 +15,6 @@ const BootScreen = ({ onComplete }) => {
       });
     }, 40);
 
-    // Completar después de 2 segundos
     const timer = setTimeout(() => {
       onComplete();
     }, 2000);

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { useLanguageContext } from '../contexts';
+import { EMAILJS_CONFIG } from '../config/emailjs.config';
 import RetroWindow from '../components/RetroWindow';
 import { RetroInput, RetroTextarea, RetroButton } from '../components/RetroComponents';
 import recycleFullIcon from '../assets/icons/recycle_bin_full.png';
@@ -37,14 +38,19 @@ const ContactPage = () => {
     setStatus({ submitting: true, submitted: false, error: null });
 
     try {
-      const result = await emailjs.sendForm(
-        'service_xn4fh3r',
-        'template_5y8fxx8',
-        form.current,
-        'wdpN3vGbALNv7KJKk'
+      // Usar send() en lugar de sendForm() para mejor compatibilidad
+      const result = await emailjs.send(
+        EMAILJS_CONFIG.serviceId,
+        EMAILJS_CONFIG.templateId,
+        {
+          from_name: formData.from_name,
+          from_email: formData.from_email,
+          message: formData.message,
+          to_name: 'Alejandro' // Nombre del destinatario (opcional)
+        }
       );
 
-      console.log('Email sent successfully:', result.text);
+      console.log('Email sent successfully:', result);
       setStatus({ submitting: false, submitted: true, error: null });
       setFormData({ from_name: '', from_email: '', message: '' });
 
@@ -53,6 +59,12 @@ const ContactPage = () => {
       }, 5000);
     } catch (error) {
       console.error('Failed to send email:', error);
+      console.error('Error details:', {
+        status: error.status,
+        text: error.text,
+        serviceId: EMAILJS_CONFIG.serviceId,
+        templateId: EMAILJS_CONFIG.templateId
+      });
       setStatus({
         submitting: false,
         submitted: false,
@@ -62,6 +74,13 @@ const ContactPage = () => {
   };
 
   const contacts = [
+    {
+      name: 'Email',
+      icon: mailIcon,
+      value: 'alejano2000@gmail.com',
+      link: 'mailto:alejano2000@gmail.com',
+      color: '#EA4335'
+    },
     {
       name: 'Discord',
       icon: discordIcon,
@@ -198,7 +217,7 @@ const ContactPage = () => {
               </div>
             </RetroWindow>
 
-            {/* MailClient.exe - Send Message */}
+            {/* MailClient.exe - Send Message - Temporarily disabled
             <RetroWindow 
               title="MailClient.exe - Compose"
               showClose={false}
@@ -319,6 +338,7 @@ const ContactPage = () => {
                 </form>
               </div>
             </RetroWindow>
+            */}
           </div>
         </div>
       </section>

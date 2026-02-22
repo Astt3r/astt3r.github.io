@@ -195,24 +195,80 @@ const ProjectsPage = () => {
   return (
     <main>
       <section className="projects-wrapper" style={{ padding: '100px 20px 60px' }}>
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <img 
-            src="/assets/cat computer.png" 
-            alt="Cat Computer" 
-            style={{
-              maxWidth: '200px',
-              width: '100%',
-              margin: '0 auto 20px',
-              display: 'block',
-              imageRendering: 'pixelated'
-            }}
-          />
-          <h1 style={{ fontSize: '36px', marginBottom: '12px' }}>
-            {t('projects') || 'Mis Proyectos'}
-          </h1>
-          <p style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
-            {t('projects_subtitle') || 'Una colección de proyectos en los que he trabajado, desde aplicaciones web hasta juegos.'}
-          </p>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px', marginBottom: '40px' }}>
+          {/* Cat Image with Paint style */}
+          <div style={{ maxWidth: '280px', width: '100%' }}>
+            <RetroWindow 
+              title="CatViewer.exe - Paint"
+              showClose={false}
+              className="paint-window"
+            >
+              <div style={{ 
+                background: '#c0c0c0',
+                padding: '3px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0'
+              }}>
+                <div style={{
+                  background: '#ffffff',
+                  minHeight: '200px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  border: '2px solid var(--border)',
+                  padding: '8px'
+                }}>
+                  <img 
+                    src="/assets/cat computer.png" 
+                    alt="Cat Computer" 
+                    style={{
+                      maxWidth: '100%',
+                      width: '200px',
+                      display: 'block',
+                      imageRendering: 'pixelated',
+                      boxShadow: 'none'
+                    }}
+                  />
+                </div>
+                
+                <div style={{
+                  background: 'var(--bg-2)',
+                  padding: '4px',
+                  display: 'flex',
+                  gap: '4px',
+                  alignItems: 'center',
+                  borderTop: '2px solid var(--border)',
+                  fontSize: '11px'
+                }}>
+                  <div style={{
+                    width: '12px',
+                    height: '12px',
+                    background: 'var(--accent)',
+                    border: '1px solid var(--border)'
+                  }}></div>
+                  <span>200x200</span>
+                </div>
+              </div>
+            </RetroWindow>
+          </div>
+
+          {/* Projects Title Window */}
+          <div style={{ maxWidth: '600px', width: '100%' }}>
+            <RetroWindow 
+              title="Projects.exe"
+              showClose={false}
+            >
+              <div style={{ padding: '20px', textAlign: 'center', background: 'var(--bg)' }}>
+                <h1 style={{ fontSize: '32px', marginBottom: '12px', color: 'var(--accent)', fontWeight: 'bold' }}>
+                  {t('projects') || 'Mis Proyectos'}
+                </h1>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '15px', margin: 0 }}>
+                  {t('projects_subtitle') || 'Una colección de proyectos en los que he trabajado, desde aplicaciones web hasta juegos.'}
+                </p>
+              </div>
+            </RetroWindow>
+          </div>
         </div>
 
         {/* Featured Projects */}
