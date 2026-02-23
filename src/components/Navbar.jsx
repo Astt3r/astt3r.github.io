@@ -21,9 +21,11 @@ const Navbar = () => {
   useEffect(() => {
     let isSubscribed = true;
     
-    const fetchVisitCount = async () => {
+    const fetchVisitCount = async (shouldIncrement = false) => {
       try {
-        const response = await fetch(getCounterApiUrl('up'), {
+        // Determinar si incrementar o solo leer
+        const endpoint = shouldIncrement ? 'up' : '';
+        const response = await fetch(getCounterApiUrl(endpoint), {
           method: 'GET'
         });
         
@@ -43,7 +45,17 @@ const Navbar = () => {
       }
     };
 
-    fetchVisitCount();
+    // Verificar si ya visitó en esta sesión
+    const hasVisited = sessionStorage.getItem('portfolio_visited');
+    
+    if (!hasVisited) {
+      // Primera visita en esta sesión: incrementar contador
+      sessionStorage.setItem('portfolio_visited', 'true');
+      fetchVisitCount(true);
+    } else {
+      // Ya visitó en esta sesión: solo leer el contador
+      fetchVisitCount(false);
+    }
     
     return () => {
       isSubscribed = false;
