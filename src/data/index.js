@@ -215,24 +215,24 @@ export const projectsData = {
     {
       id: 2,
       title: "Junta Transparente",
-      description: "Public transparency portal for neighborhood boards to publish budgets and fund allocations, making local spending easy to search and audit for residents. My final degree project (Ingeniería en Ejecución Informática).",
+      description: "Community management platform for neighborhood boards to publish budgets and fund allocations, making local spending easy to search and audit for residents. Rebuilt as a decoupled SPA with a Node.js REST API and JWT authentication. Originally my final degree project (Ingeniería en Ejecución Informática).",
       image: "/assets/juntatransparente.png",
       tech: [
-        { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-        { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
-        { name: "JS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
         { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+        { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
         { name: "Tailwind", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" },
         { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" }
       ],
       links: {
+        demo: "https://junta-app-production.up.railway.app/",
         github: "https://github.com/fit-dran/juntatransparente"
       },
       badge: {
-        text: "Open Source",
-        color: "rgba(0,0,0,0.65)"
+        text: "Live Demo",
+        color: "linear-gradient(90deg,#11998e,#38ef7d)"
       },
-      mainIcon: "devicon-react-original colored"
+      mainIcon: "devicon-react-original colored",
+      hasPreview: true
     },
     {
       id: 3,
