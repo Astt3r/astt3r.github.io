@@ -19,17 +19,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        
-        <div className="footer-section">
-          <div className="footer-well">
-            <strong style={{ color: 'var(--accent)', marginBottom: '8px', display: 'block' }}>Crypto Wallets</strong>
-            <div style={{ fontSize: '11px', lineHeight: '1.6' }}>
-              <p style={{ margin: '4px 0' }}><strong>ETH:</strong> <code className="crypto-addr">0x874264741b35189Bcd44e636eC1131bD92cefc5F</code></p>
-              <p style={{ margin: '4px 0' }}><strong>BTC:</strong> <code className="crypto-addr">bc1q9muzx5ahkzs89kq2en6yygc83rcxly7lsnauh5</code></p>
-            </div>
-          </div>
-        </div>
-        
+
         <div className="footer-copyright">
           <p>&copy; {currentYear} Alejandro Robles. {t('footer_text')}</p>
         </div>

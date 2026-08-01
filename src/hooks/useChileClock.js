@@ -12,7 +12,7 @@ export const useChileClock = () => {
         minute: '2-digit',
         hour12: false
       });
-      setTime(`🇨🇱 ${chileTime}`);
+      setTime(chileTime);
     };
 
     updateTime();

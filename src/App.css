@@ -7,6 +7,7 @@
   --border:#4D596F;
   --text:#e6e6e8;
   --text-muted:#9ca3af;
+  --text-secondary:#9ca3af;
   --accent:#D95030;
   --accent-2:#AB4455;
   --accent-3:#433F3C;
@@ -20,6 +21,7 @@ body.light{
   --border:#d0c2a0;
   --text:#2a2722;
   --text-muted:#6a6150;
+  --text-secondary:#6a6150;
   --accent:#c8a961;
   --accent-2:#8a7456;
   --accent-3:#d4af37;
@@ -28,6 +30,55 @@ body.light{
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html,body{min-height:100%;}
+
+/* ======= SCROLLBAR ======= */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-2);
+  border-left: 1px solid var(--border);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent) 0%, var(--accent-2) 100%);
+  border-radius: 2px;
+  border: 1px solid var(--bg-2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--accent-2) 0%, var(--accent) 100%);
+  filter: brightness(1.15);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--bg-2);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--bg-2);
+}
+
+/* Light theme scrollbar override — variables en :root no heredan body.light */
+html:has(body.light) ::-webkit-scrollbar-track {
+  background: #e8e4d8;
+  border-left: 1px solid #d0c2a0;
+}
+html:has(body.light) ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #c8a961 0%, #8a7456 100%);
+  border: 1px solid #e8e4d8;
+}
+html:has(body.light) ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #8a7456 0%, #c8a961 100%);
+  filter: brightness(1.1);
+}
+html:has(body.light) {
+  scrollbar-color: #c8a961 #e8e4d8;
+}
 
 @font-face {
   font-family: 'MS Sans Serif';
@@ -43,7 +94,7 @@ body{
   transition:background .25s,color .25s;
   line-height:1.45;
   overflow-x:hidden;
-  padding-top: 42px;
+  padding-top: 72px;
 }
 
 /* Layout principal */
@@ -247,10 +298,162 @@ body.light #oneko {
   }
 }
 
+/* ======= MARQUEE BAND (top strip) ======= */
+.marquee-band {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  z-index: 1100;
+  display: flex;
+  align-items: stretch;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--accent);
+  overflow: hidden;
+  font-size: 12px;
+  font-family: inherit;
+}
+
+/* 70% — scrolling text */
+.marquee-band__text-section {
+  width: 80%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid var(--border);
+}
+
+.marquee-band__track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee-scroll 55s linear infinite;
+}
+
+.marquee-band__content {
+  color: var(--text-muted);
+  padding-right: 0;
+  letter-spacing: 0.03em;
+}
+
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* 30% — music player */
+.marquee-band__player-section {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+
+.marquee-band__player {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  height: 22px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0 6px;
+  box-shadow: inset 1px 1px 0 rgba(0,0,0,0.3);
+  overflow: hidden;
+}
+
+.marquee-band__player-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-size: 8px;
+  color: var(--accent);
+  cursor: default;
+  flex-shrink: 0;
+  box-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+  user-select: none;
+}
+
+.marquee-band__player-track {
+  flex: 1;
+  overflow: hidden;
+  font-size: 10px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  letter-spacing: 0.03em;
+  opacity: 0.8;
+}
+
+.marquee-band__player-track em {
+  font-style: normal;
+  color: var(--accent);
+  opacity: 0.6;
+}
+
+.marquee-band__player-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+  height: 12px;
+  flex-shrink: 0;
+  opacity: 0.4;
+}
+
+.marquee-band__player-bars span {
+  display: block;
+  width: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+.marquee-band__player-bars span:nth-child(1) { height: 4px; }
+.marquee-band__player-bars span:nth-child(2) { height: 8px; }
+.marquee-band__player-bars span:nth-child(3) { height: 5px; }
+.marquee-band__player-bars span:nth-child(4) { height: 10px; }
+.marquee-band__player-bars span:nth-child(5) { height: 6px; }
+
+/* light theme overrides */
+body.light .marquee-band {
+  border-bottom-color: var(--accent);
+  background: #ede9de;
+}
+body.light .marquee-band__player {
+  background: #e8e4d8;
+  border-color: var(--border);
+}
+
+/* Light theme — footer */
+body.light .site-footer {
+  background: #e4dfd2;
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 -2px 16px rgba(201, 169, 97, 0.12);
+}
+
+/* Light theme — taskbar */
+body.light .taskbar {
+  background: #e0dbd0;
+  border-bottom: 2px solid var(--accent);
+  box-shadow: 0 2px 10px rgba(201, 169, 97, 0.18);
+}
+body.light .system-tray {
+  background: #d8d3c8;
+  border-color: #c5b99a;
+}
+
 /* ======= NAVBAR ======= */
 .top-nav{
   position:fixed;
-  top:0;left:0;right:0;
+  top:30px;left:0;right:0;
   height:60px;
   background:var(--bg-2);
   border-bottom:1px solid var(--border);
@@ -356,8 +559,8 @@ body.light .top-nav .brand:hover {
   font-size:28px;background:none;border:none;color:var(--accent);cursor:pointer;display:none;
 }
 
-/* desplazamos body debajo de navbar */
-body{ padding-top:60px; }
+/* desplazamos body debajo de navbar + marquee band */
+body{ padding-top:90px; }
 
 
 
@@ -368,15 +571,10 @@ body{ padding-top:60px; }
 }
 
 .hero-avatar{
-  max-width: 180px; 
+  max-width: 180px;
   height: auto;
   border-radius: 16px;
-  transition: transform 0.3s ease;
   box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-}
-
-.hero-avatar:hover {
-  transform: scale(1.05);
 }
 
 /* Tema claro: sombra suave para avatar */
@@ -974,7 +1172,7 @@ body.light .skill-box:hover::after {
 /* ===== MOBILE NAVBAR ===== */
 .mobile-bar{
 /* solo en móviles */
-  position:fixed;top:0;left:0;right:0;
+  position:fixed;top:30px;left:0;right:0;
   height:48px;background:var(--bg-2);
   border-bottom:1px solid var(--border);
   z-index:1100;
@@ -1005,8 +1203,8 @@ body.light .mobile-bar .brand {
 
 /* Panel deslizante */
 .mobile-nav{
-  position:fixed;top:48px;left:-100%;
-  width:70%;height:calc(100vh - 48px);
+  position:fixed;top:78px;left:-100%;
+  width:70%;height:calc(100vh - 78px);
   background:var(--bg-2);
   border-right:1px solid var(--border);
   transition:left .3s;z-index:1090;
@@ -1737,6 +1935,14 @@ body.light .go-top-btn:hover {
   position: relative;
 }
 
+.retro-card-maximized {
+  width: 100% !important;
+  box-shadow:
+    inset 1px 1px 0 rgba(77, 89, 111, 0.5),
+    inset -1px -1px 0 rgba(0, 0, 0, 0.5),
+    4px 4px 10px rgba(0, 0, 0, 0.4);
+}
+
 body.light .retro-card {
   border-color: #ffffff #b8a88a #b8a88a #ffffff;
   box-shadow: 
@@ -1785,6 +1991,21 @@ body.light .retro-button:hover {
 
 body.light .retro-button:active {
   border-color: #b8a88a #ffffff #ffffff #b8a88a;
+}
+
+/* Botón de descarga de CV: mismo lenguaje visual, pero con acento para destacar como CTA */
+.cv-download-btn {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.cv-download-btn:hover {
+  background: var(--accent-2);
+  color: #ffffff;
 }
 
 /* Barra de título estilo Windows 95 */
@@ -2123,6 +2344,15 @@ body.light .tech-card-retro:hover {
   font-size: 13px;
   font-weight: 600;
   color: var(--text);
+  /* Fix: Pixelify Sans renderiza el "5" como "S" en contextos numéricos */
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Mismo fix para el reloj del tray y el contador de visitas */
+.tray-clock,
+.tray-counter,
+#clClock {
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', 'Segoe UI', system-ui, sans-serif;
 }
 
 /* Skills windows */
@@ -2266,7 +2496,7 @@ body.light .tech-card-retro:hover {
 
 .taskbar {
   position: fixed;
-  top: 0;
+  top: 30px;
   left: 0;
   right: 0;
   height: 40px;
@@ -2367,6 +2597,17 @@ body.light .tech-card-retro:hover {
   box-shadow: inset -1px -1px 0 rgba(255, 255, 255, 0.1), inset 1px 1px 0 rgba(0, 0, 0, 0.4);
   background: var(--bg);
   color: var(--accent);
+}
+
+.cv-task-button {
+  border-color: var(--accent);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.cv-task-button:hover {
+  background: var(--accent);
+  color: #ffffff;
 }
 
 .task-icon {

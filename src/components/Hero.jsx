@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import RetroWindow from './RetroWindow';
 import { useChileClock } from '../hooks';
 import { useLanguageContext } from '../contexts';
@@ -6,6 +7,7 @@ import calendarIcon from '../assets/icons/calendar.png';
 import clockIcon from '../assets/icons/clock.png';
 import notepadIcon from '../assets/icons/notepad.png';
 import calculatorIcon from '../assets/icons/calculator.png';
+import mailIcon from '../assets/icons/mail.png';
 
 const Hero = () => {
   const chileTime = useChileClock();
@@ -133,6 +135,21 @@ const Hero = () => {
         {t('hero_subtitle')}
       </h2>
 
+      <div style={{ marginTop: '16px', display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <a
+          href="/assets/cv/Alejandro-Robles-CV.pdf"
+          download="Alejandro-Robles-CV.pdf"
+          className="retro-button cv-download-btn"
+        >
+          <img src={notepadIcon} alt="" style={{ width: '14px', height: '14px', marginRight: '6px', imageRendering: 'pixelated' }} />
+          {t('download_cv') || 'Download CV'}
+        </a>
+        <Link to="/contact" className="retro-button">
+          <img src={mailIcon} alt="" style={{ width: '14px', height: '14px', marginRight: '6px', imageRendering: 'pixelated', verticalAlign: 'middle' }} />
+          {t('contact') || 'Contact'}
+        </Link>
+      </div>
+
       <div style={{ marginBottom: '24px', marginTop: '24px' }}>
         <RetroWindow 
           title="System.exe - Properties"
@@ -155,7 +172,14 @@ const Hero = () => {
               <button className="retro-button system-badge">
                 <img src={clockIcon} alt="" style={{ width: '14px', height: '14px', marginRight: '4px', imageRendering: 'pixelated' }} />
                 <strong>Time:</strong>
-                <span id="clClock">{chileTime || '🇨🇱 --:--'}</span>
+                <span id="clClock">
+                  <img
+                    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f1e8-1f1f1.svg"
+                    alt="🇨🇱"
+                    style={{ width: '14px', height: '14px', marginRight: '3px', verticalAlign: 'middle', display: 'inline' }}
+                  />
+                  {chileTime || '--:--'}
+                </span>
               </button>
               <button className="retro-button system-badge">
                 <img src={notepadIcon} alt="" style={{ width: '14px', height: '14px', marginRight: '4px', imageRendering: 'pixelated' }} />

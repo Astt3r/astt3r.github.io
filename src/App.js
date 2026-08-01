@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import { Navbar, Footer, StarfieldCanvas, DesktopIcons, BootScreen } from './components';
+import { Navbar, Footer, StarfieldCanvas, DesktopIcons, BootScreen, MarqueeBand } from './components';
 import { HomePage, ProjectsPage, ContactPage } from './pages';
 import MaintenancePage from './pages/MaintenancePage';
 import { LanguageProvider } from './contexts';
 import { initSmoothScrolling } from './utils';
-import emailjs from '@emailjs/browser';
-import { EMAILJS_CONFIG } from './config/emailjs.config';
 import './App.css';
 
 // ⚠️ MODO MANTENIMIENTO ⚠️
@@ -20,9 +18,6 @@ function App() {
   useEffect(() => {
     // Skip initialization if in maintenance  mode
     if (MAINTENANCE_MODE) return;
-
-    // Initialize EmailJS
-    emailjs.init(EMAILJS_CONFIG.publicKey);
 
     // Initialize smooth scrolling
     const cleanup = initSmoothScrolling();
@@ -57,6 +52,9 @@ function App() {
     <LanguageProvider>
       <Router>
         <div className="App">
+          {/* Marquee band — top strip */}
+          <MarqueeBand />
+
           {/* Starfield background */}
           <StarfieldCanvas />
           

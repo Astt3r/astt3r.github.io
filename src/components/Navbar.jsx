@@ -9,6 +9,7 @@ import mailIcon from '../assets/icons/mail.png';
 import worldIcon from '../assets/icons/world.png';
 import toolsIcon from '../assets/icons/tools.png';
 import clockIcon from '../assets/icons/clock.png';
+import briefcaseIcon from '../assets/icons/briefcase.png';
 
 const Navbar = () => {
   const { t, language, toggleLanguage } = useLanguageContext();
@@ -101,6 +102,15 @@ const Navbar = () => {
               <span className="task-label">{link.label}</span>
             </Link>
           ))}
+          <a
+            href="/assets/cv/Alejandro-Robles-CV.pdf"
+            download="Alejandro-Robles-CV.pdf"
+            className="task-button cv-task-button"
+            onClick={() => setStartMenuOpen(false)}
+          >
+            <img src={briefcaseIcon} alt="" className="task-icon" style={{ width: '16px', height: '16px', imageRendering: 'pixelated' }} />
+            <span className="task-label">{t('download_cv') || 'CV'}</span>
+          </a>
         </div>
 
         {/* System Tray */}
@@ -158,6 +168,15 @@ const Navbar = () => {
                   <span>{link.label}</span>
                 </button>
               ))}
+              <a
+                href="/assets/cv/Alejandro-Robles-CV.pdf"
+                download="Alejandro-Robles-CV.pdf"
+                className="start-menu-item"
+                onClick={() => setStartMenuOpen(false)}
+              >
+                <img src={briefcaseIcon} alt="" className="start-menu-icon" style={{ width: '16px', height: '16px', imageRendering: 'pixelated' }} />
+                <span>{t('download_cv') || 'Download CV'}</span>
+              </a>
               <div className="start-menu-separator" />
               <button
                 className="start-menu-item"

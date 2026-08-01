@@ -19,14 +19,20 @@ const BootScreen = ({ onComplete }) => {
       onComplete();
     }, 2000);
 
+    const skip = () => onComplete();
+    window.addEventListener('keydown', skip);
+    window.addEventListener('click', skip);
+
     return () => {
       clearInterval(interval);
       clearTimeout(timer);
+      window.removeEventListener('keydown', skip);
+      window.removeEventListener('click', skip);
     };
   }, [onComplete]);
 
   return (
-    <div className="boot-screen">
+    <div className="boot-screen" role="button" tabIndex={0} aria-label="Skip boot screen">
       <div className="boot-content">
         <div className="boot-header">
           <div className="boot-title">astt3r.sys</div>

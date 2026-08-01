@@ -1,7 +1,9 @@
 import React from 'react';
-import { skillsData } from '../data';
+import { skillsData, certificationsData, languagesData } from '../data';
 import { useLanguageContext } from '../contexts';
 import RetroWindow from './RetroWindow';
+import cdIcon from '../assets/icons/cd_drive.png';
+import worldIcon from '../assets/icons/world.png';
 
 const TechCard = ({ icon, name, customIcon }) => (
   <button 
@@ -47,6 +49,37 @@ const SkillBox = ({ title, icon, skills, exeName }) => (
                 name={skill.name}
                 customIcon={skill.customIcon}
               />
+            ))}
+          </div>
+        </div>
+      </div>
+    </RetroWindow>
+  </div>
+);
+
+const CertificationsBox = () => (
+  <div style={{ marginBottom: '32px' }}>
+    <RetroWindow
+      title="Certifications.exe - Achievements"
+      showClose={false}
+      width="640px"
+      style={{ maxWidth: '100%', margin: '0 auto' }}
+    >
+      <div style={{ padding: '12px' }}>
+        <div className="retro-well" style={{ padding: '14px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          {certificationsData.map((cert, index) => (
+            <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px' }}>
+              <img src={cdIcon} alt="" style={{ width: '16px', height: '16px', imageRendering: 'pixelated' }} />
+              <span>{cert}</span>
+            </div>
+          ))}
+          <div style={{ borderTop: '1px solid var(--border)', margin: '4px 0 2px', paddingTop: '8px', display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+            {languagesData.map((lang, index) => (
+              <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px' }}>
+                <img src={worldIcon} alt="" style={{ width: '14px', height: '14px', imageRendering: 'pixelated' }} />
+                <strong>{lang.name}:</strong>
+                <span>{lang.level}</span>
+              </div>
             ))}
           </div>
         </div>
@@ -110,6 +143,7 @@ const Skills = () => {
             exeName={section.exeName}
           />
         ))}
+        <CertificationsBox />
       </div>
     </section>
   );

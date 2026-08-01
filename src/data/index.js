@@ -8,7 +8,8 @@ export const translations = {
     
     // Hero section
     hero_subtitle: "Software Engineer & Indie Game Developer",
-    
+    download_cv: "Descargar CV",
+
     // About section
     about_title: "🧑‍💻 Sobre mí",
     about_text: "Soy un ingeniero de software apasionado por el desarrollo de software y la creación de juegos indie. Me gusta combinar lógica, creatividad y pixel art para dar vida a ideas originales. Siempre busco aprender nuevas tecnologías y asumir desafíos que impulsen mi crecimiento profesional y personal.",
@@ -28,14 +29,7 @@ export const translations = {
     projects_subtitle: "Una colección de proyectos en los que he trabajado, desde aplicaciones web hasta juegos indie.",
     featured_projects: "Destacados",
     completed_projects: "Completados",
-    in_progress_projects: "En Desarrollo",
-    preparing_new_projects: "Preparando nuevos proyectos",
-    focused_on_current: "Estoy enfocado en perfeccionar los proyectos actuales y planificando las próximas creaciones.",
-    stay_tuned: "¡Mantente atento a futuras actualizaciones!",
-    carousel_infinite: "Carrusel infinito en movimiento",
-    single_project: "Proyecto único",
-    swipe_to_navigate: "Desliza para navegar",
-    
+
     // Hero badges
     pronouns: "Él/He",
     
@@ -63,7 +57,8 @@ export const translations = {
     
     // Hero section
     hero_subtitle: "Software Engineer & Indie Game Developer",
-    
+    download_cv: "Download CV",
+
     // About section
     about_title: "🧑‍💻 About me",
     about_text: "I am a software engineer passionate about software development and indie game creation. I enjoy combining logic, creativity, and pixel art to bring original ideas to life. I'm always looking to learn new technologies and take on challenges that drive my professional and personal growth.",
@@ -83,14 +78,7 @@ export const translations = {
     projects_subtitle: "A collection of projects I've worked on, from web applications to games.",
     featured_projects: "Featured",
     completed_projects: "Completed",
-    in_progress_projects: "Currently in Development",
-    preparing_new_projects: "Preparing new projects",
-    focused_on_current: "I'm focused on perfecting current projects and planning next creations.",
-    stay_tuned: "Stay tuned for future updates!",
-    carousel_infinite: "Infinite carousel in motion",
-    single_project: "Single project",
-    swipe_to_navigate: "Swipe to navigate",
-    
+
     // Hero badges
     pronouns: "He/Him",
     
@@ -147,16 +135,67 @@ export const skillsData = {
     { icon: "devicon-docker-plain colored", name: "Docker" },
     { icon: "cisco-icon", name: "Cisco Packet Tracer", customIcon: "https://www.vectorlogo.zone/logos/cisco/cisco-icon.svg" },
     { icon: "devicon-latex-original colored", name: "LaTeX / Overleaf" },
-    { icon: "excel-vba-icon", name: "Excel VBA", customIcon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/filezilla/filezilla-plain.svg" }
+    { icon: "excel-vba-icon", name: "Excel VBA", customIcon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/microsoftexcel.svg" }
   ]
 };
+
+export const certificationsData = [
+  "AWS Academy Cloud Foundations",
+  "Desarrollo Web Moderno",
+  "JavaScript ES6+",
+  "CSS Grid & Flexbox"
+];
+
+export const languagesData = [
+  { name: "Español", level: "Native" },
+  { name: "English", level: "B2" }
+];
+
+export const experienceData = [
+  {
+    id: 1,
+    company: "Fundación Juan XXIII",
+    logo: "/assets/fundacionlogo.png",
+    role: "Full Stack Developer (Freelance)",
+    period: "Aug 2025 — Present",
+    achievements: [
+      "Designed and built an institutional web platform for a network of 9 schools, end-to-end from requirements to production deploy.",
+      "Built a custom CMS with role-based access and a WYSIWYG editor to centralize content management.",
+      "Deployed and maintained the app on Netlify/Render with a decoupled, reusable React frontend."
+    ]
+  },
+  {
+    id: 2,
+    company: "PC Rebailing",
+    logo: "/assets/pcrebailing.png",
+    role: "Software Developer (.NET)",
+    period: "Aug 2025 — Oct 2025",
+    achievements: [
+      "Built a POS system with C#, WPF and MySQL tailored to the company's internal processes.",
+      "Designed the relational database for inventory and sales.",
+      "Extended existing functionality with React.js components and ran functional tests before production releases."
+    ]
+  },
+  {
+    id: 3,
+    company: "Municipalidad de Los Ángeles",
+    logo: "/assets/munilosangeles.svg",
+    role: "Software Engineering Intern",
+    period: "Jan 2025 — Feb 2025",
+    achievements: [
+      "Built a pharmaceutical stock management system that cut critical-stock lookup time by ~40%.",
+      "Digitized administrative processes with dashboards and tracking tools.",
+      "Also taught Computer Science within the commune's school system as part of the same role."
+    ]
+  }
+];
 
 export const projectsData = {
   featured: [
     {
       id: 1,
       title: "Fundación Juan XXIII",
-      description: "Landing page proposal for Fundación Juan XXIII, a Catholic Schools organization. Modern and responsive design showcasing the foundation's mission and services.",
+      description: "Institutional web platform for a network of 9 schools, built end-to-end from requirements to production deploy. Includes a custom CMS with role-based access and a WYSIWYG editor so non-technical staff can manage content themselves.",
       image: "/assets/Animation.gif",
       tech: [
         { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
@@ -167,7 +206,7 @@ export const projectsData = {
         github: "https://github.com/Astt3r/fjuanxxiii"
       },
       badge: {
-        text: "Landing Page",
+        text: "CMS Platform",
         color: "linear-gradient(90deg,#11998e,#38ef7d)"
       },
       mainIcon: "devicon-react-original colored",
@@ -176,7 +215,7 @@ export const projectsData = {
     {
       id: 2,
       title: "Junta Transparente",
-      description: "Neighborhood board data viewer and public allocations. Part of my graduation project.",
+      description: "Public transparency portal for neighborhood boards to publish budgets and fund allocations, making local spending easy to search and audit for residents. My final degree project (Ingeniería en Ejecución Informática).",
       image: "/assets/juntatransparente.png",
       tech: [
         { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },

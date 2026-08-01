@@ -1,10 +1,6 @@
-import React, { useState, useRef } from 'react';
-import emailjs from '@emailjs/browser';
+import React from 'react';
 import { useLanguageContext } from '../contexts';
-import { EMAILJS_CONFIG } from '../config/emailjs.config';
 import RetroWindow from '../components/RetroWindow';
-import { RetroInput, RetroTextarea, RetroButton } from '../components/RetroComponents';
-import recycleFullIcon from '../assets/icons/recycle_bin_full.png';
 import mailIcon from '../assets/icons/mail.png';
 import discordIcon from '../assets/icons/discord.png';
 import briefcaseIcon from '../assets/icons/briefcase.png';
@@ -12,66 +8,6 @@ import folderIcon from '../assets/icons/folder_open.png';
 
 const ContactPage = () => {
   const { t } = useLanguageContext();
-  const form = useRef();
-  
-  const [formData, setFormData] = useState({
-    from_name: '',
-    from_email: '',
-    message: ''
-  });
-
-  const [status, setStatus] = useState({
-    submitting: false,
-    submitted: false,
-    error: null
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus({ submitting: true, submitted: false, error: null });
-
-    try {
-      // Usar send() en lugar de sendForm() para mejor compatibilidad
-      const result = await emailjs.send(
-        EMAILJS_CONFIG.serviceId,
-        EMAILJS_CONFIG.templateId,
-        {
-          from_name: formData.from_name,
-          from_email: formData.from_email,
-          message: formData.message,
-          to_name: 'Alejandro' // Nombre del destinatario (opcional)
-        }
-      );
-
-      console.log('Email sent successfully:', result);
-      setStatus({ submitting: false, submitted: true, error: null });
-      setFormData({ from_name: '', from_email: '', message: '' });
-
-      setTimeout(() => {
-        setStatus({ submitting: false, submitted: false, error: null });
-      }, 5000);
-    } catch (error) {
-      console.error('Failed to send email:', error);
-      console.error('Error details:', {
-        status: error.status,
-        text: error.text,
-        serviceId: EMAILJS_CONFIG.serviceId,
-        templateId: EMAILJS_CONFIG.templateId
-      });
-      setStatus({
-        submitting: false,
-        submitted: false,
-        error: t('contact_error') || 'Error al enviar el mensaje. Inténtalo de nuevo.'
-      });
-    }
-  };
 
   const contacts = [
     {
@@ -109,7 +45,7 @@ const ContactPage = () => {
         padding: '80px 24px 40px',
         minHeight: '100vh'
       }}>
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <div className="container" style={{ maxWidth: '600px', margin: '0 auto' }}>
           <h1 style={{
             textAlign: 'center',
             fontSize: '32px',
@@ -124,222 +60,92 @@ const ContactPage = () => {
             <img src={mailIcon} alt="" style={{ width: '32px', height: '32px', imageRendering: 'pixelated' }} />
             {t('contact_title') || 'Contacto'}
           </h1>
-          
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '32px',
-            alignItems: 'start'
-          }}>
-            <RetroWindow 
-              title="Contacts.exe - Address Book"
-              showClose={false}
-              width="100%"
-            >
-              <div style={{ padding: '20px' }}>
-                <div style={{
-                  marginBottom: '16px',
-                  padding: '12px',
-                  background: 'var(--bg)',
-                  border: '2px solid var(--border)',
-                  borderRadius: '4px'
-                }}>
-                  <p style={{
-                    margin: 0,
-                    fontSize: '13px',
-                    lineHeight: '1.6',
-                    color: 'var(--text-secondary)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px'
-                  }}>
-                    <img src={mailIcon} alt="" style={{ width: '16px', height: '16px', imageRendering: 'pixelated' }} />
-                    {t('contact_intro') || '¡Estos son mis medios de contacto! No dudes en escribirme.'}
-                  </p>
-                </div>
-                
-                <div style={{
-                  display: 'grid',
-                  gap: '12px'
-                }}>
-                  {contacts.map((contact, index) => (
-                    <a
-                      key={index}
-                      href={contact.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '12px',
-                        padding: '14px',
-                        background: 'var(--bg)',
-                        border: '2px solid var(--border)',
-                        borderRadius: '4px',
-                        textDecoration: 'none',
-                        color: 'var(--text)',
-                        transition: 'all 0.2s ease',
-                        cursor: 'pointer',
-                        boxShadow: '2px 2px 4px rgba(0,0,0,0.2)'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.borderColor = contact.color;
-                        e.currentTarget.style.transform = 'translateY(-2px)';
-                        e.currentTarget.style.boxShadow = '3px 3px 8px rgba(0,0,0,0.3)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.borderColor = 'var(--border)';
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = '2px 2px 4px rgba(0,0,0,0.2)';
-                      }}
-                    >
-                      <img src={contact.icon} alt="" style={{ width: '24px', height: '24px', imageRendering: 'pixelated' }} />
-                      <div style={{ flex: 1 }}>
-                        <div style={{ 
-                          fontWeight: 'bold', 
-                          fontSize: '14px',
-                          color: contact.color 
-                        }}>
-                          {contact.name}
-                        </div>
-                        <div style={{ 
-                          fontSize: '13px', 
-                          color: 'var(--text-secondary)',
-                          marginTop: '2px'
-                        }}>
-                          {contact.value}
-                        </div>
-                      </div>
-                      <span style={{ fontSize: '18px', opacity: 0.6 }}>→</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </RetroWindow>
 
-            {/* MailClient.exe - Send Message - Temporarily disabled
-            <RetroWindow 
-              title="MailClient.exe - Compose"
-              showClose={false}
-              width="100%"
-            >
-              <div style={{ padding: '16px' }}>
-                <form ref={form} onSubmit={handleSubmit} style={{
+          <RetroWindow
+            title="Contacts.exe - Address Book"
+            showClose={false}
+            width="100%"
+          >
+            <div style={{ padding: '20px' }}>
+              <div style={{
+                marginBottom: '16px',
+                padding: '12px',
+                background: 'var(--bg)',
+                border: '2px solid var(--border)',
+                borderRadius: '4px'
+              }}>
+                <p style={{
+                  margin: 0,
+                  fontSize: '13px',
+                  lineHeight: '1.6',
+                  color: 'var(--text-secondary)',
                   display: 'flex',
-                  flexDirection: 'column',
-                  gap: '16px'
+                  alignItems: 'center',
+                  gap: '8px'
                 }}>
-                  <div>
-                    <label style={{
-                      display: 'block',
-                      marginBottom: '6px',
-                      fontSize: '13px',
-                      fontWeight: 'bold',
-                      color: 'var(--text)'
-                    }}>
-                      {t('Name') || 'Nombre'}
-                    </label>
-                    <RetroInput
-                      type="text"
-                      name="from_name"
-                      value={formData.from_name}
-                      onChange={handleChange}
-                      required
-                      placeholder={t('Name') || 'Tu nombre'}
-                    />
-                  </div>
+                  <img src={mailIcon} alt="" style={{ width: '16px', height: '16px', imageRendering: 'pixelated' }} />
+                  {t('contact_intro') || '¡Estos son mis medios de contacto! No dudes en escribirme.'}
+                </p>
+              </div>
 
-                  <div>
-                    <label style={{
-                      display: 'block',
-                      marginBottom: '6px',
-                      fontSize: '13px',
-                      fontWeight: 'bold',
-                      color: 'var(--text)'
-                    }}>
-                      {t('Email') || 'Email'}
-                    </label>
-                    <RetroInput
-                      type="email"
-                      name="from_email"
-                      value={formData.from_email}
-                      onChange={handleChange}
-                      required
-                      placeholder={t('Email') || 'tucorreo@ejemplo.com'}
-                    />
-                  </div>
-
-                  <div>
-                    <label style={{
-                      display: 'block',
-                      marginBottom: '6px',
-                      fontSize: '13px',
-                      fontWeight: 'bold',
-                      color: 'var(--text)'
-                    }}>
-                      {t('Message') || 'Mensaje'}
-                    </label>
-                    <RetroTextarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      placeholder={t('Message') || 'Escribe tu mensaje aquí...'}
-                      rows={6}
-                    />
-                  </div>
-
-                  <RetroButton
-                    type="submit"
-                    disabled={status.submitting}
+              <div style={{
+                display: 'grid',
+                gap: '12px'
+              }}>
+                {contacts.map((contact, index) => (
+                  <a
+                    key={index}
+                    href={contact.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{
-                      padding: '12px 24px',
-                      fontSize: '14px',
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    {status.submitting ? '⏳ ' + (t('contact_sending') || 'Enviando...') : (t('Send') || 'Enviar mensaje')}
-                  </RetroButton>
-
-                  {status.submitted && (
-                    <div style={{
-                      padding: '12px',
-                      background: 'var(--bg-2)',
-                      border: '2px solid #4CAF50',
-                      borderRadius: '4px',
-                      color: '#4CAF50',
-                      textAlign: 'center',
-                      fontSize: '13px',
-                      fontWeight: 'bold',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '8px'
-                    }}>
-                      <img src={recycleFullIcon} alt="" style={{ width: '16px', height: '16px', imageRendering: 'pixelated' }} />
-                      {t('contact_success') || '¡Mensaje enviado con éxito!'}
-                    </div>
-                  )}
-
-                  {status.error && (
-                    <div style={{
-                      padding: '12px',
-                      background: 'var(--bg-2)',
-                      border: '2px solid #f44336',
+                      gap: '12px',
+                      padding: '14px',
+                      background: 'var(--bg)',
+                      border: '2px solid var(--border)',
                       borderRadius: '4px',
-                      color: '#f44336',
-                      textAlign: 'center',
-                      fontSize: '13px',
-                      fontWeight: 'bold'
-                    }}>
-                      ❌ {status.error}
+                      textDecoration: 'none',
+                      color: 'var(--text)',
+                      transition: 'all 0.2s ease',
+                      cursor: 'pointer',
+                      boxShadow: '2px 2px 4px rgba(0,0,0,0.2)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = contact.color;
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.boxShadow = '3px 3px 8px rgba(0,0,0,0.3)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--border)';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '2px 2px 4px rgba(0,0,0,0.2)';
+                    }}
+                  >
+                    <img src={contact.icon} alt="" style={{ width: '24px', height: '24px', imageRendering: 'pixelated' }} />
+                    <div style={{ flex: 1 }}>
+                      <div style={{
+                        fontWeight: 'bold',
+                        fontSize: '14px',
+                        color: contact.color
+                      }}>
+                        {contact.name}
+                      </div>
+                      <div style={{
+                        fontSize: '13px',
+                        color: 'var(--text-secondary)',
+                        marginTop: '2px'
+                      }}>
+                        {contact.value}
+                      </div>
                     </div>
-                  )}
-                </form>
+                    <span style={{ fontSize: '18px', opacity: 0.6 }}>→</span>
+                  </a>
+                ))}
               </div>
-            </RetroWindow>
-            */}
-          </div>
+            </div>
+          </RetroWindow>
         </div>
       </section>
     </main>
