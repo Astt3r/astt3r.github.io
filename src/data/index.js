@@ -18,6 +18,7 @@ export const translations = {
     skills_title: "Skills",
     frontend_title: "Lenguajes",
     frameworks_title: "Frameworks",
+    qa_testing_title: "QA & Testing",
     database_cloud_title: "Database & Cloud",
     tools_title: "Herramientas",
     
@@ -67,6 +68,7 @@ export const translations = {
     skills_title: "Skills",
     frontend_title: "Languages",
     frameworks_title: "Frameworks",
+    qa_testing_title: "QA & Testing",
     database_cloud_title: "Database & Cloud",
     tools_title: "Tools",
     
@@ -114,6 +116,7 @@ export const skillsData = {
   
   frameworks: [
     { icon: "devicon-react-original colored", name: "React" },
+    { icon: "devicon-laravel-plain colored", name: "Laravel" },
     { icon: "devicon-unity-original", name: "Unity" },
     { icon: "devicon-godot-plain colored", name: "Godot" },
     { icon: "devicon-bootstrap-plain colored", name: "Bootstrap" },
@@ -121,7 +124,15 @@ export const skillsData = {
     { icon: "devicon-express-original colored", name: "Express.js" },
     { icon: "devicon-jquery-plain colored", name: "jQuery" }
   ],
-  
+
+  qa: [
+    { icon: "devicon-selenium-original colored", name: "Selenium" },
+    { icon: "devicon-laravel-plain colored", name: "Laravel Dusk" },
+    { icon: "devicon-php-plain colored", name: "Pest" },
+    { icon: "devicon-postman-plain colored", name: "Postman" },
+    { icon: "devicon-githubactions-plain colored", name: "CI/CD" }
+  ],
+
   database: [
     { icon: "devicon-mysql-plain colored", name: "MySQL" },
     { icon: "devicon-microsoftsqlserver-plain colored", name: "SQL Server" },
@@ -215,23 +226,23 @@ export const projectsData = {
     {
       id: 2,
       title: "Junta Transparente",
-      description: "Community management platform for neighborhood boards to publish budgets and fund allocations, making local spending easy to search and audit for residents. Rebuilt as a decoupled SPA with a Node.js REST API and JWT authentication. Originally my final degree project (Ingeniería en Ejecución Informática).",
+      description: "Community management platform for neighborhood boards to publish budgets and fund allocations, making local spending easy to search and audit for residents. Rebuilt as a Laravel + Inertia.js + React modular monolith with multi-tenant, role-based authorization. Originally my final degree project (Ingeniería en Ejecución Informática).",
       image: "/assets/juntatransparente.png",
       tech: [
+        { name: "Laravel", icon: "https://cdn.jsdelivr.net/npm/devicon/icons/laravel/laravel-plain.svg" },
         { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-        { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
         { name: "Tailwind", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" },
         { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" }
       ],
       links: {
         demo: "https://junta-app-production.up.railway.app/",
-        github: "https://github.com/fit-dran/juntatransparente"
+        github: "https://github.com/Astt3r/CommunityPlatform"
       },
       badge: {
         text: "Live Demo",
         color: "linear-gradient(90deg,#11998e,#38ef7d)"
       },
-      mainIcon: "devicon-react-original colored",
+      mainIcon: "devicon-laravel-plain colored",
       hasPreview: true
     },
     {
@@ -277,27 +288,6 @@ export const projectsData = {
       },
       mainIcon: "devicon-javascript-plain colored",
       isPlayable: true
-    },
-    {
-      id: 5,
-      title: "Portfolio migration to React",
-      description: "Successfully migrated this portfolio from vanilla HTML/CSS/JS to React with improved architecture, component-based development, and modern features.",
-      image: "/assets/portfolio-react.png",
-      tech: [
-        { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-        { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-        { name: "CSS3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
-        { name: "React Router", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" }
-      ],
-      links: {
-        demo: "https://astt3r.github.io",
-        github: "https://github.com/Astt3r/astt3r.github.io"
-      },
-      badge: {
-        text: "Live Site",
-        color: "linear-gradient(90deg,#61dafb,#20232a)"
-      },
-      mainIcon: "devicon-react-original colored"
     }
   ]
 };

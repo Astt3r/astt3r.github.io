@@ -105,6 +105,12 @@ const Skills = () => {
       exeName: 'Frameworks'
     },
     {
+      title: t('qa_testing_title'),
+      icon: 'devicon-selenium-original',
+      skills: skillsData.qa,
+      exeName: 'QA'
+    },
+    {
       title: t('database_cloud_title'),
       icon: 'devicon-mysql-plain',
       skills: skillsData.database,
