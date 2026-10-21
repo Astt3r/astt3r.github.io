@@ -179,22 +179,6 @@ const MeatKlawBanner = ({ style, href }) => {
 
       function hline(x0, x1, y, c) { for (var x = x0; x <= x1; x++) put(x, y, c); }
 
-      function plate(cx, cy, hw, hh, point) {
-        for (var y = -hh; y <= hh; y++) {
-          for (var x = -hw - point; x <= hw + point; x++) {
-            var ax = Math.abs(x);
-            var edge = ax <= hw ? hh : hh * (1 - (ax - hw) / (point + 0.5));
-            var dd = Math.abs(y) - edge;
-            if (dd > 0) continue;
-            var c;
-            if (dd > -1) c = G_OUT;
-            else if (dd > -2) c = (y < 0 || x < 0) ? G_HI : G_MID;
-            else c = [20, 14, 8];
-            put(cx + x, cy + y, c);
-          }
-        }
-      }
-
       var TX = 322; // centro del bloque de texto (a la derecha del corazon)
 
       function buildStatic() {
@@ -219,12 +203,6 @@ const MeatKlawBanner = ({ style, href }) => {
         hline(TX - 112, sx0 - 6, 80, G_OUT); hline(sx1 + 6, TX + 112, 80, G_OUT);
         diamond(sx0, 80, 3, true); diamond(sx1, 80, 3, true);
         diamond(TX - 114, 79, 2, false); diamond(TX + 114, 79, 2, false);
-
-        // placa de versión que rompe el borde de arriba
-        var tag = pixelText('PROTOTYPE 0.7.1', 0, 10, 700, 2);
-        var hw = Math.ceil(tag.w / 2) + 6;
-        plate(TX, 11, hw, 8, 9);
-        blitText(tag, TX, 16, G_HI, [214, 184, 132], [130, 100, 56], null);
       }
 
       // ---------- capa viva: la cadena de corazones ----------
