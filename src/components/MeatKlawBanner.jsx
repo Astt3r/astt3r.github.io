@@ -193,7 +193,7 @@ const MeatKlawBanner = ({ style }) => {
 
         // título
         var title = pixelText('MEATKLAW', 0, 34, 400, 2, '"Black Ops One"', false);
-        var SOLID = [237, 204, 143]; // color sólido, sin relieve
+        var SOLID = EMBER; // rojo del corazón, sin relieve
         blitText(title, TX, 66, SOLID, SOLID, SOLID, G_OUT);
         // subtítulo con filetes a los lados
         var sub = pixelText('VER EN ITCH.IO', 0, 12, 700, 3);
