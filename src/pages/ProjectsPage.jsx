@@ -272,50 +272,10 @@ const ProjectsPage = () => {
           </div>
         </div>
 
-        {/* Main Project */}
+        {/* Main Project: el banner entero es el boton hacia itch.io */}
         {projectsData.main && (
-          <div className="projects-section" style={{ marginBottom: '48px', maxWidth: '640px', margin: '0 auto 48px' }}>
-            <RetroWindow title={`${projectsData.main.title}.exe`} showClose={false} className="proj-card-retro">
-              <MeatKlawBanner style={{ marginBottom: '8px' }} />
-              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap', padding: '8px' }}>
-                <img
-                  src={projectsData.main.image}
-                  alt={projectsData.main.title}
-                  style={{ width: '96px', height: '96px', imageRendering: 'pixelated', flexShrink: 0 }}
-                />
-                <div style={{ flex: 1, minWidth: '200px' }}>
-                  <span
-                    className="project-badge"
-                    style={{
-                      display: 'inline-block',
-                      background: projectsData.main.badge.color,
-                      color: '#fff',
-                      fontSize: '11px',
-                      padding: '3px 8px',
-                      border: '1px solid rgba(0, 0, 0, 0.3)',
-                      fontWeight: 'bold',
-                      letterSpacing: '0.5px',
-                      marginBottom: '6px'
-                    }}
-                  >
-                    ★ {projectsData.main.badge.text}
-                  </span>
-                  <h2 style={{ fontSize: '28px', margin: '4px 0', color: 'var(--accent)', fontWeight: 'bold' }}>
-                    {projectsData.main.title}
-                  </h2>
-                  <p style={{ margin: 0, fontSize: '14px', fontStyle: 'italic' }}>{projectsData.main.subtitle}</p>
-                </div>
-              </div>
-              <div className="retro-well" style={{ margin: '12px 0', padding: '10px' }}>
-                <p style={{ fontSize: '13px', lineHeight: '1.5', margin: 0 }}>{projectsData.main.description}</p>
-              </div>
-              <RetroButton
-                onClick={() => window.open(projectsData.main.links.demo, '_blank')}
-                style={{ background: 'var(--accent)', color: '#fff', fontWeight: 'bold', width: '100%', fontSize: '13px', padding: '10px 12px' }}
-              >
-                🎮 View on itch.io
-              </RetroButton>
-            </RetroWindow>
+          <div className="projects-section" style={{ marginBottom: '48px', maxWidth: '960px', margin: '0 auto 48px' }}>
+            <MeatKlawBanner href={projectsData.main.links.demo} />
           </div>
         )}
 
