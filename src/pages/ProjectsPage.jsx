@@ -2,6 +2,7 @@ import React from 'react';
 import { projectsData } from '../data';
 import { useLanguageContext } from '../contexts';
 import RetroWindow from '../components/RetroWindow';
+import MeatKlawBanner from '../components/MeatKlawBanner';
 import { RetroButton } from '../components/RetroComponents';
 import worldIcon from '../assets/icons/world.png';
 import recycleFullIcon from '../assets/icons/recycle_bin_full.png';
@@ -275,6 +276,7 @@ const ProjectsPage = () => {
         {projectsData.main && (
           <div className="projects-section" style={{ marginBottom: '48px', maxWidth: '640px', margin: '0 auto 48px' }}>
             <RetroWindow title={`${projectsData.main.title}.exe`} showClose={false} className="proj-card-retro">
+              <MeatKlawBanner style={{ marginBottom: '8px' }} />
               <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap', padding: '8px' }}>
                 <img
                   src={projectsData.main.image}

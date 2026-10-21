@@ -136,6 +136,10 @@ const Hero = () => {
       </h2>
 
       <div style={{ marginTop: '16px', display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <Link to="/projects" className="retro-button cv-download-btn">
+          <img src="/assets/KHeartsicon.png" alt="" style={{ width: '16px', height: '16px', marginRight: '6px', imageRendering: 'pixelated', verticalAlign: 'middle' }} />
+          MEATKLAW
+        </Link>
         <Link to="/contact" className="retro-button">
           <img src={mailIcon} alt="" style={{ width: '14px', height: '14px', marginRight: '6px', imageRendering: 'pixelated', verticalAlign: 'middle' }} />
           {t('contact') || 'Contact'}
