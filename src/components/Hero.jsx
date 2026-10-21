@@ -136,14 +136,6 @@ const Hero = () => {
       </h2>
 
       <div style={{ marginTop: '16px', display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
-        <a
-          href="/assets/cv/Alejandro-Robles-CV.pdf"
-          download="Alejandro-Robles-CV.pdf"
-          className="retro-button cv-download-btn"
-        >
-          <img src={notepadIcon} alt="" style={{ width: '14px', height: '14px', marginRight: '6px', imageRendering: 'pixelated' }} />
-          {t('download_cv') || 'Download CV'}
-        </a>
         <Link to="/contact" className="retro-button">
           <img src={mailIcon} alt="" style={{ width: '14px', height: '14px', marginRight: '6px', imageRendering: 'pixelated', verticalAlign: 'middle' }} />
           {t('contact') || 'Contact'}
