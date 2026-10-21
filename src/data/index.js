@@ -202,6 +202,21 @@ export const experienceData = [
 ];
 
 export const projectsData = {
+  main: {
+    id: 0,
+    title: "MEATKLAW",
+    subtitle: "A Dark Patagonian RPG",
+    description: "A dark RPG set in Patagonia. My flagship personal project, currently in development.",
+    image: "/assets/KHeartsicon.png",
+    tech: [],
+    links: {
+      demo: "https://astt0r.itch.io/meatklaw"
+    },
+    badge: {
+      text: "In Development",
+      color: "linear-gradient(90deg,#b31217,#e52d27)"
+    }
+  },
   featured: [
     {
       id: 1,
