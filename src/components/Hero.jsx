@@ -8,6 +8,7 @@ import clockIcon from '../assets/icons/clock.png';
 import notepadIcon from '../assets/icons/notepad.png';
 import calculatorIcon from '../assets/icons/calculator.png';
 import mailIcon from '../assets/icons/mail.png';
+import MeatKlawBanner from './MeatKlawBanner';
 
 const Hero = () => {
   const chileTime = useChileClock();
@@ -135,11 +136,11 @@ const Hero = () => {
         {t('hero_subtitle')}
       </h2>
 
+      <a href="https://astt0r.itch.io/meatklaw" target="_blank" rel="noopener noreferrer" aria-label="MEATKLAW - ver en itch.io" style={{ display: 'block', maxWidth: '720px', margin: '16px auto 0' }}>
+        <MeatKlawBanner />
+      </a>
+
       <div style={{ marginTop: '16px', display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
-        <Link to="/projects" className="retro-button cv-download-btn">
-          <img src="/assets/KHeartsicon.png" alt="" style={{ width: '16px', height: '16px', marginRight: '6px', imageRendering: 'pixelated', verticalAlign: 'middle' }} />
-          MEATKLAW
-        </Link>
         <Link to="/contact" className="retro-button">
           <img src={mailIcon} alt="" style={{ width: '14px', height: '14px', marginRight: '6px', imageRendering: 'pixelated', verticalAlign: 'middle' }} />
           {t('contact') || 'Contact'}
