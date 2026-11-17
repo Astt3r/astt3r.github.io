@@ -37,14 +37,6 @@ src/
 public/assets/      # images, CV PDF, etc. served statically
 ```
 
-### 🚀 Commands
-
-```bash
-npm install     # install dependencies
-npm start       # local dev server
-npm run build   # production build
-```
-
 Deployment is automatic: pushing to `main` triggers the GitHub Actions workflow, which builds the app and publishes `build/` to GitHub Pages. There is no manual deploy script.
 
 ### 🔧 Environment variables
